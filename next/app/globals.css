@@ -1,0 +1,139 @@
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ================================
+   Root Color System (Nopeca)
+   ================================ */
+
+:root {
+  /* Base surfaces */
+  --color-bg-primary: #F2F2F3;      /* Main background */
+  --color-bg-secondary: #F5F5F5;    /* Sections, cards */
+
+  /* Brand */
+  --color-brand-primary: #012340;   /* Navy */
+  --color-brand-secondary: #d9b573;    /* Gold */
+
+  /* Neutral / text */
+  --color-text-primary: #444444;    /* Main text */
+  --color-text-muted: #8195a6;      /* Secondary text */
+
+  /* Supporting */
+  --color-border-soft: #d1c7b1;     /* Dividers, subtle borders */
+
+  /* Feature palettes */
+  --color-ink-deep: #0a1628;
+  --color-ink-deep-0: rgba(10, 22, 40, 0);
+  --color-ink-deep-30: rgba(10, 22, 40, 0.3);
+  --color-ink-muted: #27344a;
+  --color-ink-muted-80: rgba(39, 52, 74, 0.8);
+  --color-highlight-amber: #d4a84b;
+  --color-accent-arc: #d4c9b5;
+  --color-stripe-wisp: #e8e4dd;
+  --color-stripe-wisp-60: rgba(232, 228, 221, 0.6);
+}
+
+body {
+  @apply antialiased;
+  background-color: #ffffff;
+}
+
+@layer utilities {
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.8s ease-out;
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.8s ease-out;
+  }
+}
+
+.brush-underline {
+  width: min(320px, 70vw);
+  height: auto;
+}
+
+.brush-underline__path {
+  fill: none;
+  stroke: #D9B573;
+  stroke-width: 16;
+  stroke-dasharray: 1700;
+  stroke-dashoffset: 1700;
+  animation: draw-path 1.6s ease-in-out forwards;
+    animation-delay: 0.9s;
+
+}
+
+@keyframes draw-path {
+  to {
+    stroke-dashoffset: 1200;
+  }
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-100% - 1rem));
+  }
+}
+
+.animate-scroll {
+  animation: scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite;
+}
+
+@layer base {
+  .theme {
+    --animate-marquee: marquee var(--duration) infinite linear;
+    --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+  }
+}
+
+/* Correct usage */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+@keyframes marquee-vertical {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-100% - var(--gap)));
+  }
+}
+
+
+.animate-marquee {
+  animation: marquee var(--duration) infinite linear;
+}
+.animate-marquee-vertical {
+  animation: marquee-vertical var(--duration) linear infinite;
+}

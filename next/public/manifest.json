@@ -1,0 +1,40 @@
+{
+  "name": "Nopeca — Study in UK from Algeria",
+  "short_name": "Nopeca",
+  "description": "Nopeca helps Algerian students study in top UK universities. Expert guidance on admissions, UK student visa, and arrival support.",
+  "start_url": "/en",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F5F0E8",
+  "theme_color": "#012340",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["education"],
+  "shortcuts": [
+    {
+      "name": "Free Consultation",
+      "url": "/en/contact",
+      "description": "Book a free consultation with Nopeca advisors"
+    },
+    {
+      "name": "Explore Universities",
+      "url": "/en/universities",
+      "description": "Browse UK universities available to Algerian students"
+    }
+  ],
+  "icons": [
+    {
+      "src": "/singl_logo_colord_white_background@4x.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/singl_logo_colord_white_background@4x.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
