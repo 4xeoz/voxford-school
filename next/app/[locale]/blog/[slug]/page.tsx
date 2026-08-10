@@ -10,7 +10,7 @@ import HomePageWrapper from "@/components/layout/HomePageWrapper";
 
 export const dynamic = "force-dynamic";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://nopeca.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 export async function generateMetadata({
   params,
@@ -100,11 +100,11 @@ export default async function BlogPostPage({
     },
     publisher: {
       "@type": "Organization",
-      name: "Nopeca",
+      name: "Voxford",
       url: SITE_URL,
       logo: {
         "@type": "ImageObject",
-        url: `${SITE_URL}/singl_logo_colord_white_background@4x.png`,
+        url: `${SITE_URL}/voxford/icon-detailed-red-on-whiteBackground-v2.png`,
       },
     },
     inLanguage: locale === "ar" ? "ar-DZ" : locale === "fr" ? "fr-DZ" : "en",
@@ -123,11 +123,11 @@ export default async function BlogPostPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
 
-      <article className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-20">
+      <article className="mx-auto max-w-4xl px-4 pb-16 pt-28 sm:px-6 sm:pb-20 sm:pt-36">
         {/* Back link */}
         <Link
           href={`/${locale}/blog`}
-          className="mb-10 inline-flex items-center gap-2 rounded-full bg-[--color-brand-primary]/5 px-4 py-2 text-sm font-medium text-[--color-brand-primary] transition hover:bg-[--color-brand-primary]/10"
+          className="mb-10 inline-flex items-center gap-2 rounded-full bg-brand/5 px-4 py-2 text-sm font-medium text-brand transition hover:bg-brand/10"
         >
           <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
@@ -137,21 +137,21 @@ export default async function BlogPostPage({
 
         {/* Header */}
         <header className="mb-10">
-          <h1 className="text-3xl font-bold leading-tight text-[--color-brand-primary] sm:text-4xl lg:text-[2.75rem] lg:leading-[1.2]">
+          <h1 className="text-3xl font-bold leading-tight text-brand sm:text-4xl lg:text-[2.75rem] lg:leading-[1.2]">
             {localized.title}
           </h1>
           <div className="mt-5 flex flex-wrap items-center gap-4">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[--color-brand-primary]/10 text-sm font-bold text-[--color-brand-primary]">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand/10 text-sm font-bold text-brand">
                 {post.author.name[0]?.toUpperCase()}
               </div>
               <div>
-                <p className="text-sm font-semibold text-[--color-text-primary]">
+                <p className="text-sm font-semibold text-ink-soft">
                   {post.author.name}
                 </p>
                 <time
                   dateTime={post.createdAt.toISOString()}
-                  className="text-xs text-[--color-text-primary]/50"
+                  className="text-xs text-ink-soft/50"
                 >
                   {new Date(post.createdAt).toLocaleDateString(
                     locale === "ar" ? "ar-DZ" : locale === "fr" ? "fr-DZ" : "en-GB",
@@ -178,17 +178,17 @@ export default async function BlogPostPage({
         )}
 
         {/* Content */}
-        <div className="prose prose-lg max-w-none text-[--color-text-primary] prose-headings:text-[--color-brand-primary] prose-a:text-[--color-brand-secondary] prose-a:no-underline hover:prose-a:underline prose-strong:text-[--color-text-primary] prose-p:leading-relaxed">
+        <div className="prose prose-lg max-w-none text-ink-soft prose-headings:text-brand prose-a:text-ink-soft prose-a:no-underline hover:prose-a:underline prose-strong:text-ink-soft prose-p:leading-relaxed">
           {localized.content.split("\n\n").map((paragraph, i) => (
             <p key={i}>{paragraph}</p>
           ))}
         </div>
 
         {/* Bottom divider + back link */}
-        <div className="mt-14 border-t border-[--color-border-soft] pt-8">
+        <div className="mt-14 border-t border-hairline pt-8">
           <Link
             href={`/${locale}/blog`}
-            className="inline-flex items-center gap-2 rounded-full bg-[--color-brand-secondary] px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:shadow-lg"
+            className="inline-flex items-center gap-2 rounded-full bg-ink-soft px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:shadow-lg"
           >
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />

@@ -39,14 +39,14 @@ export default function BlogActions({
     <div className="flex items-center gap-2">
       <Link
         href={`/admin/blog/${postId}/edit`}
-        className="rounded-lg px-2.5 py-1.5 text-xs font-medium text-[#012340] transition hover:bg-[#012340]/10"
+        className="rounded-lg px-2.5 py-1.5 text-xs font-medium text-brand transition hover:bg-brand/10"
       >
         Edit
       </Link>
       <button
         type="button"
         onClick={handleToggle}
-        className="rounded-lg px-2.5 py-1.5 text-xs font-medium text-[#012340]/60 transition hover:bg-[#012340]/10"
+        className="rounded-lg px-2.5 py-1.5 text-xs font-medium text-brand/60 transition hover:bg-brand/10"
       >
         {published ? "Unpublish" : "Publish"}
       </button>

@@ -3,7 +3,7 @@
 import { useActionState } from "react";
 import { loginAction } from "@/actions/auth";
 import Image from "next/image";
-import logoMark from "@/public/singl_logo_colord_white_background@4x.png";
+import logoMark from "@/public/voxford/icon-detailed-red-transparent-v2.png";
 
 export default function LoginPage() {
   const [state, formAction, isPending] = useActionState(
@@ -14,19 +14,19 @@ export default function LoginPage() {
   );
 
   return (
-    <div className="flex min-h-dvh items-center justify-center bg-[#f5f0e8] px-4">
+    <div className="flex min-h-dvh items-center justify-center bg-surface-soft px-4">
       <div className="w-full max-w-sm">
         <div className="mb-8 flex flex-col items-center">
           <Image
             src={logoMark}
-            alt="Nopeca"
+            alt="Voxford"
             width={120}
             height={120}
             className="mb-4 h-16 w-auto"
           />
-          <h1 className="text-2xl font-bold text-[#0a1628]">Admin Login</h1>
-          <p className="mt-1 text-sm text-[#0a1628]/60">
-            Sign in to the Nopeca dashboard
+          <h1 className="text-2xl font-bold text-ink">Admin Login</h1>
+          <p className="mt-1 text-sm text-ink/60">
+            Sign in to the Voxford dashboard
           </p>
         </div>
 
@@ -40,7 +40,7 @@ export default function LoginPage() {
           <div>
             <label
               htmlFor="email"
-              className="mb-1 block text-sm font-medium text-[#0a1628]"
+              className="mb-1 block text-sm font-medium text-ink"
             >
               Email
             </label>
@@ -50,14 +50,14 @@ export default function LoginPage() {
               type="email"
               required
               autoComplete="email"
-              className="h-12 w-full rounded-xl border border-[#d1c7b1] bg-white px-4 text-[#0a1628] outline-none focus:border-[#012340] focus:ring-2 focus:ring-[#012340]/20"
+              className="h-12 w-full rounded-xl border border-hairline bg-white px-4 text-ink outline-none focus:border-brand focus:ring-2 focus:ring-brand/20"
             />
           </div>
 
           <div>
             <label
               htmlFor="password"
-              className="mb-1 block text-sm font-medium text-[#0a1628]"
+              className="mb-1 block text-sm font-medium text-ink"
             >
               Password
             </label>
@@ -67,14 +67,14 @@ export default function LoginPage() {
               type="password"
               required
               autoComplete="current-password"
-              className="h-12 w-full rounded-xl border border-[#d1c7b1] bg-white px-4 text-[#0a1628] outline-none focus:border-[#012340] focus:ring-2 focus:ring-[#012340]/20"
+              className="h-12 w-full rounded-xl border border-hairline bg-white px-4 text-ink outline-none focus:border-brand focus:ring-2 focus:ring-brand/20"
             />
           </div>
 
           <button
             type="submit"
             disabled={isPending}
-            className="mt-2 h-12 w-full rounded-full bg-[#012340] font-semibold text-white transition hover:bg-[#012340]/90 disabled:opacity-50"
+            className="mt-2 h-12 w-full rounded-full bg-brand font-semibold text-white transition hover:bg-brand/90 disabled:opacity-50"
           >
             {isPending ? "Signing in..." : "Sign in"}
           </button>

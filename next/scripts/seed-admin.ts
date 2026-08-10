@@ -19,17 +19,17 @@ import { PrismaPg } from "@prisma/adapter-pg";
 //   SUPER_ADMIN_EMAIL=you@example.com \
 //   SUPER_ADMIN_PASSWORD='...' \
 //   npx tsx scripts/seed-admin.ts
-const SUPER_ADMIN_EMAIL = process.env.SUPER_ADMIN_EMAIL;
-const SUPER_ADMIN_PASSWORD = process.env.SUPER_ADMIN_PASSWORD;
-const SUPER_ADMIN_NAME = process.env.SUPER_ADMIN_NAME ?? "Admin";
-
-if (!SUPER_ADMIN_EMAIL || !SUPER_ADMIN_PASSWORD) {
-  throw new Error(
-    "SUPER_ADMIN_EMAIL and SUPER_ADMIN_PASSWORD must be set before seeding an admin."
-  );
+function required(name: string): string {
+  const value = process.env[name];
+  if (!value) throw new Error(`${name} must be set before seeding an admin.`);
+  return value;
 }
 
 async function main() {
+  const SUPER_ADMIN_EMAIL = required("SUPER_ADMIN_EMAIL");
+  const SUPER_ADMIN_PASSWORD = required("SUPER_ADMIN_PASSWORD");
+  const SUPER_ADMIN_NAME = process.env.SUPER_ADMIN_NAME ?? "Admin";
+
   const connectionString = process.env.DATABASE_URL;
   if (!connectionString) {
     throw new Error("DATABASE_URL environment variable is not set");

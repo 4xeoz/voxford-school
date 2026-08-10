@@ -9,7 +9,7 @@ import HomePageWrapper from "@/components/layout/HomePageWrapper";
 
 export const dynamic = "force-dynamic";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://nopeca.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 export async function generateMetadata({
   params,
@@ -19,14 +19,14 @@ export async function generateMetadata({
   const { locale } = await params;
 
   const titles: Record<string, string> = {
-    en: "Blog — Study Abroad Tips & Guides | Nopeca",
-    fr: "Blog — Conseils et Guides pour Étudier à l'Étranger | Nopeca",
-    ar: "المدونة — نصائح وإرشادات للدراسة في الخارج | Nopeca",
+    en: "Blog — Language Learning Tips & Guides | Voxford",
+    fr: "Blog — Conseils et guides pour apprendre les langues | Voxford",
+    ar: "المدونة — نصائح وإرشادات لتعلّم اللغات | فوكسفورد",
   };
   const descriptions: Record<string, string> = {
-    en: "Read the latest tips, guides, and stories about studying abroad from Algeria to UK universities. Expert advice from Nopeca.",
-    fr: "Lisez les derniers conseils, guides et récits sur les études à l'étranger depuis l'Algérie vers les universités britanniques. Conseils d'experts de Nopeca.",
-    ar: "اقرأ أحدث النصائح والأدلة والقصص حول الدراسة في الخارج من الجزائر إلى الجامعات البريطانية. نصائح الخبراء من Nopeca.",
+    en: "Tips, guides and stories about learning English, French and other languages — written by the teachers at Voxford Language School.",
+    fr: "Conseils, guides et témoignages sur l'apprentissage de l'anglais, du français et d'autres langues — écrits par les professeurs de Voxford.",
+    ar: "نصائح وأدلة وقصص حول تعلّم الإنجليزية والفرنسية وغيرها من اللغات — بقلم أساتذة مدرسة فوكسفورد للغات.",
   };
 
   return {
@@ -102,33 +102,33 @@ export default async function BlogPage({
             url: `${SITE_URL}/${locale}/blog`,
             publisher: {
               "@type": "Organization",
-              name: "Nopeca",
+              name: "Voxford",
               url: SITE_URL,
             },
           }),
         }}
       />
 
-      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+      <section className="mx-auto max-w-7xl px-4 pb-20 pt-28 sm:px-6 lg:px-8 lg:pt-36">
         {/* Header */}
         <div className="mb-14 text-center">
-          <span className="inline-block rounded-full bg-[--color-brand-primary]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-[--color-brand-primary]">
+          <span className="inline-block rounded-full bg-brand/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-brand">
             Blog
           </span>
-          <h1 className="mt-4 text-3xl font-bold text-[--color-brand-primary] sm:text-4xl lg:text-5xl">
+          <h1 className="mt-4 text-3xl font-bold text-brand sm:text-4xl lg:text-5xl">
             {labels.title}
           </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-base text-[--color-text-primary]/60 sm:text-lg">
+          <p className="mx-auto mt-4 max-w-2xl text-base text-ink-soft/60 sm:text-lg">
             {labels.subtitle}
           </p>
         </div>
 
         {posts.length === 0 ? (
-          <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-[--color-border-soft] py-20">
-            <svg className="mb-4 h-12 w-12 text-[--color-text-primary]/20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+          <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-hairline py-20">
+            <svg className="mb-4 h-12 w-12 text-ink-soft/20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
             </svg>
-            <p className="text-base font-medium text-[--color-text-primary]/40">
+            <p className="text-base font-medium text-ink-soft/40">
               {labels.noPosts}
             </p>
           </div>
@@ -140,7 +140,7 @@ export default async function BlogPage({
               return (
                 <Link
                   href={`/${locale}/blog/${featuredPost.slug}`}
-                  className="group mb-12 block overflow-hidden rounded-3xl border border-[--color-border-soft] bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+                  className="group mb-12 block overflow-hidden rounded-3xl border border-hairline bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
                 >
                   <div className="grid md:grid-cols-2">
                     <div className="relative aspect-[16/10] md:aspect-auto">
@@ -154,15 +154,15 @@ export default async function BlogPage({
                           priority
                         />
                       ) : (
-                        <div className="flex h-full min-h-[240px] items-center justify-center bg-[--color-brand-primary]/5">
-                          <svg className="h-16 w-16 text-[--color-brand-primary]/15" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={0.5}>
+                        <div className="flex h-full min-h-[240px] items-center justify-center bg-brand/5">
+                          <svg className="h-16 w-16 text-brand/15" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={0.5}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
                           </svg>
                         </div>
                       )}
                     </div>
                     <div className="flex flex-col justify-center p-6 sm:p-8 md:p-10">
-                      <div className="mb-3 flex items-center gap-3 text-sm text-[--color-text-primary]/50">
+                      <div className="mb-3 flex items-center gap-3 text-sm text-ink-soft/50">
                         <time dateTime={featuredPost.createdAt.toISOString()}>
                           {new Date(featuredPost.createdAt).toLocaleDateString(
                             locale === "ar" ? "ar-DZ" : locale === "fr" ? "fr-DZ" : "en-GB",
@@ -172,13 +172,13 @@ export default async function BlogPage({
                         <span>&middot;</span>
                         <span>{labels.by} {featuredPost.author.name}</span>
                       </div>
-                      <h2 className="text-2xl font-bold leading-tight text-[--color-brand-primary] sm:text-3xl">
+                      <h2 className="text-2xl font-bold leading-tight text-brand sm:text-3xl">
                         {localized.title}
                       </h2>
-                      <p className="mt-3 text-base leading-relaxed text-[--color-text-primary]/60 line-clamp-3">
+                      <p className="mt-3 text-base leading-relaxed text-ink-soft/60 line-clamp-3">
                         {localized.excerpt}
                       </p>
-                      <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-[--color-brand-secondary] transition group-hover:gap-3">
+                      <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-ink-soft transition group-hover:gap-3">
                         {labels.readMore}
                         <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                           <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
@@ -199,7 +199,7 @@ export default async function BlogPage({
                     <Link
                       key={post.id}
                       href={`/${locale}/blog/${post.slug}`}
-                      className="group flex flex-col overflow-hidden rounded-2xl border border-[--color-border-soft] bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+                      className="group flex flex-col overflow-hidden rounded-2xl border border-hairline bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
                     >
                       {post.coverImage ? (
                         <div className="relative aspect-[16/9] overflow-hidden">
@@ -212,14 +212,14 @@ export default async function BlogPage({
                           />
                         </div>
                       ) : (
-                        <div className="flex aspect-[16/9] items-center justify-center bg-[--color-brand-primary]/5">
-                          <svg className="h-12 w-12 text-[--color-brand-primary]/15" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={0.5}>
+                        <div className="flex aspect-[16/9] items-center justify-center bg-brand/5">
+                          <svg className="h-12 w-12 text-brand/15" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={0.5}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
                           </svg>
                         </div>
                       )}
                       <div className="flex flex-1 flex-col p-5">
-                        <div className="mb-2 flex items-center gap-2 text-xs text-[--color-text-primary]/45">
+                        <div className="mb-2 flex items-center gap-2 text-xs text-ink-soft/45">
                           <time dateTime={post.createdAt.toISOString()}>
                             {new Date(post.createdAt).toLocaleDateString(
                               locale === "ar" ? "ar-DZ" : locale === "fr" ? "fr-DZ" : "en-GB",
@@ -229,13 +229,13 @@ export default async function BlogPage({
                           <span>&middot;</span>
                           <span>{post.author.name}</span>
                         </div>
-                        <h2 className="text-lg font-bold leading-snug text-[--color-brand-primary] line-clamp-2">
+                        <h2 className="text-lg font-bold leading-snug text-brand line-clamp-2">
                           {localized.title}
                         </h2>
-                        <p className="mt-2 flex-1 text-sm leading-relaxed text-[--color-text-primary]/60 line-clamp-3">
+                        <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-soft/60 line-clamp-3">
                           {localized.excerpt}
                         </p>
-                        <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-[--color-brand-secondary] transition group-hover:gap-3">
+                        <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-ink-soft transition group-hover:gap-3">
                           {labels.readMore}
                           <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />

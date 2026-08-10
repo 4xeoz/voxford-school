@@ -18,8 +18,8 @@ export default async function AdminsPage() {
   return (
     <div className="px-6 py-5">
       <div className="mb-6">
-        <h1 className="text-xl font-bold text-[#0a1628]">Team</h1>
-        <p className="mt-0.5 text-sm text-[#0a1628]/50">
+        <h1 className="text-xl font-bold text-ink">Team</h1>
+        <p className="mt-0.5 text-sm text-ink/50">
           Manage admins and operators
         </p>
       </div>

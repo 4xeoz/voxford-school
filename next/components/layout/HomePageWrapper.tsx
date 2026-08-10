@@ -1,8 +1,7 @@
-"use client";
-
 import React from "react";
 import Navbar from "./Navbar";
 import FooterSection from "./FooterSection";
+import { getPreRegistrationCount } from "@/actions/contact";
 import type { Dictionary } from "@/dictionaries";
 
 interface HomePageWrapperProps {
@@ -11,12 +10,14 @@ interface HomePageWrapperProps {
   dict: Dictionary;
 }
 
-export default function HomePageWrapper({ children, locale, dict }: HomePageWrapperProps) {
+export default async function HomePageWrapper({ children, locale, dict }: HomePageWrapperProps) {
+  const claimed = await getPreRegistrationCount();
+
   return (
-    <div className="w-full bg-[--color-bg-primary] text-[--color-text-primary]">
+    <div className="w-full bg-surface text-ink-soft">
       <Navbar locale={locale} dict={dict} />
       {children}
-      <FooterSection dict={dict} locale={locale} />
+      <FooterSection dict={dict} locale={locale} claimed={claimed} />
     </div>
   );
 }

@@ -1,9 +1,40 @@
-import svgToDataUri from 'mini-svg-data-uri';
 import type { Config } from 'tailwindcss';
 
-const {
-  default: flattenColorPalette,
-} = require('tailwindcss/lib/util/flattenColorPalette');
+/**
+ * Voxford brand charter — the single source of truth for colour.
+ *
+ * Registering these here (rather than only as CSS custom properties) is what
+ * makes `bg-brand/10` work: Tailwind v3 cannot apply an opacity modifier to an
+ * arbitrary `var()` colour, so `bg-brand/10` silently emits
+ * no CSS at all. Named theme colours support the whole modifier syntax.
+ *
+ * Reds are sampled from the logo assets in public/voxford — the crest is
+ * #BC0000 and the wordmark #D30000.
+ */
+const palette = {
+  brand: {
+    DEFAULT: '#BC0000', // crest red — primary
+    dark: '#8F0000', // pressed / gradient end
+    bright: '#D30000', // wordmark red — accents, hovers
+    soft: '#FBEAEA', // tinted fills
+  },
+  ink: {
+    DEFAULT: '#1A1C1F', // primary text and dark surfaces
+    muted: '#3A3D42',
+    soft: '#2E3134',
+  },
+  surface: {
+    DEFAULT: '#FFFFFF',
+    soft: '#F7F7F8', // sections, cards, hero
+    wisp: '#F0F0F1',
+  },
+  hairline: '#E4E4E7', // dividers, borders
+  subtle: '#6B7075', // secondary text
+  whatsapp: {
+    DEFAULT: '#25D366',
+    dark: '#1A9F4B',
+  },
+} as const;
 
 const config: Config = {
   content: [
@@ -13,94 +44,43 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      colors: {
-        charcoal: '#08090A',
-        lightblack: '#1C1C1C',
-        secondary: '#E6E6E6',
-        muted: 'var(--neutral-200)',
+      colors: palette,
+      fontFamily: {
+        // Snaga Arabic, from the Adobe Fonts kit, loaded only on /ar.
+        // NB the kit publishes the family as "snaga-arabic-text" (weights 400
+        // and 700) — "snaga-arabic" matches nothing and silently falls back.
+        // The rest are system Arabic faces for when the kit can't load.
+        arabic: [
+          'snaga-arabic-text',
+          'Geeza Pro',
+          'Segoe UI',
+          'Tahoma',
+          'sans-serif',
+        ],
       },
-      boxShadow: {
-        derek: `0px 0px 0px 1px rgb(0 0 0 / 0.06),
-        0px 1px 1px -0.5px rgb(0 0 0 / 0.06),
-        0px 3px 3px -1.5px rgb(0 0 0 / 0.06), 
-        0px 6px 6px -3px rgb(0 0 0 / 0.06),
-        0px 12px 12px -6px rgb(0 0 0 / 0.06),
-        0px 24px 24px -12px rgb(0 0 0 / 0.06)`,
-        aceternity: `0px 2px 3px -1px rgba(0,0,0,0.1), 0px 1px 0px 0px rgba(25,28,33,0.02), 0px 0px 0px 1px rgba(25,28,33,0.08)`,
-      },
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
-      animation: {
-        move: 'move 5s linear infinite',
-        'spin-circle': 'spin-circle 3s linear infinite',
+      spacing: {
+        // The navbar is `h-0` and floats over the page, so every top-level
+        // section clears it with this instead of re-guessing a number.
+        nav: '7rem',
+        'nav-lg': '9rem',
       },
       keyframes: {
-        move: {
-          '0%': { transform: 'translateX(-200px)' },
-          '100%': { transform: 'translateX(200px)' },
+        marquee: {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(calc(-100% - var(--gap)))' },
         },
-        'spin-circle': {
-          '0%': { transform: 'rotate(0deg)' },
-          '100%': { transform: 'rotate(360deg)' },
+        'marquee-vertical': {
+          from: { transform: 'translateY(0)' },
+          to: { transform: 'translateY(calc(-100% - var(--gap)))' },
         },
+      },
+      animation: {
+        marquee: 'marquee var(--duration) infinite linear',
+        'marquee-vertical': 'marquee-vertical var(--duration) linear infinite',
       },
     },
   },
-  plugins: [
-    require('tailwindcss-animate'),
-    require('@tailwindcss/typography'),
-    addVariablesForColors,
-    function ({ matchUtilities, theme }: any) {
-      matchUtilities(
-        {
-          'bg-grid': (value: any) => ({
-            backgroundImage: `url("${svgToDataUri(
-              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="${value}"><path d="M0 .5H31.5V32"/></svg>`
-            )}")`,
-          }),
-          'bg-grid-small': (value: any) => ({
-            backgroundImage: `url("${svgToDataUri(
-              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="8" height="8" fill="none" stroke="${value}"><path d="M0 .5H31.5V32"/></svg>`
-            )}")`,
-          }),
-          'bg-dot': (value: any) => ({
-            backgroundImage: `url("${svgToDataUri(
-              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="16" height="16" fill="none"><circle fill="${value}" id="pattern-circle" cx="10" cy="10" r="1.6257413380501518"></circle></svg>`
-            )}")`,
-          }),
-          'bg-dot-thick': (value: any) => ({
-            backgroundImage: `url("${svgToDataUri(
-              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="16" height="16" fill="none"><circle fill="${value}" id="pattern-circle" cx="10" cy="10" r="2.5"></circle></svg>`
-            )}")`,
-          }),
-        },
-        { values: flattenColorPalette(theme('backgroundColor')), type: 'color' }
-      );
-
-      matchUtilities(
-        {
-          highlight: (value: any) => ({
-            boxShadow: `inset 0 1px 0 0 ${value}`,
-          }),
-        },
-        { values: flattenColorPalette(theme('backgroundColor')), type: 'color' }
-      );
-    },
-  ],
+  plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],
 };
-
-function addVariablesForColors({ addBase, theme }: any) {
-  let allColors = flattenColorPalette(theme('colors'));
-  let newVars = Object.fromEntries(
-    Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
-  );
-
-  addBase({
-    ':root': newVars,
-  });
-}
 
 export default config;

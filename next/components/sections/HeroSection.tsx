@@ -1,61 +1,61 @@
-"use client"
-import React from 'react'
-import ArcGalleryHero from '../ui/HeroSectionUI/arc-gallery-hero'
-import img1 from '@/public/arc_gallery/image-gen (1).png'
-import img3 from '@/public/arc_gallery/image-gen (3).png'
-import img4 from '@/public/arc_gallery/image-gen (4).png'
-import img5 from '@/public/arc_gallery/image-gen (5).png'
-import img6 from '@/public/arc_gallery/image-gen (6).png'
-import img12 from '@/public/arc_gallery/image-gen (12).png'
-import img14 from '@/public/arc_gallery/image-gen (14).png'
-import img15 from '@/public/arc_gallery/image-gen (15).png'
-import img16 from '@/public/arc_gallery/image-gen (16).png'
-import imgJpg from '@/public/arc_gallery/image-gen.jpg'
-import type { Dictionary } from '@/dictionaries'
+import Image from "next/image";
+import crest from "@/public/voxford/icon-detailed-red-transparent-v2.png";
+import HeroRing from "./HeroRing";
+import HeroCtas from "./HeroCtas";
+import type { Dictionary } from "@/dictionaries";
 
 interface HeroSectionProps {
+  locale: string;
   dict: Dictionary;
 }
 
-const HeroSection = ({ dict }: HeroSectionProps) => {
-
-const images = [
-  img5,
-  img12,
-  img16,
-  img3,
-  img1,
-  img14,
-  img4,
-  img6,
-  img15,
-  imgJpg,
-];
+export default function HeroSection({ locale, dict }: HeroSectionProps) {
+  const h = dict.hero;
 
   return (
-    <section id="home" className="w-full max-h-[100dvh] h-[90dvh]  overflow-hidden ">
-      <div className="max-w-7xl mx-auto  relative">
-        <ArcGalleryHero
-        images={images}
-        startAngle={20}
-        endAngle={160}
-        radiusXl={660}
-        radiusLg={560}
-        radiusMd={550}
-        radiusSm={490}
-        cardSizeLg={150}
-        cardSizeMd={140}
-        cardSizeSm={140}
-        className="pt-5 pb-5  2xl:pt-40 2xl:pb-40"
-        title={dict.hero.title}
-        titleHighlight={dict.hero.titleHighlight}
-        subtitle={dict.hero.subtitle}
-        ctaText={dict.hero.cta}
-        ctaHref="#contact"
-      />
+    // overflow-hidden: the ring's cards start off-screen, which would otherwise
+    // widen the page and flash a horizontal scrollbar while they fly in.
+    <section
+      id="home"
+      className="relative w-full flex flex-col justify-center overflow-hidden bg-surface-soft min-h-fit h-[80svh]"
+    >
+      <HeroRing />
+
+      {/* pt clears the floating navbar, which overlays this section */}
+      <div className="relative z-10 mx-auto max-w-6xl px-4 pb-14 pt-28 sm:px-6 lg:pb-20 lg:pt-36">
+
+        {/* ── Centred copy ── */}
+        <div className="flex flex-col items-center text-center">
+          <Image
+            src={crest}
+            alt="Voxford language school"
+            priority
+            className="mb-7 h-20 w-auto lg:h-28"
+          />
+
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand sm:text-xs sm:tracking-[0.28em]">
+            {h.eyebrow}
+          </p>
+
+          {/* 16ch / text-6xl: this headline is two lines per half, so it is
+              capped narrower and one step smaller than a short headline would
+              be — that keeps it clear of the HeroRing cards at every width. */}
+          <h1 className="mt-5 max-w-[16ch] text-3xl font-black leading-[0.95] tracking-[-0.03em] text-ink sm:text-4xl md:text-5xl lg:text-6xl">
+            {h.headlineTop}
+            <span className="block text-brand">{h.headlineBottom}</span>
+          </h1>
+
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg">
+            {h.lead}
+            <span className="block">{h.leadSecondary}</span>
+          </p>
+
+          {/* Nothing is bookable before launch, so the hero's two exits are a
+              direct WhatsApp chat and the pre-registration form. */}
+          <HeroCtas locale={locale} dict={dict} />
+        </div>
+
       </div>
     </section>
-  )
+  );
 }
-
-export default HeroSection

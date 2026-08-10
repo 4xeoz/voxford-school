@@ -77,7 +77,15 @@ export async function middleware(request: NextRequest) {
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
 
-  if (pathnameHasLocale) return NextResponse.next();
+  if (pathnameHasLocale) {
+    // The root layout renders <html> but sits above [locale], so it cannot read
+    // the route param. Pass the locale down as a header so it can set lang/dir
+    // on <html> itself — which is where RTL belongs.
+    const locale = pathname.split('/')[1];
+    const headers = new Headers(request.headers);
+    headers.set('x-locale', locale);
+    return NextResponse.next({ request: { headers } });
+  }
 
   // Redirect to default locale if no locale found
   return NextResponse.redirect(

@@ -45,19 +45,19 @@ export default function EventsListClient({ events }: { events: EventRow[] }) {
 
   if (events.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center gap-4 rounded-2xl border-2 border-dashed border-[#e5e0d5] py-20 text-center">
-        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#0a1628]/5">
-          <svg className="h-7 w-7 text-[#0a1628]/30" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <div className="flex flex-col items-center justify-center gap-4 rounded-2xl border-2 border-dashed border-hairline py-20 text-center">
+        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-ink/5">
+          <svg className="h-7 w-7 text-ink/30" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 9v7.5" />
           </svg>
         </div>
         <div>
-          <p className="font-semibold text-[#0a1628]">No events yet</p>
-          <p className="mt-1 text-sm text-[#0a1628]/50">Create your first event to generate a registration link and QR code.</p>
+          <p className="font-semibold text-ink">No events yet</p>
+          <p className="mt-1 text-sm text-ink/50">Create your first event to generate a registration link and QR code.</p>
         </div>
         <Link
           href="/admin/events/new"
-          className="mt-1 flex h-10 items-center rounded-lg bg-[#0a1628] px-5 text-sm font-semibold text-white hover:opacity-90"
+          className="mt-1 flex h-10 items-center rounded-lg bg-ink px-5 text-sm font-semibold text-white hover:opacity-90"
         >
           Create Event
         </Link>
@@ -66,48 +66,48 @@ export default function EventsListClient({ events }: { events: EventRow[] }) {
   }
 
   return (
-    <div className="overflow-hidden rounded-xl border border-[#e5e0d5] bg-white">
+    <div className="overflow-hidden rounded-xl border border-hairline bg-white">
       <table className="w-full text-sm">
         <thead>
-          <tr className="border-b border-[#e5e0d5] bg-[#f5f3ee]">
-            <th className="px-4 py-3 text-left font-medium text-[#0a1628]/60">Event</th>
-            <th className="hidden px-4 py-3 text-left font-medium text-[#0a1628]/60 md:table-cell">Date</th>
-            <th className="hidden px-4 py-3 text-left font-medium text-[#0a1628]/60 lg:table-cell">Location</th>
-            <th className="px-4 py-3 text-left font-medium text-[#0a1628]/60">Registrations</th>
-            <th className="px-4 py-3 text-left font-medium text-[#0a1628]/60">Status</th>
-            <th className="px-4 py-3 text-right font-medium text-[#0a1628]/60">Actions</th>
+          <tr className="border-b border-hairline bg-surface-soft">
+            <th className="px-4 py-3 text-start font-medium text-ink/60">Event</th>
+            <th className="hidden px-4 py-3 text-start font-medium text-ink/60 md:table-cell">Date</th>
+            <th className="hidden px-4 py-3 text-start font-medium text-ink/60 lg:table-cell">Location</th>
+            <th className="px-4 py-3 text-start font-medium text-ink/60">Registrations</th>
+            <th className="px-4 py-3 text-start font-medium text-ink/60">Status</th>
+            <th className="px-4 py-3 text-end font-medium text-ink/60">Actions</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-[#e5e0d5]">
+        <tbody className="divide-y divide-hairline">
           {events.map((ev) => (
-            <tr key={ev.id} className="hover:bg-[#f5f3ee]/50 transition-colors">
+            <tr key={ev.id} className="hover:bg-surface-soft/50 transition-colors">
               {/* Name */}
               <td className="px-4 py-3">
                 <Link
                   href={`/admin/events/${ev.id}`}
-                  className="font-semibold text-[#0a1628] hover:text-[#d4a84b] transition-colors"
+                  className="font-semibold text-ink hover:text-brand transition-colors"
                 >
                   {ev.name}
                 </Link>
-                <p className="text-xs text-[#0a1628]/40 mt-0.5">by {ev.createdBy.name}</p>
+                <p className="text-xs text-ink/40 mt-0.5">by {ev.createdBy.name}</p>
               </td>
 
               {/* Date */}
-              <td className="hidden px-4 py-3 text-[#0a1628]/70 md:table-cell">
+              <td className="hidden px-4 py-3 text-ink/70 md:table-cell">
                 {format(new Date(ev.date), "MMM d, yyyy")}
-                <span className="block text-xs text-[#0a1628]/40">
+                <span className="block text-xs text-ink/40">
                   {format(new Date(ev.date), "HH:mm")}
                 </span>
               </td>
 
               {/* Location */}
-              <td className="hidden max-w-[200px] truncate px-4 py-3 text-[#0a1628]/70 lg:table-cell">
+              <td className="hidden max-w-[200px] truncate px-4 py-3 text-ink/70 lg:table-cell">
                 {ev.location}
               </td>
 
               {/* Count */}
               <td className="px-4 py-3">
-                <span className="font-bold text-[#0a1628]">{ev._count.registrations}</span>
+                <span className="font-bold text-ink">{ev._count.registrations}</span>
               </td>
 
               {/* Status */}
@@ -116,7 +116,7 @@ export default function EventsListClient({ events }: { events: EventRow[] }) {
                   className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold ${
                     ev.isActive
                       ? "bg-emerald-100 text-emerald-700"
-                      : "bg-[#0a1628]/8 text-[#0a1628]/50"
+                      : "bg-ink/10 text-ink/50"
                   }`}
                 >
                   {ev.isActive ? "Open" : "Closed"}
@@ -131,7 +131,7 @@ export default function EventsListClient({ events }: { events: EventRow[] }) {
                     type="button"
                     title="Copy registration link"
                     onClick={() => copyLink(ev.slug)}
-                    className="flex h-8 w-8 items-center justify-center rounded-lg text-[#0a1628]/50 transition-colors hover:bg-[#0a1628]/8 hover:text-[#0a1628]"
+                    className="flex h-8 w-8 items-center justify-center rounded-lg text-ink/50 transition-colors hover:bg-ink/10 hover:text-ink"
                   >
                     <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
@@ -142,7 +142,7 @@ export default function EventsListClient({ events }: { events: EventRow[] }) {
                   <Link
                     href={`/admin/events/${ev.id}`}
                     title="View event"
-                    className="flex h-8 w-8 items-center justify-center rounded-lg text-[#0a1628]/50 transition-colors hover:bg-[#0a1628]/8 hover:text-[#0a1628]"
+                    className="flex h-8 w-8 items-center justify-center rounded-lg text-ink/50 transition-colors hover:bg-ink/10 hover:text-ink"
                   >
                     <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.641 0-8.573-3.007-9.963-7.178z" />

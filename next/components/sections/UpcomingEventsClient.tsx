@@ -22,12 +22,12 @@ interface Props {
 }
 
 const CARD_COLORS = [
-  { bg: "#0a1628", text: "#f5f0e8" },
-  { bg: "#1a3a6b", text: "#f5f0e8" },
-  { bg: "#d4a84b", text: "#0a1628" },
-  { bg: "#2e4057", text: "#f5f0e8" },
-  { bg: "#1b4332", text: "#f5f0e8" },
-  { bg: "#4a1942", text: "#f5f0e8" },
+  { bg: "#1A1C1F", text: "#F7F7F8" },
+  { bg: "#3A3D42", text: "#F7F7F8" },
+  { bg: "#BC0000", text: "#1A1C1F" },
+  { bg: "#2e4057", text: "#F7F7F8" },
+  { bg: "#1b4332", text: "#F7F7F8" },
+  { bg: "#4a1942", text: "#F7F7F8" },
 ];
 
 const labels: Record<string, {
@@ -178,18 +178,18 @@ export default function UpcomingEventsClient({ events, locale }: Props) {
   function onMouseUp() { isDragging.current = false; }
 
   return (
-    <section id="events" className="bg-[#F3F4F6] py-20 overflow-hidden">
+    <section id="events" className="bg-gray-100 py-20 overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
         {/* ── Header ─────────────────────────────────────────────── */}
         <div className="mb-10 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           {/* Left */}
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-3 text-sm font-semibold text-[--color-brand-secondary]">
-              <span className="h-2 w-2 rounded-full bg-[--color-brand-secondary]" />
+            <span className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-3 text-sm font-semibold text-ink-soft">
+              <span className="h-2 w-2 rounded-full bg-ink-soft" />
               {l.badge}
             </span>
-            <h2 className="mt-3 text-3xl font-bold text-[--color-brand-primary] sm:text-4xl lg:text-5xl">
+            <h2 className="mt-3 text-3xl font-bold text-brand sm:text-4xl lg:text-5xl">
               {l.title}
             </h2>
           </div>
@@ -197,15 +197,15 @@ export default function UpcomingEventsClient({ events, locale }: Props) {
           {/* Right — nav arrows */}
           <div className="flex items-center gap-3">
             <Link
-              href={`/${locale}/events`}
-              className="hidden rounded-full border border-[--color-border-soft] px-5 py-2 text-sm font-semibold text-[--color-brand-primary] transition hover:border-[--color-brand-primary]/40 sm:inline-flex"
+              href={`/${locale}#events`}
+              className="hidden rounded-full border border-hairline px-5 py-2 text-sm font-semibold text-brand transition hover:border-brand/40 sm:inline-flex"
             >
               {l.exploreAll}
             </Link>
             <div className="flex gap-2">
               <button
                 onClick={prev}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-[--color-border-soft] text-[--color-brand-primary] transition hover:bg-[--color-brand-primary] hover:text-white hover:border-transparent"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-hairline text-brand transition hover:bg-brand hover:text-white hover:border-transparent"
                 aria-label="Previous"
               >
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -214,7 +214,7 @@ export default function UpcomingEventsClient({ events, locale }: Props) {
               </button>
               <button
                 onClick={next}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-[--color-border-soft] text-[--color-brand-primary] transition hover:bg-[--color-brand-primary] hover:text-white hover:border-transparent"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-hairline text-brand transition hover:bg-brand hover:text-white hover:border-transparent"
                 aria-label="Next"
               >
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -228,7 +228,7 @@ export default function UpcomingEventsClient({ events, locale }: Props) {
         {/* ── Cards carousel ─────────────────────────────────────── */}
         <div
           ref={scrollRef}
-          className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide cursor-grab active:cursor-grabbing select-none"
+          className="flex gap-4 overflow-x-auto pb-4 [scrollbar-width:none] cursor-grab active:cursor-grabbing select-none"
           style={{ scrollSnapType: "x mandatory" }}
           onMouseDown={onMouseDown}
           onMouseMove={onMouseMove}
@@ -277,19 +277,19 @@ export default function UpcomingEventsClient({ events, locale }: Props) {
                   )}
 
                   {/* Date badge */}
-                  <div className="absolute right-3 top-3 flex flex-col items-center rounded-xl bg-white px-3 py-2 text-center shadow-md">
-                    <span className="text-xl font-bold leading-none text-[#0a1628]">
+                  <div className="absolute end-3 top-3 flex flex-col items-center rounded-xl bg-white px-3 py-2 text-center shadow-md">
+                    <span className="text-xl font-bold leading-none text-ink">
                       {formatDay(event.date)}
                     </span>
-                    <span className="mt-0.5 text-xs font-semibold uppercase text-[#0a1628]/60">
+                    <span className="mt-0.5 text-xs font-semibold uppercase text-ink/60">
                       {formatMonth(event.date, locale)}
                     </span>
                   </div>
 
                   {/* Status badge */}
                   {(isSoldOut || isLimited) && (
-                    <div className={`absolute left-3 top-3 rounded-full px-2.5 py-1 text-xs font-bold uppercase ${
-                      isSoldOut ? "bg-red-500 text-white" : "bg-[#d4a84b] text-[#0a1628]"
+                    <div className={`absolute start-3 top-3 rounded-full px-2.5 py-1 text-xs font-bold uppercase ${
+                      isSoldOut ? "bg-red-500 text-white" : "bg-brand text-ink"
                     }`}>
                       {isSoldOut ? l.soldOut : l.limitedSpots}
                     </div>
@@ -360,8 +360,8 @@ export default function UpcomingEventsClient({ events, locale }: Props) {
               onClick={() => scrollTo(i)}
               className={`h-1 rounded-full transition-all duration-300 ${
                 activeIndex === i
-                  ? "w-8 bg-[--color-brand-primary]"
-                  : "w-3 bg-[--color-brand-primary]/20"
+                  ? "w-8 bg-brand"
+                  : "w-3 bg-brand/20"
               }`}
             />
           ))}
@@ -370,8 +370,8 @@ export default function UpcomingEventsClient({ events, locale }: Props) {
         {/* ── Mobile explore all link ───────────────────────────── */}
         <div className="mt-6 text-center sm:hidden">
           <Link
-            href={`/${locale}/events`}
-            className="inline-flex items-center gap-2 text-sm font-semibold text-[--color-brand-primary]"
+            href={`/${locale}#events`}
+            className="inline-flex items-center gap-2 text-sm font-semibold text-brand"
           >
             {l.exploreAll}
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

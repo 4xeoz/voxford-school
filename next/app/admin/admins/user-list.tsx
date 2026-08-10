@@ -54,25 +54,25 @@ export default function UserList({
   }
 
   return (
-    <div className="overflow-hidden rounded-xl border border-[#e5e0d5] bg-white">
+    <div className="overflow-hidden rounded-xl border border-hairline bg-white">
       {error && (
         <div className="border-b border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
           {error}
         </div>
       )}
-      <div className="flex flex-col divide-y divide-[#e5e0d5]/60">
+      <div className="flex flex-col divide-y divide-hairline/60">
         {admins.map((admin) => (
           <div
             key={admin.id}
             className="flex items-center justify-between px-5 py-4"
           >
             <div className="flex items-center gap-3">
-              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#012340]/10 text-sm font-bold text-[#012340]">
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand/10 text-sm font-bold text-brand">
                 {admin.name[0]?.toUpperCase()}
               </div>
               <div className="flex flex-col gap-0.5">
                 <div className="flex items-center gap-2">
-                  <span className="font-semibold text-[#0a1628]">
+                  <span className="font-semibold text-ink">
                     {admin.name}
                   </span>
                   <span
@@ -83,12 +83,12 @@ export default function UserList({
                     {ROLE_LABELS[admin.role] || admin.role}
                   </span>
                   {admin.id === currentUserId && (
-                    <span className="rounded-full bg-[#012340]/5 px-2 py-0.5 text-[10px] font-medium text-[#012340]/60">
+                    <span className="rounded-full bg-brand/5 px-2 py-0.5 text-[10px] font-medium text-brand/60">
                       You
                     </span>
                   )}
                 </div>
-                <span className="text-sm text-[#0a1628]/50">{admin.email}</span>
+                <span className="text-sm text-ink/50">{admin.email}</span>
               </div>
             </div>
 

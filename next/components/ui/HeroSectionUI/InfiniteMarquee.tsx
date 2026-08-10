@@ -18,13 +18,13 @@ const logos: Array<{ id: number; name: string; image: StaticImageData }> = [
 const LogoCard = ({ image, name }: { image: StaticImageData; name: string }) => (
   <figure
     className={cn(
-      "relative flex h-28 w-44 items-center justify-center overflow-hidden rounded-xl bg-white/5 px-4 py-3 backdrop-blur"
+      "relative flex h-28 w-44 items-center justify-center overflow-hidden rounded-xl  px-4 py-3 backdrop-blur"
     )}
   >
     <Image
       src={image}
       alt={name}
-      className="h-16 w-auto object-contain grayscale opacity-80"
+      className="h-16 w-auto object-contain brightness-0 invert opacity-80"
       sizes="(max-width: 640px) 140px, 176px"
     />
   </figure>
@@ -33,13 +33,13 @@ const LogoCard = ({ image, name }: { image: StaticImageData; name: string }) => 
 export function MarqueeDemo() {
   return (
     <div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
-      <Marquee pauseOnHover className="[--duration:20s]">
+      <Marquee className="[--duration:20s]">
         {logos.map((logo) => (
           <LogoCard key={logo.id} image={logo.image} name={logo.name} />
         ))}
       </Marquee>
-      <div className="from-[--color-bg-primary] pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r"></div>
-      <div className="from-[--color-bg-primary] pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l"></div>
+      <div className="from-brand pointer-events-none absolute inset-y-0 start-0 w-1/4 bg-gradient-to-r"></div>
+      <div className="from-brand pointer-events-none absolute inset-y-0 end-0 w-1/4 bg-gradient-to-l"></div>
 
     </div>
   )

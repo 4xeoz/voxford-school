@@ -3,7 +3,7 @@ import type { Locale } from "@/i18n.config";
 import type { Metadata } from "next";
 import ContactPageClient from "@/components/sections/ContactPageClient";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://nopeca.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -13,15 +13,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
 
   const titles: Record<string, string> = {
-    en: "Free Consultation — Study in UK from Algeria | Nopeca",
-    fr: "Consultation Gratuite — Étudier au Royaume-Uni depuis l'Algérie | Nopeca",
-    ar: "استشارة مجانية — الدراسة في المملكة المتحدة من الجزائر | نوبيكا",
+    en: "Pre-register | Voxford Language School",
+    fr: "Pré-inscription | Voxford, école de langues",
+    ar: "التسجيل المسبق | مدرسة فوكسفورد للغات",
   };
 
   const descriptions: Record<string, string> = {
-    en: "Book your free consultation with Nopeca. Our experts guide Algerian students through UK university admissions, student visa, and 1-to-1 arrival support. Contact us today.",
-    fr: "Réservez votre consultation gratuite avec Nopeca. Nos experts accompagnent les étudiants algériens dans les admissions universitaires UK, le visa étudiant et l'accompagnement à l'arrivée.",
-    ar: "احجز استشارتك المجانية مع نوبيكا. خبراؤنا يرشدون الطلاب الجزائريين عبر القبول في الجامعات البريطانية، تأشيرة الطالب، والدعم عند الوصول.",
+    en: "Pre-register for Voxford Language School in M'Sila, Algeria. English, French, Spanish, German and more — be first to enrol when we open.",
+    fr: "Pré-inscrivez-vous à l'école de langues Voxford à M'Sila, Algérie. Anglais, espagnol, allemand et plus — soyez prioritaire à l'ouverture.",
+    ar: "سجّل مسبقاً في مدرسة فوكسفورد للغات بالمسيلة، الجزائر. الإنجليزية والفرنسية والإسبانية والألمانية وغيرها — كن أول المسجّلين عند الافتتاح.",
   };
 
   return {

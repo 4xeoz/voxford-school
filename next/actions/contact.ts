@@ -71,3 +71,17 @@ export async function submitContactForm(
     };
   }
 }
+
+/**
+ * How many people have pre-registered. Real count, used by the footer's
+ * scarcity strip — never a hardcoded figure.
+ * Returns 0 if the database is unreachable, which makes the strip fall back
+ * to the no-number "limited places" wording rather than showing a wrong count.
+ */
+export async function getPreRegistrationCount(): Promise<number> {
+  try {
+    return await prisma.contact.count();
+  } catch {
+    return 0;
+  }
+}

@@ -53,8 +53,8 @@ export default function EventForm({ event }: { event?: EventData }) {
   }
 
   const inputCls =
-    "w-full rounded-lg border border-[#e5e0d5] bg-white px-4 py-2.5 text-sm text-[#0a1628] placeholder:text-[#0a1628]/35 focus:border-[#0a1628] focus:outline-none transition-colors";
-  const labelCls = "block mb-1.5 text-sm font-medium text-[#0a1628]";
+    "w-full rounded-lg border border-hairline bg-white px-4 py-2.5 text-sm text-ink placeholder:text-ink/35 focus:border-ink focus:outline-none transition-colors";
+  const labelCls = "block mb-1.5 text-sm font-medium text-ink";
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-6">
@@ -120,7 +120,7 @@ export default function EventForm({ event }: { event?: EventData }) {
       {/* Image URL */}
       <div>
         <label className={labelCls}>
-          Image URL <span className="text-[#0a1628]/35 font-normal">(optional)</span>
+          Image URL <span className="text-ink/35 font-normal">(optional)</span>
         </label>
         <input
           name="imageUrl"
@@ -129,7 +129,7 @@ export default function EventForm({ event }: { event?: EventData }) {
           placeholder="https://example.com/event-image.jpg"
           className={inputCls}
         />
-        <p className="mt-1 text-xs text-[#0a1628]/40">
+        <p className="mt-1 text-xs text-ink/40">
           Link to an image that will be shown on the event page and upcoming events section.
         </p>
       </div>
@@ -139,7 +139,7 @@ export default function EventForm({ event }: { event?: EventData }) {
         <button
           type="submit"
           disabled={saving}
-          className="flex h-10 items-center gap-2 rounded-lg bg-[#0a1628] px-5 text-sm font-semibold text-white transition-opacity disabled:opacity-60 hover:opacity-90"
+          className="flex h-10 items-center gap-2 rounded-lg bg-ink px-5 text-sm font-semibold text-white transition-opacity disabled:opacity-60 hover:opacity-90"
         >
           {saving ? (
             <>
@@ -158,7 +158,7 @@ export default function EventForm({ event }: { event?: EventData }) {
         <button
           type="button"
           onClick={() => router.back()}
-          className="flex h-10 items-center rounded-lg border border-[#e5e0d5] bg-white px-5 text-sm font-medium text-[#0a1628]/70 transition-colors hover:text-[#0a1628]"
+          className="flex h-10 items-center rounded-lg border border-hairline bg-white px-5 text-sm font-medium text-ink/70 transition-colors hover:text-ink"
         >
           Cancel
         </button>

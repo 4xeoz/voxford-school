@@ -24,7 +24,7 @@ export default async function EventDetailPage({
 
   // Build the URL from the actual request host so it works in any environment
   const headersList = await headers();
-  const host = headersList.get("host") ?? "nopeca.com";
+  const host = headersList.get("host") ?? "localhost:3000";
   const proto =
     headersList.get("x-forwarded-proto") ??
     (process.env.NODE_ENV === "production" ? "https" : "http");
@@ -35,7 +35,7 @@ export default async function EventDetailPage({
   const qrDataUrl = await QRCode.toDataURL(registrationUrl, {
     width: 512,
     margin: 2,
-    color: { dark: "#0a1628", light: "#ffffff" },
+    color: { dark: "#1A1C1F", light: "#ffffff" },
     errorCorrectionLevel: "H",
   });
 

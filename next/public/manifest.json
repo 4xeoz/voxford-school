@@ -1,37 +1,39 @@
 {
-  "name": "Nopeca — Study in UK from Algeria",
-  "short_name": "Nopeca",
-  "description": "Nopeca helps Algerian students study in top UK universities. Expert guidance on admissions, UK student visa, and arrival support.",
+  "name": "Voxford Language School — Opening Soon",
+  "short_name": "Voxford",
+  "description": "Voxford Language School is opening in M'Sila, Algeria. Pre-register for the founding intake.",
   "start_url": "/en",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#F5F0E8",
-  "theme_color": "#012340",
+  "background_color": "#F7F7F8",
+  "theme_color": "#BC0000",
   "lang": "en",
   "dir": "ltr",
-  "categories": ["education"],
+  "categories": [
+    "education"
+  ],
   "shortcuts": [
     {
-      "name": "Free Consultation",
+      "name": "Pre-register",
       "url": "/en/contact",
-      "description": "Book a free consultation with Nopeca advisors"
+      "description": "Pre-register for the founding intake at Voxford"
     },
     {
-      "name": "Explore Universities",
-      "url": "/en/universities",
-      "description": "Browse UK universities available to Algerian students"
+      "name": "Read the Blog",
+      "url": "/en/blog",
+      "description": "Language learning tips and guides from our teachers"
     }
   ],
   "icons": [
     {
-      "src": "/singl_logo_colord_white_background@4x.png",
+      "src": "/voxford/icon-detailed-red-on-whiteBackground-v2.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/singl_logo_colord_white_background@4x.png",
+      "src": "/voxford/icon-detailed-red-on-whiteBackground-v2.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"

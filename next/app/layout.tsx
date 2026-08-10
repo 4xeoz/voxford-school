@@ -1,40 +1,41 @@
 import type { Metadata } from 'next';
+import { headers } from 'next/headers';
 import { i18n } from '@/i18n.config';
 import { Toaster } from '@/components/ui/sonner';
 import SmoothScrollProvider from '@/components/providers/SmoothScrollProvider';
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
 import './globals.css';
-import LoadingOverlay from '@/components/ui/LoadingOverlay';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://nopeca.com';
+// Set NEXT_PUBLIC_SITE_URL to the production domain — canonical URLs, OG tags
+// and the sitemap all derive from it.
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Study in UK from Algeria | University Admissions & Visa Support | Nopeca',
-    template: '%s | Nopeca',
+    default: "Voxford Language School | Opening Soon in M'Sila, Algeria",
+    template: '%s | Voxford',
   },
   description:
-    'Nopeca helps Algerian students study in top UK universities. Expert guidance on admissions, UK student visa, scholarships & arrival support. 500+ students placed. Based in Boumerdes.',
+    "Voxford Language School is opening in M'Sila, Algeria. English, French, Spanish, German and more — with a route to study abroad. Pre-register for the founding intake.",
   keywords: [
-    'study in UK from Algeria',
-    'UK student visa Algeria',
-    'UK universities for Algerian students',
-    'scholarships for Algerian students',
-    'étudier au Royaume-Uni depuis l\'Algérie',
-    'visa étudiant UK Algérie',
-    'study abroad Algeria',
-    'Nopeca',
-    'Boumerdes',
-    'Oxford',
-    'Cambridge',
-    'UCL',
-    'الدراسة في المملكة المتحدة من الجزائر',
-    'تأشيرة طالب UK الجزائر',
+    "language school M'Sila",
+    'English courses Algeria',
+    "French courses M'Sila",
+    'learn English Algeria',
+    'IELTS preparation Algeria',
+    'Spanish courses Algeria',
+    'German courses Algeria',
+    "école de langues M'Sila",
+    "cours d'anglais Algérie",
+    'Voxford',
+    "M'Sila",
+    'مدرسة لغات المسيلة',
+    'تعلم الإنجليزية الجزائر',
   ],
-  authors: [{ name: 'Nopeca', url: SITE_URL }],
-  creator: 'Nopeca',
-  publisher: 'Nopeca',
+  authors: [{ name: 'Voxford Language School', url: SITE_URL }],
+  creator: 'Voxford Language School',
+  publisher: 'Voxford Language School',
   formatDetection: {
     email: false,
     address: false,
@@ -42,27 +43,27 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    siteName: 'Nopeca',
+    siteName: 'Voxford Language School',
     locale: 'en_DZ',
     alternateLocale: ['fr_DZ', 'ar_DZ'],
     url: SITE_URL,
-    title: 'Study in the UK from Algeria | Nopeca — Your Gateway to British Universities',
+    title: 'Voxford Language School — Opening Soon',
     description:
-      '500+ Algerian students placed at top UK universities. Expert support for admissions, UK student visa, flights & arrival. Based in Boumerdes. Free consultation.',
+      "A new language school opening in M'Sila, Algeria. Pre-register for the founding intake and be first to enrol.",
     images: [
       {
-        url: 'https://nopeca.com/og-image.png',
+        url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Nopeca — Study in the UK from Algeria',
+        alt: 'Voxford Language School',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Study in UK from Algeria | Nopeca',
+    title: 'Voxford Language School',
     description:
-      '500+ Algerian students placed at top UK universities. Free expert guidance on admissions, visa, flights & arrival support.',
+      "Opening soon in M'Sila, Algeria. Pre-register for the founding intake.",
     images: ['/og-image.png'],
   },
   robots: {
@@ -95,23 +96,33 @@ export function generateStaticParams() {
   return i18n.locales.map((locale) => ({ locale }));
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-  params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ locale?: string }>;
 }) {
+  // Set by middleware — this layout sits above [locale] so it has no route param.
+  const locale = (await headers()).get('x-locale') ?? i18n.defaultLocale;
+  const isArabic = locale === 'ar';
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    // dir is always ltr: the Arabic version keeps the same layout as EN/FR
+    // rather than mirroring. lang still says 'ar' so screen readers and search
+    // engines identify the language correctly.
+    <html lang={locale} dir="ltr" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/og-image.png" />
         <link rel="manifest" href="/manifest.json" />
+        {/* Snaga Arabic (Adobe Fonts). The kit id is a public identifier — it
+            ships in the markup of every site that uses it. Only fetched for the
+            Arabic locale, which is the only place the family is applied. */}
+        {isArabic && (
+          <link rel="stylesheet" href="https://use.typekit.net/aen1cxm.css" />
+        )}
       </head>
-      <body>
+      <body className={isArabic ? 'font-arabic' : undefined}>
         <GoogleAnalytics />
-        <LoadingOverlay />
         <SmoothScrollProvider>
           {children}
         </SmoothScrollProvider>

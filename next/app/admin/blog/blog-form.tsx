@@ -67,33 +67,33 @@ export default function BlogForm({ post }: { post?: PostData }) {
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Published toggle + Cover image */}
       <div className="grid gap-4 sm:grid-cols-2">
-        <label className="flex items-center gap-3 rounded-xl border border-[#e5e0d5] bg-white px-4 py-3">
+        <label className="flex items-center gap-3 rounded-xl border border-hairline bg-white px-4 py-3">
           <input
             type="checkbox"
             name="published"
             value="true"
             defaultChecked={post?.published ?? false}
-            className="h-4 w-4 rounded border-gray-300 text-[#012340] focus:ring-[#012340]"
+            className="h-4 w-4 rounded border-gray-300 text-brand focus:ring-brand"
           />
-          <span className="text-sm font-medium text-[#0a1628]">
+          <span className="text-sm font-medium text-ink">
             Published
           </span>
         </label>
         <div>
-          <label className="mb-1 block text-xs font-medium text-[#0a1628]/60">
+          <label className="mb-1 block text-xs font-medium text-ink/60">
             Cover Image URL
           </label>
           <input
             name="coverImage"
             defaultValue={post?.coverImage ?? ""}
             placeholder="https://..."
-            className="w-full rounded-xl border border-[#e5e0d5] bg-white px-4 py-2.5 text-sm text-[#0a1628] outline-none transition focus:border-[#012340] focus:ring-1 focus:ring-[#012340]"
+            className="w-full rounded-xl border border-hairline bg-white px-4 py-2.5 text-sm text-ink outline-none transition focus:border-brand focus:ring-1 focus:ring-brand"
           />
         </div>
       </div>
 
       {/* Language tabs */}
-      <div className="flex gap-1 rounded-xl bg-[#e5e0d5]/50 p-1">
+      <div className="flex gap-1 rounded-xl bg-hairline/50 p-1">
         {TABS.map((t) => (
           <button
             key={t.key}
@@ -101,8 +101,8 @@ export default function BlogForm({ post }: { post?: PostData }) {
             onClick={() => setTab(t.key)}
             className={`flex-1 rounded-lg px-4 py-2 text-sm font-medium transition ${
               tab === t.key
-                ? "bg-white text-[#0a1628] shadow-sm"
-                : "text-[#0a1628]/50 hover:text-[#0a1628]/80"
+                ? "bg-white text-ink shadow-sm"
+                : "text-ink/50 hover:text-ink/80"
             }`}
           >
             {t.label}
@@ -118,7 +118,7 @@ export default function BlogForm({ post }: { post?: PostData }) {
           dir={t.key === "ar" ? "rtl" : "ltr"}
         >
           <div>
-            <label className="mb-1 block text-xs font-medium text-[#0a1628]/60">
+            <label className="mb-1 block text-xs font-medium text-ink/60">
               Title {t.key !== "en" && "(optional)"}
             </label>
             <input
@@ -130,11 +130,11 @@ export default function BlogForm({ post }: { post?: PostData }) {
               }
               required={t.key === "en"}
               placeholder={`Post title in ${t.label}`}
-              className="w-full rounded-xl border border-[#e5e0d5] bg-white px-4 py-2.5 text-sm text-[#0a1628] outline-none transition focus:border-[#012340] focus:ring-1 focus:ring-[#012340]"
+              className="w-full rounded-xl border border-hairline bg-white px-4 py-2.5 text-sm text-ink outline-none transition focus:border-brand focus:ring-1 focus:ring-brand"
             />
           </div>
           <div>
-            <label className="mb-1 block text-xs font-medium text-[#0a1628]/60">
+            <label className="mb-1 block text-xs font-medium text-ink/60">
               Excerpt {t.key !== "en" && "(optional)"}
             </label>
             <textarea
@@ -147,11 +147,11 @@ export default function BlogForm({ post }: { post?: PostData }) {
               required={t.key === "en"}
               rows={2}
               placeholder={`Short excerpt in ${t.label}`}
-              className="w-full rounded-xl border border-[#e5e0d5] bg-white px-4 py-2.5 text-sm text-[#0a1628] outline-none transition focus:border-[#012340] focus:ring-1 focus:ring-[#012340]"
+              className="w-full rounded-xl border border-hairline bg-white px-4 py-2.5 text-sm text-ink outline-none transition focus:border-brand focus:ring-1 focus:ring-brand"
             />
           </div>
           <div>
-            <label className="mb-1 block text-xs font-medium text-[#0a1628]/60">
+            <label className="mb-1 block text-xs font-medium text-ink/60">
               Content {t.key !== "en" && "(optional)"}
             </label>
             <textarea
@@ -164,18 +164,18 @@ export default function BlogForm({ post }: { post?: PostData }) {
               required={t.key === "en"}
               rows={12}
               placeholder={`Full post content in ${t.label} (supports Markdown)`}
-              className="w-full rounded-xl border border-[#e5e0d5] bg-white px-4 py-2.5 text-sm text-[#0a1628] outline-none transition focus:border-[#012340] focus:ring-1 focus:ring-[#012340] font-mono"
+              className="w-full rounded-xl border border-hairline bg-white px-4 py-2.5 text-sm text-ink outline-none transition focus:border-brand focus:ring-1 focus:ring-brand font-mono"
             />
           </div>
 
           {/* SEO fields */}
-          <details className="rounded-xl border border-[#e5e0d5] bg-white">
-            <summary className="cursor-pointer px-4 py-3 text-sm font-medium text-[#0a1628]">
+          <details className="rounded-xl border border-hairline bg-white">
+            <summary className="cursor-pointer px-4 py-3 text-sm font-medium text-ink">
               SEO Settings ({t.label})
             </summary>
-            <div className="space-y-3 border-t border-[#e5e0d5] p-4">
+            <div className="space-y-3 border-t border-hairline p-4">
               <div>
-                <label className="mb-1 block text-xs font-medium text-[#0a1628]/60">
+                <label className="mb-1 block text-xs font-medium text-ink/60">
                   Meta Title
                 </label>
                 <input
@@ -186,11 +186,11 @@ export default function BlogForm({ post }: { post?: PostData }) {
                     ] as string ?? ""
                   }
                   placeholder="Custom SEO title (defaults to post title)"
-                  className="w-full rounded-lg border border-[#e5e0d5] px-3 py-2 text-sm outline-none focus:border-[#012340]"
+                  className="w-full rounded-lg border border-hairline px-3 py-2 text-sm outline-none focus:border-brand"
                 />
               </div>
               <div>
-                <label className="mb-1 block text-xs font-medium text-[#0a1628]/60">
+                <label className="mb-1 block text-xs font-medium text-ink/60">
                   Meta Description
                 </label>
                 <textarea
@@ -202,11 +202,11 @@ export default function BlogForm({ post }: { post?: PostData }) {
                   }
                   rows={2}
                   placeholder="Custom SEO description (defaults to excerpt)"
-                  className="w-full rounded-lg border border-[#e5e0d5] px-3 py-2 text-sm outline-none focus:border-[#012340]"
+                  className="w-full rounded-lg border border-hairline px-3 py-2 text-sm outline-none focus:border-brand"
                 />
               </div>
               <div>
-                <label className="mb-1 block text-xs font-medium text-[#0a1628]/60">
+                <label className="mb-1 block text-xs font-medium text-ink/60">
                   Keywords (comma-separated)
                 </label>
                 <input
@@ -223,7 +223,7 @@ export default function BlogForm({ post }: { post?: PostData }) {
                         ? "étudier à l'étranger, université UK, Algérie"
                         : "الدراسة في الخارج، جامعة بريطانيا، الجزائر"
                   }
-                  className="w-full rounded-lg border border-[#e5e0d5] px-3 py-2 text-sm outline-none focus:border-[#012340]"
+                  className="w-full rounded-lg border border-hairline px-3 py-2 text-sm outline-none focus:border-brand"
                 />
               </div>
             </div>
@@ -236,14 +236,14 @@ export default function BlogForm({ post }: { post?: PostData }) {
         <button
           type="submit"
           disabled={saving}
-          className="rounded-xl bg-[#012340] px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-[#012340]/90 disabled:opacity-50"
+          className="rounded-xl bg-brand px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-brand/90 disabled:opacity-50"
         >
           {saving ? "Saving..." : isEdit ? "Update Post" : "Create Post"}
         </button>
         <button
           type="button"
           onClick={() => router.push("/admin/blog")}
-          className="rounded-xl border border-[#e5e0d5] px-6 py-2.5 text-sm font-medium text-[#0a1628] transition hover:bg-[#e5e0d5]/50"
+          className="rounded-xl border border-hairline px-6 py-2.5 text-sm font-medium text-ink transition hover:bg-hairline/50"
         >
           Cancel
         </button>

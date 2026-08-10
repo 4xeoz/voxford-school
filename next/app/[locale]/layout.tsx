@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { i18n, type Locale } from '@/i18n.config';
 import { getDictionary } from '@/dictionaries';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://nopeca.com';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
 export function generateStaticParams() {
   return i18n.locales.map((locale) => ({ locale }));
@@ -17,7 +17,9 @@ export async function generateMetadata({
   const dict = await getDictionary(locale as Locale);
 
   return {
-    title: dict.seo.title,
+    // absolute: seo.title already carries the brand, so skip the root
+    // layout's "%s | Voxford" template and avoid doubling it up.
+    title: { absolute: dict.seo.title },
     description: dict.seo.description,
     keywords: dict.seo.keywords,
     openGraph: {
@@ -37,19 +39,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function LocaleLayout({
-  children,
-  params,
-}: {
-  children: React.ReactNode;
-  params: Promise<{ locale: string }>;
-}) {
-  const { locale } = await params;
-  const isArabic = locale === 'ar';
-
-  return (
-    <div lang={locale} dir={isArabic ? 'rtl' : 'ltr'}>
-      {children}
-    </div>
-  );
+// lang and dir now live on <html> in the root layout, so this is a pass-through.
+export default function LocaleLayout({ children }: { children: React.ReactNode }) {
+  return <>{children}</>;
 }

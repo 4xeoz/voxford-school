@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 import { i18n } from '@/i18n.config';
 import { getAllPublishedSlugs } from '@/actions/blog';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://nopeca.com';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const allLocales = i18n.locales;
@@ -19,36 +19,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       ),
     },
   }));
-
-  // Universities pages
-  allLocales.forEach((locale) => {
-    routes.push({
-      url: `${SITE_URL}/${locale}/universities`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.9,
-      alternates: {
-        languages: Object.fromEntries(
-          allLocales.map((l) => [l, `${SITE_URL}/${l}/universities`])
-        ),
-      },
-    });
-  });
-
-  // FAQ pages
-  allLocales.forEach((locale) => {
-    routes.push({
-      url: `${SITE_URL}/${locale}/faq`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.8,
-      alternates: {
-        languages: Object.fromEntries(
-          allLocales.map((l) => [l, `${SITE_URL}/${l}/faq`])
-        ),
-      },
-    });
-  });
 
   // Contact pages
   allLocales.forEach((locale) => {

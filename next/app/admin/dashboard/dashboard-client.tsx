@@ -311,13 +311,13 @@ export default function DashboardClient({
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center px-6 py-20">
         <div className="mx-auto max-w-sm text-center">
-          <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-[#012340]/10">
-            <svg className="h-10 w-10 text-[#012340]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-brand/10">
+            <svg className="h-10 w-10 text-brand" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
-          <h2 className="text-xl font-bold text-[#0a1628]">Clock In to Start</h2>
-          <p className="mt-2 text-sm text-[#0a1628]/50">
+          <h2 className="text-xl font-bold text-ink">Clock In to Start</h2>
+          <p className="mt-2 text-sm text-ink/50">
             You need to clock in before you can access the dashboard. Your work hours and location will be recorded.
           </p>
           <button
@@ -351,11 +351,11 @@ export default function DashboardClient({
   return (
     <div className="relative flex h-full flex-col">
       {/* Header */}
-      <div className="border-b border-[#e5e0d5] bg-white px-6 py-5">
+      <div className="border-b border-hairline bg-white px-6 py-5">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-xl font-bold text-[#0a1628]">Leads</h1>
-            <p className="mt-0.5 text-sm text-[#0a1628]/50">
+            <h1 className="text-xl font-bold text-ink">Leads</h1>
+            <p className="mt-0.5 text-sm text-ink/50">
               {isAdminView ? "Manage and assign contact leads" : "Your assigned leads"}
             </p>
           </div>
@@ -374,17 +374,17 @@ export default function DashboardClient({
                 {clockLoading ? "..." : "Clock Out"}
               </button>
             )}
-            <div className="flex items-center gap-1.5 rounded-lg bg-[#0a1628]/5 px-3 py-1.5 text-xs font-medium text-[#0a1628]/70">
+            <div className="flex items-center gap-1.5 rounded-lg bg-ink/5 px-3 py-1.5 text-xs font-medium text-ink/70">
               <span className="inline-block h-2 w-2 rounded-full bg-blue-500" />
               {stats.new} new
             </div>
             {isAdminView && (
-              <div className="flex items-center gap-1.5 rounded-lg bg-[#0a1628]/5 px-3 py-1.5 text-xs font-medium text-[#0a1628]/70">
+              <div className="flex items-center gap-1.5 rounded-lg bg-ink/5 px-3 py-1.5 text-xs font-medium text-ink/70">
                 <span className="inline-block h-2 w-2 rounded-full bg-orange-400" />
                 {stats.unassigned} unassigned
               </div>
             )}
-            <div className="rounded-lg bg-[#012340] px-3 py-1.5 text-xs font-semibold text-white">
+            <div className="rounded-lg bg-brand px-3 py-1.5 text-xs font-semibold text-white">
               {stats.total} total
             </div>
           </div>
@@ -424,7 +424,7 @@ export default function DashboardClient({
       {/* Table */}
       <div className="flex-1 overflow-auto px-6 py-4">
         {filteredLeads.length === 0 ? (
-          <div className="flex h-60 flex-col items-center justify-center rounded-xl border border-dashed border-[#d1c7b1] text-[#0a1628]/40">
+          <div className="flex h-60 flex-col items-center justify-center rounded-xl border border-dashed border-hairline text-ink/40">
             <svg className="mb-2 h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m6 4.125l2.25 2.25m0 0l2.25-2.25M12 13.875V7.5M3.75 7.5h16.5" />
             </svg>
@@ -433,28 +433,28 @@ export default function DashboardClient({
         ) : (
           <>
             {/* Desktop table */}
-            <div className="hidden overflow-hidden rounded-xl border border-[#e5e0d5] bg-white md:block">
-              <table className="w-full text-left text-sm">
+            <div className="hidden overflow-hidden rounded-xl border border-hairline bg-white md:block">
+              <table className="w-full text-start text-sm">
                 <thead>
-                  <tr className="border-b border-[#e5e0d5] bg-[#faf8f4]">
+                  <tr className="border-b border-hairline bg-surface-soft">
                     {isAdminView && (
                       <th className="w-10 px-4 py-3">
                         <input
                           type="checkbox"
                           checked={selected.size === filteredLeads.length && filteredLeads.length > 0}
                           onChange={toggleAll}
-                          className="h-4 w-4 rounded border-[#d1c7b1] accent-[#012340]"
+                          className="h-4 w-4 rounded border-hairline accent-brand"
                         />
                       </th>
                     )}
-                    <th className="px-4 py-3 font-semibold text-[#0a1628]/70">Name</th>
-                    <th className="px-4 py-3 font-semibold text-[#0a1628]/70">Email</th>
-                    <th className="px-4 py-3 font-semibold text-[#0a1628]/70">Phone</th>
-                    <th className="px-4 py-3 font-semibold text-[#0a1628]/70">Status</th>
+                    <th className="px-4 py-3 font-semibold text-ink/70">Name</th>
+                    <th className="px-4 py-3 font-semibold text-ink/70">Email</th>
+                    <th className="px-4 py-3 font-semibold text-ink/70">Phone</th>
+                    <th className="px-4 py-3 font-semibold text-ink/70">Status</th>
                     {isAdminView && (
-                      <th className="px-4 py-3 font-semibold text-[#0a1628]/70">Assigned to</th>
+                      <th className="px-4 py-3 font-semibold text-ink/70">Assigned to</th>
                     )}
-                    <th className="px-4 py-3 font-semibold text-[#0a1628]/70">Date</th>
+                    <th className="px-4 py-3 font-semibold text-ink/70">Date</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -462,8 +462,8 @@ export default function DashboardClient({
                     <tr
                       key={lead.id}
                       onClick={() => setOpenLead(lead)}
-                      className={`cursor-pointer border-b border-[#e5e0d5]/60 transition last:border-0 hover:bg-[#faf8f4] ${
-                        selected.has(lead.id) ? "bg-[#012340]/[0.03]" : ""
+                      className={`cursor-pointer border-b border-hairline/60 transition last:border-0 hover:bg-surface-soft ${
+                        selected.has(lead.id) ? "bg-brand/[0.03]" : ""
                       }`}
                     >
                       {isAdminView && (
@@ -472,29 +472,29 @@ export default function DashboardClient({
                             type="checkbox"
                             checked={selected.has(lead.id)}
                             onChange={() => toggleSelect(lead.id)}
-                            className="h-4 w-4 rounded border-[#d1c7b1] accent-[#012340]"
+                            className="h-4 w-4 rounded border-hairline accent-brand"
                           />
                         </td>
                       )}
-                      <td className="px-4 py-3 font-medium text-[#0a1628]">{lead.name}</td>
-                      <td className="px-4 py-3 text-[#0a1628]/60">{lead.email}</td>
-                      <td className="px-4 py-3 text-[#0a1628]/60">{lead.phone || "—"}</td>
+                      <td className="px-4 py-3 font-medium text-ink">{lead.name}</td>
+                      <td className="px-4 py-3 text-ink/60">{lead.email}</td>
+                      <td className="px-4 py-3 text-ink/60">{lead.phone || "—"}</td>
                       <td className="px-4 py-3">
                         <StatusBadge status={lead.status} />
                       </td>
                       {isAdminView && (
-                        <td className="px-4 py-3 text-[#0a1628]/60">
+                        <td className="px-4 py-3 text-ink/60">
                           {lead.assignedTo ? (
-                            <span className="inline-flex items-center gap-1.5 rounded-full bg-[#0a1628]/5 px-2 py-0.5 text-xs font-medium text-[#0a1628]/80">
+                            <span className="inline-flex items-center gap-1.5 rounded-full bg-ink/5 px-2 py-0.5 text-xs font-medium text-ink/80">
                               <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500" />
                               {lead.assignedTo.name}
                             </span>
                           ) : (
-                            <span className="text-xs text-[#0a1628]/30">—</span>
+                            <span className="text-xs text-ink/30">—</span>
                           )}
                         </td>
                       )}
-                      <td className="whitespace-nowrap px-4 py-3 text-[#0a1628]/40 text-xs">
+                      <td className="whitespace-nowrap px-4 py-3 text-ink/40 text-xs">
                         {new Date(lead.createdAt).toLocaleDateString("en-GB", {
                           day: "numeric",
                           month: "short",
@@ -514,7 +514,7 @@ export default function DashboardClient({
                   key={lead.id}
                   onClick={() => setOpenLead(lead)}
                   className={`cursor-pointer rounded-xl border bg-white p-4 transition hover:shadow-sm ${
-                    selected.has(lead.id) ? "border-[#012340]/30 bg-[#012340]/[0.02]" : "border-[#e5e0d5]"
+                    selected.has(lead.id) ? "border-brand/30 bg-brand/[0.02]" : "border-hairline"
                   }`}
                 >
                   <div className="flex items-start justify-between gap-2">
@@ -525,25 +525,25 @@ export default function DashboardClient({
                           checked={selected.has(lead.id)}
                           onChange={(e) => { e.stopPropagation(); toggleSelect(lead.id); }}
                           onClick={(e) => e.stopPropagation()}
-                          className="h-4 w-4 rounded border-[#d1c7b1] accent-[#012340]"
+                          className="h-4 w-4 rounded border-hairline accent-brand"
                         />
                       )}
-                      <span className="font-semibold text-[#0a1628]">{lead.name}</span>
+                      <span className="font-semibold text-ink">{lead.name}</span>
                     </div>
                     <StatusBadge status={lead.status} />
                   </div>
-                  <p className="mt-1.5 text-sm text-[#0a1628]/60">{lead.email}</p>
-                  <p className="mt-1 line-clamp-1 text-sm text-[#0a1628]/40">{lead.message}</p>
+                  <p className="mt-1.5 text-sm text-ink/60">{lead.email}</p>
+                  <p className="mt-1 line-clamp-1 text-sm text-ink/40">{lead.message}</p>
                   <div className="mt-2 flex items-center justify-between">
                     {isAdminView && lead.assignedTo ? (
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-[#0a1628]/5 px-2 py-0.5 text-xs font-medium text-[#0a1628]/70">
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-ink/5 px-2 py-0.5 text-xs font-medium text-ink/70">
                         <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500" />
                         {lead.assignedTo.name}
                       </span>
                     ) : (
                       <span />
                     )}
-                    <span className="text-xs text-[#0a1628]/30">
+                    <span className="text-xs text-ink/30">
                       {new Date(lead.createdAt).toLocaleDateString("en-GB", { day: "numeric", month: "short" })}
                     </span>
                   </div>
@@ -556,38 +556,38 @@ export default function DashboardClient({
 
       {/* Bulk action bar */}
       {isAdminView && selected.size > 0 && (
-        <div className="sticky bottom-0 left-0 right-0 flex items-center justify-center px-4 pb-4">
-          <div className="flex items-center gap-3 rounded-full border border-[#e5e0d5] bg-white px-5 py-2.5 shadow-lg">
-            <span className="text-sm font-medium text-[#0a1628]">
+        <div className="sticky bottom-0 start-0 end-0 flex items-center justify-center px-4 pb-4">
+          <div className="flex items-center gap-3 rounded-full border border-hairline bg-white px-5 py-2.5 shadow-lg">
+            <span className="text-sm font-medium text-ink">
               {selected.size} selected
             </span>
-            <div className="h-4 w-px bg-[#e5e0d5]" />
+            <div className="h-4 w-px bg-hairline" />
             <div className="relative">
               <button
                 type="button"
                 onClick={() => setAssignOpen(!assignOpen)}
                 disabled={isPending}
-                className="rounded-full bg-[#012340] px-4 py-1.5 text-xs font-semibold text-white transition hover:bg-[#012340]/90 disabled:opacity-50"
+                className="rounded-full bg-brand px-4 py-1.5 text-xs font-semibold text-white transition hover:bg-brand/90 disabled:opacity-50"
               >
                 {isPending ? "Assigning..." : "Assign to"}
               </button>
               {assignOpen && (
-                <div className="absolute bottom-full left-0 mb-2 w-48 overflow-hidden rounded-xl border border-[#e5e0d5] bg-white py-1 shadow-xl">
+                <div className="absolute bottom-full start-0 mb-2 w-48 overflow-hidden rounded-xl border border-hairline bg-white py-1 shadow-xl">
                   {operators.map((op) => (
                     <button
                       key={op.id}
                       type="button"
                       onClick={() => handleBulkAssign(op.id)}
-                      className="flex w-full items-center gap-2 px-4 py-2 text-left text-sm text-[#0a1628] transition hover:bg-[#faf8f4]"
+                      className="flex w-full items-center gap-2 px-4 py-2 text-start text-sm text-ink transition hover:bg-surface-soft"
                     >
-                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#012340]/10 text-[10px] font-bold text-[#012340]">
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand/10 text-[10px] font-bold text-brand">
                         {op.name[0]}
                       </span>
                       {op.name}
                     </button>
                   ))}
                   {operators.length === 0 && (
-                    <p className="px-4 py-3 text-xs text-[#0a1628]/40">No operators yet</p>
+                    <p className="px-4 py-3 text-xs text-ink/40">No operators yet</p>
                   )}
                 </div>
               )}
@@ -596,7 +596,7 @@ export default function DashboardClient({
               type="button"
               onClick={handleBulkUnassign}
               disabled={isPending}
-              className="rounded-full border border-[#e5e0d5] px-4 py-1.5 text-xs font-medium text-[#0a1628]/60 transition hover:bg-[#faf8f4] disabled:opacity-50"
+              className="rounded-full border border-hairline px-4 py-1.5 text-xs font-medium text-ink/60 transition hover:bg-surface-soft disabled:opacity-50"
             >
               Unassign
             </button>
@@ -611,7 +611,7 @@ export default function DashboardClient({
             <button
               type="button"
               onClick={clearSelection}
-              className="rounded-full px-3 py-1.5 text-xs font-medium text-[#0a1628]/40 transition hover:text-[#0a1628]"
+              className="rounded-full px-3 py-1.5 text-xs font-medium text-ink/40 transition hover:text-ink"
             >
               Cancel
             </button>
@@ -659,13 +659,13 @@ function TabButton({
       onClick={onClick}
       className={`flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition ${
         active
-          ? "bg-[#012340] text-white"
-          : "text-[#0a1628]/50 hover:bg-[#0a1628]/5 hover:text-[#0a1628]"
+          ? "bg-brand text-white"
+          : "text-ink/50 hover:bg-ink/5 hover:text-ink"
       }`}
     >
       {label}
       <span className={`rounded-full px-1.5 py-0.5 text-[10px] font-bold ${
-        active ? "bg-white/20 text-white" : "bg-[#0a1628]/5 text-[#0a1628]/40"
+        active ? "bg-white/20 text-white" : "bg-ink/5 text-ink/40"
       }`}>
         {count}
       </span>
@@ -734,10 +734,10 @@ function LeadDetailSidebar({
       />
 
       {/* Panel */}
-      <div className="fixed inset-y-0 right-0 z-50 flex w-full max-w-md flex-col bg-white shadow-2xl">
+      <div className="fixed inset-y-0 end-0 z-50 flex w-full max-w-md flex-col bg-white shadow-2xl">
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-[#e5e0d5] px-6 py-4">
-          <h2 className="text-base font-bold text-[#0a1628]">Lead Details</h2>
+        <div className="flex items-center justify-between border-b border-hairline px-6 py-4">
+          <h2 className="text-base font-bold text-ink">Lead Details</h2>
           <div className="flex items-center gap-2">
             {isAdmin && (
               <button
@@ -754,7 +754,7 @@ function LeadDetailSidebar({
             <button
               type="button"
               onClick={onClose}
-              className="flex h-8 w-8 items-center justify-center rounded-lg text-[#0a1628]/40 transition hover:bg-[#0a1628]/5 hover:text-[#0a1628]"
+              className="flex h-8 w-8 items-center justify-center rounded-lg text-ink/40 transition hover:bg-ink/5 hover:text-ink"
             >
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -767,18 +767,18 @@ function LeadDetailSidebar({
         <div className="flex-1 overflow-y-auto px-6 py-5">
           {/* Contact info */}
           <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#012340]/10 text-lg font-bold text-[#012340]">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand/10 text-lg font-bold text-brand">
               {lead.name[0]?.toUpperCase()}
             </div>
             <div>
-              <h3 className="text-lg font-bold text-[#0a1628]">{lead.name}</h3>
-              <p className="text-sm text-[#0a1628]/50">{lead.email}</p>
+              <h3 className="text-lg font-bold text-ink">{lead.name}</h3>
+              <p className="text-sm text-ink/50">{lead.email}</p>
             </div>
           </div>
 
           {lead.phone && (
-            <div className="mt-4 flex items-center gap-2 text-sm text-[#0a1628]/70">
-              <svg className="h-4 w-4 text-[#0a1628]/30" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <div className="mt-4 flex items-center gap-2 text-sm text-ink/70">
+              <svg className="h-4 w-4 text-ink/30" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
               </svg>
               {lead.phone}
@@ -787,16 +787,16 @@ function LeadDetailSidebar({
 
           {/* Message */}
           <div className="mt-6">
-            <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#0a1628]/40">
+            <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-ink/40">
               Message
             </label>
-            <div className="rounded-xl bg-[#faf8f4] p-4 text-sm leading-relaxed text-[#0a1628]/80">
+            <div className="rounded-xl bg-surface-soft p-4 text-sm leading-relaxed text-ink/80">
               {lead.message}
             </div>
           </div>
 
           {/* Date */}
-          <div className="mt-4 text-xs text-[#0a1628]/30">
+          <div className="mt-4 text-xs text-ink/30">
             Submitted{" "}
             {new Date(lead.createdAt).toLocaleDateString("en-GB", {
               day: "numeric",
@@ -809,7 +809,7 @@ function LeadDetailSidebar({
 
           {/* Status */}
           <div className="mt-6">
-            <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#0a1628]/40">
+            <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-ink/40">
               Status
             </label>
             <div className="flex flex-wrap gap-2">
@@ -825,7 +825,7 @@ function LeadDetailSidebar({
                     className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition ${
                       active
                         ? `${cfg.bg} ${cfg.color}`
-                        : "border-[#e5e0d5] text-[#0a1628]/40 hover:border-[#0a1628]/20 hover:text-[#0a1628]/60"
+                        : "border-hairline text-ink/40 hover:border-ink/20 hover:text-ink/60"
                     } disabled:cursor-default`}
                   >
                     {cfg.label}
@@ -838,14 +838,14 @@ function LeadDetailSidebar({
           {/* Assigned to — admin only */}
           {isAdmin && (
             <div className="mt-6">
-              <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#0a1628]/40">
+              <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-ink/40">
                 Assigned to
               </label>
               <select
                 value={lead.assignedToId || ""}
                 onChange={(e) => onAssign(lead.id, e.target.value || null)}
                 disabled={isPending}
-                className="h-10 w-full rounded-xl border border-[#e5e0d5] bg-white px-3 text-sm text-[#0a1628] outline-none transition focus:border-[#012340] focus:ring-2 focus:ring-[#012340]/10 disabled:opacity-50"
+                className="h-10 w-full rounded-xl border border-hairline bg-white px-3 text-sm text-ink outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/10 disabled:opacity-50"
               >
                 <option value="">Unassigned</option>
                 {operators.map((op) => (
@@ -859,7 +859,7 @@ function LeadDetailSidebar({
 
           {/* Notes section */}
           <div className="mt-6">
-            <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#0a1628]/40">
+            <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-ink/40">
               Notes
             </label>
 
@@ -871,13 +871,13 @@ function LeadDetailSidebar({
                 onChange={(e) => setNoteText(e.target.value)}
                 onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); handleSubmitNote(); } }}
                 placeholder="Add a note..."
-                className="h-9 flex-1 rounded-lg border border-[#e5e0d5] bg-white px-3 text-sm text-[#0a1628] outline-none transition focus:border-[#012340] focus:ring-2 focus:ring-[#012340]/10"
+                className="h-9 flex-1 rounded-lg border border-hairline bg-white px-3 text-sm text-ink outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/10"
               />
               <button
                 type="button"
                 onClick={handleSubmitNote}
                 disabled={noteLoading || !noteText.trim()}
-                className="rounded-lg bg-[#012340] px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-[#012340]/90 disabled:opacity-50"
+                className="rounded-lg bg-brand px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-brand/90 disabled:opacity-50"
               >
                 {noteLoading ? "..." : "Add"}
               </button>
@@ -889,10 +889,10 @@ function LeadDetailSidebar({
                 {lead.notes.map((note) => (
                   <div
                     key={note.id}
-                    className="group rounded-lg border border-[#e5e0d5]/60 bg-[#faf8f4] px-3 py-2.5"
+                    className="group rounded-lg border border-hairline/60 bg-surface-soft px-3 py-2.5"
                   >
                     <div className="flex items-start justify-between gap-2">
-                      <p className="text-sm text-[#0a1628]/80">{note.content}</p>
+                      <p className="text-sm text-ink/80">{note.content}</p>
                       {(note.authorId === userId || role === "SUPER_ADMIN" || role === "ADMIN") && (
                         <button
                           type="button"
@@ -906,7 +906,7 @@ function LeadDetailSidebar({
                         </button>
                       )}
                     </div>
-                    <div className="mt-1 flex items-center gap-2 text-[10px] text-[#0a1628]/40">
+                    <div className="mt-1 flex items-center gap-2 text-[10px] text-ink/40">
                       <span>{note.author.name}</span>
                       <span>&middot;</span>
                       <span>
@@ -922,7 +922,7 @@ function LeadDetailSidebar({
                 ))}
               </div>
             ) : (
-              <p className="text-xs text-[#0a1628]/30">No notes yet</p>
+              <p className="text-xs text-ink/30">No notes yet</p>
             )}
           </div>
         </div>

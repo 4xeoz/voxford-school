@@ -102,7 +102,7 @@ export default function AdminShell({
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-sm font-bold text-white">
             N
           </div>
-          <span className="text-base font-semibold text-white">Nopeca</span>
+          <span className="text-base font-semibold text-white">Voxford</span>
         </div>
 
         {/* Nav */}
@@ -160,9 +160,9 @@ export default function AdminShell({
   }
 
   return (
-    <div className="flex min-h-dvh bg-[#f5f3ee]">
+    <div className="flex min-h-dvh bg-surface-soft">
       {/* Desktop sidebar */}
-      <aside className="hidden w-60 shrink-0 bg-[#0a1628] lg:block">
+      <aside className="hidden w-60 shrink-0 bg-ink lg:block">
         <div className="sticky top-0 h-dvh">
           <SidebarContent />
         </div>
@@ -175,7 +175,7 @@ export default function AdminShell({
             className="absolute inset-0 bg-black/50"
             onClick={() => setMobileOpen(false)}
           />
-          <aside className="relative z-50 h-full w-60 bg-[#0a1628]">
+          <aside className="relative z-50 h-full w-60 bg-ink">
             <SidebarContent />
           </aside>
         </div>
@@ -184,17 +184,17 @@ export default function AdminShell({
       {/* Main content */}
       <div className="flex flex-1 flex-col">
         {/* Mobile top bar */}
-        <header className="flex h-14 items-center gap-3 border-b border-[#e5e0d5] bg-white px-4 lg:hidden">
+        <header className="flex h-14 items-center gap-3 border-b border-hairline bg-white px-4 lg:hidden">
           <button
             type="button"
             onClick={() => setMobileOpen(true)}
-            className="flex h-9 w-9 items-center justify-center rounded-lg text-[#0a1628] transition hover:bg-[#0a1628]/5"
+            className="flex h-9 w-9 items-center justify-center rounded-lg text-ink transition hover:bg-ink/5"
           >
             <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
             </svg>
           </button>
-          <span className="text-sm font-semibold text-[#0a1628]">Nopeca</span>
+          <span className="text-sm font-semibold text-ink">Voxford</span>
         </header>
 
         <main className="flex-1">{children}</main>

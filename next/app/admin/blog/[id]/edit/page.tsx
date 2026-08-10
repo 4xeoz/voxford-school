@@ -15,8 +15,8 @@ export default async function EditBlogPostPage({
   return (
     <div className="p-4 sm:p-6 lg:p-8">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-[#0a1628]">Edit Blog Post</h1>
-        <p className="mt-1 text-sm text-[#0a1628]/60">
+        <h1 className="text-2xl font-bold text-ink">Edit Blog Post</h1>
+        <p className="mt-1 text-sm text-ink/60">
           Update your post content and SEO settings
         </p>
       </div>
