@@ -53,7 +53,7 @@ function PhoneIcon({ className }: { className?: string }) {
 }
 
 
-const CONTACTS = [
+const CONTACTS = !SHOW_PHONE_CONTACT ? [] : [
   { key: "whatsapp", label: "WhatsApp", sublabel: "Chat with us", href: WHATSAPP_URL, Icon: WhatsAppIcon, bg: "#25D366", onTrack: () => trackWhatsAppClick("navbar") },
   ...PHONES.map((p) => ({
     key: p.track, label: p.display, sublabel: "Call us", href: `tel:${p.tel}`,
@@ -289,6 +289,7 @@ export default function Navbar({ locale, dict }: NavbarProps) {
                 </div>
 
                 {/* Contact Section */}
+                {SHOW_PHONE_CONTACT && (
                 <div>
                   <p className="px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-subtle">Get in Touch</p>
                   <div className="flex flex-col gap-1.5">
@@ -312,6 +313,7 @@ export default function Navbar({ locale, dict }: NavbarProps) {
                     ))}
                   </div>
                 </div>
+                )}
 
                 {/* CTA Section */}
                 <Link
