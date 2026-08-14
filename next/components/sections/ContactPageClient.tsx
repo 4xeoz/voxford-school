@@ -21,7 +21,7 @@ import {
 } from "@/lib/gtag";
 import Navbar from "@/components/layout/Navbar";
 import type { Dictionary } from "@/dictionaries";
-import footerLogo from "@/public/voxford/icon-detailed-red-on-whiteBackground-v2.png";
+import footerLogo from "@/public/voxbridge/icon-detailed-red-on-whiteBackground-v2.png";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 

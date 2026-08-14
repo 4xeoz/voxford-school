@@ -3,7 +3,7 @@ import { auth } from "@/auth";
 import AdminShell from "./components/admin-shell";
 
 export const metadata: Metadata = {
-  title: "Admin | Voxford",
+  title: "Admin | Voxbridge",
   robots: { index: false, follow: false },
 };
 

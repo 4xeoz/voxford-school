@@ -43,8 +43,10 @@ export async function middleware(request: NextRequest) {
 
     // Allow the login page without auth
     if (pathname === '/admin/login') {
-      // If already logged in, redirect to dashboard
-      if (token) {
+      // Only bounce *staff* to the dashboard. Sending a logged-in applicant
+      // there would trip the kind check below and redirect straight back here,
+      // looping forever.
+      if (token?.kind === 'staff') {
         return NextResponse.redirect(new URL('/admin/dashboard', request.url));
       }
       return NextResponse.next();
@@ -52,6 +54,14 @@ export async function middleware(request: NextRequest) {
 
     // All other /admin/* pages require authentication
     if (!token) {
+      return NextResponse.redirect(new URL('/admin/login', request.url));
+    }
+
+    // ...and specifically a *staff* session. Applicants authenticate through
+    // the same NextAuth cookie, so "a token exists" is no longer proof of
+    // staff access — without this check any logged-in job applicant would
+    // satisfy the guard above and land straight on the dashboard.
+    if (token.kind !== 'staff') {
       return NextResponse.redirect(new URL('/admin/login', request.url));
     }
 
@@ -78,10 +88,14 @@ export async function middleware(request: NextRequest) {
   );
 
   if (pathnameHasLocale) {
+    const locale = pathname.split('/')[1];
+
+    // Careers is entirely public, including the apply form — applications
+    // need no account, so nothing under /<locale>/careers is gated here.
+
     // The root layout renders <html> but sits above [locale], so it cannot read
     // the route param. Pass the locale down as a header so it can set lang/dir
     // on <html> itself — which is where RTL belongs.
-    const locale = pathname.split('/')[1];
     const headers = new Headers(request.headers);
     headers.set('x-locale', locale);
     return NextResponse.next({ request: { headers } });

@@ -9,7 +9,10 @@
 export const WHATSAPP_NUMBER = "447879003218";
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`;
 
-export const CONTACT_EMAIL = "contact@voxford.com";
+export const CONTACT_EMAIL = "contact@voxbridge.com";
+
+/** Where job applications sent by email land. */
+export const CAREERS_EMAIL = "voxbridgeschool@gmail.com";
 
 export const PHONES = [
   { display: "0560 409 193", tel: "+213560409193", track: "0560409193" },

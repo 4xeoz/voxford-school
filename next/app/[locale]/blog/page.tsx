@@ -19,14 +19,14 @@ export async function generateMetadata({
   const { locale } = await params;
 
   const titles: Record<string, string> = {
-    en: "Blog — Language Learning Tips & Guides | Voxford",
-    fr: "Blog — Conseils et guides pour apprendre les langues | Voxford",
-    ar: "المدونة — نصائح وإرشادات لتعلّم اللغات | فوكسفورد",
+    en: "Blog — Language Learning Tips & Guides | Voxbridge",
+    fr: "Blog — Conseils et guides pour apprendre les langues | Voxbridge",
+    ar: "المدونة — نصائح وإرشادات لتعلّم اللغات | فوكسبريدج",
   };
   const descriptions: Record<string, string> = {
-    en: "Tips, guides and stories about learning English, French and other languages — written by the teachers at Voxford Language School.",
-    fr: "Conseils, guides et témoignages sur l'apprentissage de l'anglais, du français et d'autres langues — écrits par les professeurs de Voxford.",
-    ar: "نصائح وأدلة وقصص حول تعلّم الإنجليزية والفرنسية وغيرها من اللغات — بقلم أساتذة مدرسة فوكسفورد للغات.",
+    en: "Tips, guides and stories about learning English, French and other languages — written by the teachers at Voxbridge Language School.",
+    fr: "Conseils, guides et témoignages sur l'apprentissage de l'anglais, du français et d'autres langues — écrits par les professeurs de Voxbridge.",
+    ar: "نصائح وأدلة وقصص حول تعلّم الإنجليزية والفرنسية وغيرها من اللغات — بقلم أساتذة مدرسة فوكسبريدج للغات.",
   };
 
   return {
@@ -102,7 +102,7 @@ export default async function BlogPage({
             url: `${SITE_URL}/${locale}/blog`,
             publisher: {
               "@type": "Organization",
-              name: "Voxford",
+              name: "Voxbridge",
               url: SITE_URL,
             },
           }),

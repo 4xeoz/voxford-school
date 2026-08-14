@@ -24,6 +24,22 @@ enum LeadStatus {
   LOST
 }
 
+enum EmploymentType {
+  FULL_TIME
+  PART_TIME
+  CONTRACT
+  INTERNSHIP
+}
+
+enum ApplicationStatus {
+  NEW
+  REVIEWING
+  SHORTLISTED
+  INTERVIEWED
+  REJECTED
+  HIRED
+}
+
 model Contact {
   id           String        @id @default(cuid())
   name         String
@@ -51,6 +67,8 @@ model Admin {
   notes         ContactNote[]
   clockRecords  ClockRecord[]
   events        Event[]
+  jobPosts      JobPost[]
+  applicationNotes JobApplicationNote[]
   createdAt     DateTime       @default(now()) @map("created_at")
   updatedAt     DateTime       @updatedAt @map("updated_at")
 
@@ -155,4 +173,70 @@ model EventRegistration {
   createdAt DateTime @default(now()) @map("created_at")
 
   @@map("event_registrations")
+}
+
+// ─── Careers ────────────────────────────────────────────────────────────────
+// Applications are anonymous: no account, no login. Everything the school needs
+// to contact a candidate is captured on the application row itself, so a
+// JobApplication stands alone.
+
+model JobPost {
+  id             String           @id @default(cuid())
+  slug           String           @unique
+  title          String
+  department     String?
+  location       String
+  employmentType EmploymentType   @default(FULL_TIME) @map("employment_type")
+  description    String
+  requirements   String?
+  salaryRange    String?          @map("salary_range")
+  isActive       Boolean          @default(true) @map("is_active")
+  closesAt       DateTime?        @map("closes_at")
+  createdById    String           @map("created_by_id")
+  createdBy      Admin            @relation(fields: [createdById], references: [id], onDelete: Cascade)
+  applications   JobApplication[]
+  createdAt      DateTime         @default(now()) @map("created_at")
+  updatedAt      DateTime         @updatedAt @map("updated_at")
+
+  @@map("job_posts")
+}
+
+model JobApplication {
+  id          String               @id @default(cuid())
+  jobId       String               @map("job_id")
+  job         JobPost              @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  firstName   String               @map("first_name")
+  lastName    String               @map("last_name")
+  email       String
+  phone       String
+  wilayaCode  Int                  @map("wilaya_code")
+  city        String?
+  coverLetter String?              @map("cover_letter")
+  // Storage object key inside the private `cvs` bucket — never a public URL.
+  // Admins read it through a short-lived signed link minted server-side.
+  cvPath      String               @map("cv_path")
+  cvFilename  String?              @map("cv_filename")
+  status      ApplicationStatus    @default(NEW)
+  notes       JobApplicationNote[]
+  createdAt   DateTime             @default(now()) @map("created_at")
+  updatedAt   DateTime             @updatedAt @map("updated_at")
+
+  // Without accounts, email is the only stable identity a candidate has.
+  // It stops an accidental double-submit; the action turns the resulting
+  // constraint violation into a readable message.
+  @@unique([jobId, email])
+  @@index([status])
+  @@map("job_applications")
+}
+
+model JobApplicationNote {
+  id            String         @id @default(cuid())
+  content       String
+  applicationId String         @map("application_id")
+  application   JobApplication @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  authorId      String         @map("author_id")
+  author        Admin          @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  createdAt     DateTime       @default(now()) @map("created_at")
+
+  @@map("job_application_notes")
 }

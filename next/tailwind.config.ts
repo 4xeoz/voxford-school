@@ -1,14 +1,14 @@
 import type { Config } from 'tailwindcss';
 
 /**
- * Voxford brand charter — the single source of truth for colour.
+ * Voxbridge brand charter — the single source of truth for colour.
  *
  * Registering these here (rather than only as CSS custom properties) is what
  * makes `bg-brand/10` work: Tailwind v3 cannot apply an opacity modifier to an
  * arbitrary `var()` colour, so `bg-brand/10` silently emits
  * no CSS at all. Named theme colours support the whole modifier syntax.
  *
- * Reds are sampled from the logo assets in public/voxford — the crest is
+ * Reds are sampled from the logo assets in public/voxbridge — the crest is
  * #BC0000 and the wordmark #D30000.
  */
 const palette = {

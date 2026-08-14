@@ -52,7 +52,7 @@ export const trackPhoneCall = (number: string) =>
   event("phone_call_click", { category: "contact", label: number });
 
 export const trackEmailClick = () =>
-  event("email_click", { category: "contact", label: "contact@voxford.com" });
+  event("email_click", { category: "contact", label: "contact@voxbridge.com" });
 
 export const trackLanguageSwitch = (to: string) =>
   event("language_switch", { category: "ux", label: to });

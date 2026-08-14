@@ -13,15 +13,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
 
   const titles: Record<string, string> = {
-    en: "Pre-register | Voxford Language School",
-    fr: "Pré-inscription | Voxford, école de langues",
-    ar: "التسجيل المسبق | مدرسة فوكسفورد للغات",
+    en: "Pre-register | Voxbridge Language School",
+    fr: "Pré-inscription | Voxbridge, école de langues",
+    ar: "التسجيل المسبق | مدرسة فوكسبريدج للغات",
   };
 
   const descriptions: Record<string, string> = {
-    en: "Pre-register for Voxford Language School in M'Sila, Algeria. English, French, Spanish, German and more — be first to enrol when we open.",
-    fr: "Pré-inscrivez-vous à l'école de langues Voxford à M'Sila, Algérie. Anglais, espagnol, allemand et plus — soyez prioritaire à l'ouverture.",
-    ar: "سجّل مسبقاً في مدرسة فوكسفورد للغات بالمسيلة، الجزائر. الإنجليزية والفرنسية والإسبانية والألمانية وغيرها — كن أول المسجّلين عند الافتتاح.",
+    en: "Pre-register for Voxbridge Language School in M'Sila, Algeria. English, French, Spanish, German and more — be first to enrol when we open.",
+    fr: "Pré-inscrivez-vous à l'école de langues Voxbridge à M'Sila, Algérie. Anglais, espagnol, allemand et plus — soyez prioritaire à l'ouverture.",
+    ar: "سجّل مسبقاً في مدرسة فوكسبريدج للغات بالمسيلة، الجزائر. الإنجليزية والفرنسية والإسبانية والألمانية وغيرها — كن أول المسجّلين عند الافتتاح.",
   };
 
   return {

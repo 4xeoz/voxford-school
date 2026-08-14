@@ -100,11 +100,11 @@ export default async function BlogPostPage({
     },
     publisher: {
       "@type": "Organization",
-      name: "Voxford",
+      name: "Voxbridge",
       url: SITE_URL,
       logo: {
         "@type": "ImageObject",
-        url: `${SITE_URL}/voxford/icon-detailed-red-on-whiteBackground-v2.png`,
+        url: `${SITE_URL}/voxbridge/icon-detailed-red-on-whiteBackground-v2.png`,
       },
     },
     inLanguage: locale === "ar" ? "ar-DZ" : locale === "fr" ? "fr-DZ" : "en",

@@ -1,14 +1,15 @@
 {
   "seo": {
-    "title": "Voxford Language School | Opening Soon in M'Sila, Algeria",
-    "description": "Voxford Language School is opening in M'Sila. English, French, Spanish, German and more — with a route to study abroad. Pre-register for the founding intake.",
-    "keywords": "language school M'Sila, English courses Algeria, French courses M'Sila, learn English Algeria, IELTS preparation Algeria, Spanish courses Algeria, German courses Algeria, language classes M'Sila, Voxford, مدرسة لغات المسيلة",
-    "ogTitle": "Voxford Language School — Opening Soon",
+    "title": "Voxbridge Language School | Opening Soon in M'Sila, Algeria",
+    "description": "Voxbridge Language School is opening in M'Sila. English, French, Spanish, German and more — with a route to study abroad. Pre-register for the founding intake.",
+    "keywords": "language school M'Sila, English courses Algeria, French courses M'Sila, learn English Algeria, IELTS preparation Algeria, Spanish courses Algeria, German courses Algeria, language classes M'Sila, Voxbridge, مدرسة لغات المسيلة",
+    "ogTitle": "Voxbridge Language School — Opening Soon",
     "ogDescription": "A new language school opening in M'Sila, Algeria. Pre-register for the founding intake and be first to enrol."
   },
   "nav": {
     "home": "Home",
     "blog": "Blog",
+    "careers": "Careers",
     "contact": "Contact",
     "applyNow": "Pre-register"
   },
@@ -45,7 +46,7 @@
     "trustNote": "Your info is safe with us. No spam, ever.",
     "officeHours": "Pre-registration open",
     "whatsappCta": "Chat on WhatsApp",
-    "copyright": "Voxford Language School. All rights reserved.",
+    "copyright": "Voxbridge Language School. All rights reserved.",
     "adminLogin": "Admin Login",
     "messageFailed": "Failed to send message",
     "sending": "Sending...",

@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { i18n } from '@/i18n.config';
 import { getAllPublishedSlugs } from '@/actions/blog';
+import { getOpenJobSlugs } from '@/actions/careers';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
@@ -47,6 +48,44 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           allLocales.map((l) => [l, `${SITE_URL}/${l}/blog`])
         ),
       },
+    });
+  });
+
+  // Careers listing pages
+  allLocales.forEach((locale) => {
+    routes.push({
+      url: `${SITE_URL}/${locale}/careers`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+      alternates: {
+        languages: Object.fromEntries(
+          allLocales.map((l) => [l, `${SITE_URL}/${l}/careers`])
+        ),
+      },
+    });
+  });
+
+  // Individual job posts — open roles only, so closed ones drop out of search
+  let jobs: { slug: string; updatedAt: Date }[] = [];
+  try {
+    jobs = await getOpenJobSlugs();
+  } catch {
+    // DB not available during build — skip jobs in sitemap
+  }
+  jobs.forEach((job) => {
+    allLocales.forEach((locale) => {
+      routes.push({
+        url: `${SITE_URL}/${locale}/careers/${job.slug}`,
+        lastModified: job.updatedAt,
+        changeFrequency: 'weekly' as const,
+        priority: 0.6,
+        alternates: {
+          languages: Object.fromEntries(
+            allLocales.map((l) => [l, `${SITE_URL}/${l}/careers/${job.slug}`])
+          ),
+        },
+      });
     });
   });
 

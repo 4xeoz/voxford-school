@@ -24,7 +24,7 @@ const TEAM: TeamMember[] = [
     name: "Eyad Cherifi",
     role: "Founder & Director of Studies",
     department: "Leadership",
-    bio: "Founded Voxford to bring modern, conversation-first language teaching to M'Sila. 7+ years teaching English and training teachers.",
+    bio: "Founded Voxbridge to bring modern, conversation-first language teaching to M'Sila. 7+ years teaching English and training teachers.",
     image: "/team/Eyad-cherifi.png",
     initials: "AB",
     color: "#1A1C1F",

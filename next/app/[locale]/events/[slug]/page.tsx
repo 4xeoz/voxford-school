@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const event = await getEventBySlug(slug);
   if (!event) return { title: "Event Not Found" };
   return {
-    title: `${event.name} — Voxford`,
+    title: `${event.name} — Voxbridge`,
     description: event.description,
   };
 }
@@ -57,7 +57,7 @@ export default async function EventPage({ params }: Props) {
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-brand/30 bg-brand/10 px-4 py-2">
             <span className="h-2 w-2 rounded-full bg-brand animate-pulse" />
             <p className="text-xs font-semibold uppercase tracking-widest text-brand">
-              Voxford Event
+              Voxbridge Event
             </p>
           </div>
 

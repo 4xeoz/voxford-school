@@ -1,7 +1,7 @@
 {
-  "name": "Voxford Language School — Opening Soon",
-  "short_name": "Voxford",
-  "description": "Voxford Language School is opening in M'Sila, Algeria. Pre-register for the founding intake.",
+  "name": "Voxbridge Language School — Opening Soon",
+  "short_name": "Voxbridge",
+  "description": "Voxbridge Language School is opening in M'Sila, Algeria. Pre-register for the founding intake.",
   "start_url": "/en",
   "scope": "/",
   "display": "standalone",
@@ -17,7 +17,7 @@
     {
       "name": "Pre-register",
       "url": "/en/contact",
-      "description": "Pre-register for the founding intake at Voxford"
+      "description": "Pre-register for the founding intake at Voxbridge"
     },
     {
       "name": "Read the Blog",
@@ -27,13 +27,13 @@
   ],
   "icons": [
     {
-      "src": "/voxford/icon-detailed-red-on-whiteBackground-v2.png",
+      "src": "/voxbridge/icon-detailed-red-on-whiteBackground-v2.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/voxford/icon-detailed-red-on-whiteBackground-v2.png",
+      "src": "/voxbridge/icon-detailed-red-on-whiteBackground-v2.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"

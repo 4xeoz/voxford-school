@@ -1,5 +1,5 @@
 import Image from "next/image";
-import crest from "@/public/voxford/icon-detailed-red-transparent-v2.png";
+import crest from "@/public/voxbridge/icon-detailed-red-transparent-v2.png";
 import HeroRing from "./HeroRing";
 import HeroCtas from "./HeroCtas";
 import type { Dictionary } from "@/dictionaries";
@@ -28,7 +28,7 @@ export default function HeroSection({ locale, dict }: HeroSectionProps) {
         <div className="flex flex-col items-center text-center">
           <Image
             src={crest}
-            alt="Voxford language school"
+            alt="Voxbridge language school"
             priority
             className="mb-7 h-20 w-auto lg:h-28"
           />

@@ -18,7 +18,7 @@ export async function generateMetadata({
 
   return {
     // absolute: seo.title already carries the brand, so skip the root
-    // layout's "%s | Voxford" template and avoid doubling it up.
+    // layout's "%s | Voxbridge" template and avoid doubling it up.
     title: { absolute: dict.seo.title },
     description: dict.seo.description,
     keywords: dict.seo.keywords,

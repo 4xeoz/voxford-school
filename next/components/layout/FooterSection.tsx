@@ -12,8 +12,8 @@ import {
   LANGUAGES,
   START_DATES,
 } from "@/lib/contact";
-import footerLogo from "@/public/voxford/icon-detailed-red-on-whiteBackground-v2.png";
-import footerLogoWatermark from "@/public/voxford/icon-detailed-white-transparent-v2.png";
+import footerLogo from "@/public/voxbridge/icon-detailed-red-on-whiteBackground-v2.png";
+import footerLogoWatermark from "@/public/voxbridge/icon-detailed-white-transparent-v2.png";
 import { submitContactForm } from "@/actions/contact";
 import type { Dictionary } from "@/dictionaries";
 import {
@@ -430,7 +430,7 @@ export default function FooterSection({ dict, locale = "en", claimed = 0 }: Foot
       <div className="">
         <div className="mx-auto max-w-7xl px-4 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <Image src={footerLogo} alt="Voxford" width={28} height={28} className="rounded-md opacity-70" />
+            <Image src={footerLogo} alt="Voxbridge" width={28} height={28} className="rounded-md opacity-70" />
             <p className="text-white/35 text-sm">&copy; {new Date().getFullYear()} {f.copyright}</p>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm">

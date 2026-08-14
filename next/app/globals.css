@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* The Voxford brand charter lives in tailwind.config.ts, not here — that is
+/* The Voxbridge brand charter lives in tailwind.config.ts, not here — that is
    what makes `bg-brand/10` and friends compile. Keep colour out of this file. */
 
 body {

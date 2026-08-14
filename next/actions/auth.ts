@@ -5,7 +5,7 @@ import { AuthError } from "next-auth";
 
 export async function loginAction(formData: FormData) {
   try {
-    await signIn("credentials", {
+    await signIn("admin-credentials", {
       email: formData.get("email") as string,
       password: formData.get("password") as string,
       redirectTo: "/admin/dashboard",

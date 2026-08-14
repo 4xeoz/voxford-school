@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Play, X } from "lucide-react";
-import poster from "@/public/voxford/building-warrped-gift.png";
+import poster from "@/public/voxbridge/building-warrped-gift.png";
 import type { Dictionary } from "@/dictionaries";
 
 /**

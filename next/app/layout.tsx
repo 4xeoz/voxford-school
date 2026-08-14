@@ -13,11 +13,11 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Voxford Language School | Opening Soon in M'Sila, Algeria",
-    template: '%s | Voxford',
+    default: "Voxbridge Language School | Opening Soon in M'Sila, Algeria",
+    template: '%s | Voxbridge',
   },
   description:
-    "Voxford Language School is opening in M'Sila, Algeria. English, French, Spanish, German and more — with a route to study abroad. Pre-register for the founding intake.",
+    "Voxbridge Language School is opening in M'Sila, Algeria. English, French, Spanish, German and more — with a route to study abroad. Pre-register for the founding intake.",
   keywords: [
     "language school M'Sila",
     'English courses Algeria',
@@ -28,14 +28,14 @@ export const metadata: Metadata = {
     'German courses Algeria',
     "école de langues M'Sila",
     "cours d'anglais Algérie",
-    'Voxford',
+    'Voxbridge',
     "M'Sila",
     'مدرسة لغات المسيلة',
     'تعلم الإنجليزية الجزائر',
   ],
-  authors: [{ name: 'Voxford Language School', url: SITE_URL }],
-  creator: 'Voxford Language School',
-  publisher: 'Voxford Language School',
+  authors: [{ name: 'Voxbridge Language School', url: SITE_URL }],
+  creator: 'Voxbridge Language School',
+  publisher: 'Voxbridge Language School',
   formatDetection: {
     email: false,
     address: false,
@@ -43,11 +43,11 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    siteName: 'Voxford Language School',
+    siteName: 'Voxbridge Language School',
     locale: 'en_DZ',
     alternateLocale: ['fr_DZ', 'ar_DZ'],
     url: SITE_URL,
-    title: 'Voxford Language School — Opening Soon',
+    title: 'Voxbridge Language School — Opening Soon',
     description:
       "A new language school opening in M'Sila, Algeria. Pre-register for the founding intake and be first to enrol.",
     images: [
@@ -55,13 +55,13 @@ export const metadata: Metadata = {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Voxford Language School',
+        alt: 'Voxbridge Language School',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Voxford Language School',
+    title: 'Voxbridge Language School',
     description:
       "Opening soon in M'Sila, Algeria. Pre-register for the founding intake.",
     images: ['/og-image.png'],

@@ -3,7 +3,7 @@
 import { useActionState } from "react";
 import { loginAction } from "@/actions/auth";
 import Image from "next/image";
-import logoMark from "@/public/voxford/icon-detailed-red-transparent-v2.png";
+import logoMark from "@/public/voxbridge/icon-detailed-red-transparent-v2.png";
 
 export default function LoginPage() {
   const [state, formAction, isPending] = useActionState(
@@ -19,14 +19,14 @@ export default function LoginPage() {
         <div className="mb-8 flex flex-col items-center">
           <Image
             src={logoMark}
-            alt="Voxford"
+            alt="Voxbridge"
             width={120}
             height={120}
             className="mb-4 h-16 w-auto"
           />
           <h1 className="text-2xl font-bold text-ink">Admin Login</h1>
           <p className="mt-1 text-sm text-ink/60">
-            Sign in to the Voxford dashboard
+            Sign in to the Voxbridge dashboard
           </p>
         </div>
 

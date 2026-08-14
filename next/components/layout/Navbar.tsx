@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState, useRef, useCallback, useEffect } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
-import logoMark from "@/public/voxford/icon-detailed-red-transparent-v2.png";
+import logoMark from "@/public/voxbridge/icon-detailed-red-transparent-v2.png";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 import { WHATSAPP_URL, PHONES } from "@/lib/contact";
 import type { Dictionary } from "@/dictionaries";
@@ -152,11 +152,11 @@ export default function Navbar({ locale, dict }: NavbarProps) {
           <div className="flex shrink-0 items-center">
             {isHomePage ? (
               <a href="#home" onClick={(e) => handleSmoothScroll(e, "#home")} className="flex items-center">
-                <Image src={logoMark} alt="Voxford logo" width={140} height={140} className="h-8 w-auto object-contain md:h-11" priority />
+                <Image src={logoMark} alt="Voxbridge logo" width={140} height={140} className="h-8 w-auto object-contain md:h-11" priority />
               </a>
             ) : (
               <Link href={`/${locale}`} className="flex items-center">
-                <Image src={logoMark} alt="Voxford logo" width={140} height={140} className="h-8 w-auto object-contain md:h-11" priority />
+                <Image src={logoMark} alt="Voxbridge logo" width={140} height={140} className="h-8 w-auto object-contain md:h-11" priority />
               </Link>
             )}
           </div>
@@ -178,6 +178,12 @@ export default function Navbar({ locale, dict }: NavbarProps) {
               className={`rounded-full px-4 py-2 transition-colors ${pathname.includes('/blog') ? 'bg-brand/10 text-brand' : 'text-ink-soft hover:text-brand hover:bg-brand/5'}`}
             >
               {dict.nav.blog}
+            </Link>
+            <Link
+              href={`/${locale}/careers`}
+              className={`rounded-full px-4 py-2 transition-colors ${pathname.includes('/careers') ? 'bg-brand/10 text-brand' : 'text-ink-soft hover:text-brand hover:bg-brand/5'}`}
+            >
+              {dict.nav.careers}
             </Link>
             <Link
               href={`/${locale}/contact`}
@@ -254,6 +260,9 @@ export default function Navbar({ locale, dict }: NavbarProps) {
                     )}
                     <Link href={`/${locale}/blog`} onClick={() => { handleClose(); trackBlogClick(); }} className={`rounded-xl px-3 py-2.5 transition ${pathname.includes('/blog') ? 'bg-brand/10 text-brand' : 'text-ink-soft hover:bg-brand/5 hover:text-brand'}`}>
                       {dict.nav.blog}
+                    </Link>
+                    <Link href={`/${locale}/careers`} onClick={handleClose} className={`rounded-xl px-3 py-2.5 transition ${pathname.includes('/careers') ? 'bg-brand/10 text-brand' : 'text-ink-soft hover:bg-brand/5 hover:text-brand'}`}>
+                      {dict.nav.careers}
                     </Link>
                     <Link href={`/${locale}/contact`} onClick={handleClose} className={`rounded-xl px-3 py-2.5 transition ${pathname.includes('/contact') ? 'bg-brand/10 text-brand' : 'text-ink-soft hover:bg-brand/5 hover:text-brand'}`}>
                       {dict.nav.contact}

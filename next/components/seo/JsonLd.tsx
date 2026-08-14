@@ -14,12 +14,12 @@ export default function JsonLd({ locale, dict }: JsonLdProps) {
   const organization = {
     "@context": "https://schema.org",
     "@type": ["EducationalOrganization", "LocalBusiness"],
-    name: "Voxford Language School",
-    alternateName: ["Voxford", "مدرسة فوكسفورد للغات"],
+    name: "Voxbridge Language School",
+    alternateName: ["Voxbridge", "مدرسة فوكسبريدج للغات"],
     url: SITE_URL,
     logo: {
       "@type": "ImageObject",
-      url: `${SITE_URL}/voxford/icon-detailed-red-on-whiteBackground-v2.png`,
+      url: `${SITE_URL}/voxbridge/icon-detailed-red-on-whiteBackground-v2.png`,
       width: 2049,
       height: 2049,
     },
@@ -59,10 +59,10 @@ export default function JsonLd({ locale, dict }: JsonLdProps) {
         availableLanguage: ["English", "French", "Arabic"],
       },
     ],
-    email: "contact@voxford.com",
+    email: "contact@voxbridge.com",
     sameAs: [
-      "https://instagram.com/voxford",
-      "https://linkedin.com/company/voxford",
+      "https://instagram.com/voxbridge",
+      "https://linkedin.com/company/voxbridge",
     ],
     areaServed: [
       {
@@ -82,7 +82,7 @@ export default function JsonLd({ locale, dict }: JsonLdProps) {
   const website = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "Voxford Language School",
+    name: "Voxbridge Language School",
     url: SITE_URL,
     inLanguage: isAr ? "ar-DZ" : isFr ? "fr-DZ" : "en",
   };

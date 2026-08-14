@@ -1,14 +1,15 @@
 {
   "seo": {
-    "title": "Voxford — École de langues | Ouverture prochaine à M'Sila",
-    "description": "L'école de langues Voxford ouvre à M'Sila. Anglais, espagnol, allemand et plus — avec un départ à l'étranger. Pré-inscrivez-vous à la promotion fondatrice.",
-    "keywords": "école de langues M'Sila, cours d'anglais Algérie, cours de français M'Sila, apprendre l'anglais Algérie, préparation IELTS Algérie, cours d'espagnol Algérie, cours d'allemand Algérie, Voxford",
-    "ogTitle": "Voxford — École de langues | Ouverture prochaine",
+    "title": "Voxbridge — École de langues | Ouverture prochaine à M'Sila",
+    "description": "L'école de langues Voxbridge ouvre à M'Sila. Anglais, espagnol, allemand et plus — avec un départ à l'étranger. Pré-inscrivez-vous à la promotion fondatrice.",
+    "keywords": "école de langues M'Sila, cours d'anglais Algérie, cours de français M'Sila, apprendre l'anglais Algérie, préparation IELTS Algérie, cours d'espagnol Algérie, cours d'allemand Algérie, Voxbridge",
+    "ogTitle": "Voxbridge — École de langues | Ouverture prochaine",
     "ogDescription": "Une nouvelle école de langues ouvre à M'Sila, Algérie. Pré-inscrivez-vous et soyez prioritaire."
   },
   "nav": {
     "home": "Accueil",
     "blog": "Blog",
+    "careers": "Carrières",
     "contact": "Contact",
     "applyNow": "Je me pré-inscris"
   },
@@ -45,7 +46,7 @@
     "trustNote": "Vos informations sont en sécurité. Jamais de spam.",
     "officeHours": "Pré-inscriptions ouvertes",
     "whatsappCta": "Discuter sur WhatsApp",
-    "copyright": "Voxford — École de langues. Tous droits réservés.",
+    "copyright": "Voxbridge — École de langues. Tous droits réservés.",
     "adminLogin": "Connexion admin",
     "messageFailed": "Échec de l'envoi du message",
     "sending": "Envoi...",
