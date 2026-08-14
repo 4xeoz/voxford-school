@@ -2,12 +2,12 @@
 
 import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
-import img1 from "@/public/arc_gallery/image-gen (1).png";
-import img2 from "@/public/arc_gallery/image-gen (3).png";
-import img3 from "@/public/arc_gallery/image-gen (5).png";
-import img4 from "@/public/arc_gallery/image-gen (12).png";
-import img5 from "@/public/arc_gallery/image-gen (14).png";
-import img6 from "@/public/arc_gallery/image-gen (16).png";
+import london from "@/public/voxbridge/voxbridge-hand-pictures-for-website/hero-london.png";
+import paris from "@/public/voxbridge/voxbridge-hand-pictures-for-website/hero-paris.png";
+import rome from "@/public/voxbridge/voxbridge-hand-pictures-for-website/hero-rome.png";
+import tokyo from "@/public/voxbridge/voxbridge-hand-pictures-for-website/hero-tokyo.png";
+import dubai from "@/public/voxbridge/voxbridge-hand-pictures-for-website/hero-dubai.png";
+import sydney from "@/public/voxbridge/voxbridge-hand-pictures-for-website/hero-sydney.png";
 
 const CARD = 192; // px — must match h-48 w-48 below
 const RX = 600; // horizontal radius: wide, to clear the headline
@@ -21,7 +21,12 @@ const RY = 310; // vertical radius: shorter, to stay inside the hero
  */
 const ANGLES = [-35, 0, 35, 145, 180, 215];
 
-const IMAGES = [img1, img2, img3, img4, img5, img6];
+/**
+ * Ordered to match ANGLES: the first three sit down the right-hand side, the
+ * last three down the left. Europe on the right, the rest of the world on the
+ * left, so neither side reads as one region.
+ */
+const IMAGES = [london, paris, rome, tokyo, dubai, sydney];
 
 export default function HeroRing() {
   const reduced = useReducedMotion();
