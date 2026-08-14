@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { registerForEvent } from "@/actions/events";
 import { toast } from "sonner";
+import { SHOW_PHONE_CONTACT } from "@/lib/contact";
 
 interface Props {
   eventId: string;
@@ -46,6 +47,7 @@ export default function RegisterClient({ eventId }: Props) {
         </div>
 
         {/* Quick contact links */}
+        {SHOW_PHONE_CONTACT && (
         <div className="w-full flex flex-col gap-2 mt-2">
           <a
             href="https://wa.me/447879003218"
@@ -59,6 +61,7 @@ export default function RegisterClient({ eventId }: Props) {
             Message on WhatsApp
           </a>
         </div>
+        )}
       </div>
     );
   }

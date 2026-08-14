@@ -7,7 +7,7 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
 import logoMark from "@/public/voxbridge/icon-detailed-red-transparent-v2.png";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
-import { WHATSAPP_URL, PHONES } from "@/lib/contact";
+import { WHATSAPP_URL, PHONES, SHOW_PHONE_CONTACT } from "@/lib/contact";
 import type { Dictionary } from "@/dictionaries";
 import {
   trackGetStartedClick,
@@ -220,7 +220,7 @@ export default function Navbar({ locale, dict }: NavbarProps) {
             </Link>
 
             {/* WhatsApp / phone dropdown */}
-            <ContactDropdown />
+            {SHOW_PHONE_CONTACT && <ContactDropdown />}
 
             {/* Mobile hamburger */}
             <button

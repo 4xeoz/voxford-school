@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 import {
   WHATSAPP_URL,
+  SHOW_PHONE_CONTACT,
   LANGUAGES,
   START_DATES,
 } from "@/lib/contact";
@@ -180,7 +181,9 @@ export default function FooterSection({ dict, locale = "en", claimed = 0 }: Foot
               ))}
             </ul>
 
-            {/* WhatsApp CTA — primary for mobile users */}
+            {/* WhatsApp CTA + phone numbers — hidden until the school has a
+                line to answer. See SHOW_PHONE_CONTACT in lib/contact.ts. */}
+            {SHOW_PHONE_CONTACT && (<>
             <a
               href={WHATSAPP_URL}
               target="_blank"
@@ -211,6 +214,7 @@ export default function FooterSection({ dict, locale = "en", claimed = 0 }: Foot
                 0560 409 195
               </a>
             </div>
+            </>)}
           </div>
 
           {/* ── RIGHT: White form card ── */}
@@ -385,7 +389,7 @@ export default function FooterSection({ dict, locale = "en", claimed = 0 }: Foot
                         <h3 className="text-xl font-black text-ink">{f.thankYouTitle}</h3>
                         <p className="text-gray-500 text-sm mt-1 max-w-xs">{f.thankYouDesc}</p>
                       </div>
-                      <a
+                      {SHOW_PHONE_CONTACT && (<a
                         href={WHATSAPP_URL}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -394,7 +398,7 @@ export default function FooterSection({ dict, locale = "en", claimed = 0 }: Foot
                       >
                         <WhatsAppIcon className="h-5 w-5" />
                         {f.thankYouWhatsapp}
-                      </a>
+                      </a>)}
                     </motion.div>
                   )}
 

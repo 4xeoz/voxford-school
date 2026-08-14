@@ -1,4 +1,5 @@
 import type { Dictionary } from "@/dictionaries";
+import { SHOW_PHONE_CONTACT } from "@/lib/contact";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
@@ -42,23 +43,29 @@ export default function JsonLd({ locale, dict }: JsonLdProps) {
       latitude: "35.7058",
       longitude: "4.5419",
     },
-    contactPoint: [
-      {
-        "@type": "ContactPoint",
-        telephone: "+213-560-409-193",
-        contactType: "customer service",
-        areaServed: "DZ",
-        availableLanguage: ["English", "French", "Arabic"],
-      },
-      {
-        "@type": "ContactPoint",
-        telephone: "+44-7879-003-218",
-        contactType: "customer service",
-        contactOption: "https://wa.me/447879003218",
-        areaServed: "GB",
-        availableLanguage: ["English", "French", "Arabic"],
-      },
-    ],
+    // Omitted entirely while contact numbers are hidden — structured data is
+    // invisible on the page but Google surfaces it as a call button.
+    ...(SHOW_PHONE_CONTACT
+      ? {
+          contactPoint: [
+            {
+              "@type": "ContactPoint",
+              telephone: "+213-560-409-193",
+              contactType: "customer service",
+              areaServed: "DZ",
+              availableLanguage: ["English", "French", "Arabic"],
+            },
+            {
+              "@type": "ContactPoint",
+              telephone: "+44-7879-003-218",
+              contactType: "customer service",
+              contactOption: "https://wa.me/447879003218",
+              areaServed: "GB",
+              availableLanguage: ["English", "French", "Arabic"],
+            },
+          ],
+        }
+      : {}),
     email: "contact@voxbridge.com",
     sameAs: [
       "https://instagram.com/voxbridge",

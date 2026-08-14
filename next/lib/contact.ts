@@ -6,6 +6,18 @@
  * numbers alone — so a number change shipped to some surfaces and not others.
  */
 
+/**
+ * Master switch for phone and WhatsApp contact across the public site.
+ *
+ * Set to false while the school has no line to answer: every number, tel:
+ * link, WhatsApp button and the structured-data telephone entries disappear
+ * together. Nothing is deleted — flip this back to true and they all return.
+ *
+ * Keep the numbers below accurate even while hidden, or turning this on again
+ * ships stale ones.
+ */
+export const SHOW_PHONE_CONTACT = false;
+
 export const WHATSAPP_NUMBER = "447879003218";
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`;
 

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
-import { WHATSAPP_URL } from "@/lib/contact";
+import { WHATSAPP_URL, SHOW_PHONE_CONTACT } from "@/lib/contact";
 import { trackWhatsAppClick, trackGetStartedClick } from "@/lib/gtag";
 import type { Dictionary } from "@/dictionaries";
 
@@ -18,6 +18,7 @@ export default function HeroCtas({ locale, dict }: HeroCtasProps) {
 
   return (
     <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+      {SHOW_PHONE_CONTACT && (
       <a
         href={WHATSAPP_URL}
         target="_blank"
@@ -28,6 +29,7 @@ export default function HeroCtas({ locale, dict }: HeroCtasProps) {
         <WhatsAppIcon className="h-5 w-5" />
         {h.ctaWhatsapp}
       </a>
+      )}
 
       <Link
         href={`/${locale}/contact`}

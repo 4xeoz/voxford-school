@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 import {
   WHATSAPP_URL,
+  SHOW_PHONE_CONTACT,
   LANGUAGES,
   START_DATES,
 } from "@/lib/contact";
@@ -151,7 +152,9 @@ export default function ContactPageClient({ dict, locale }: Props) {
                 </ul>
 
 
-                {/* WhatsApp CTA — most important for Algerian users */}
+                {/* WhatsApp CTA + phones — hidden until the school has a line
+                    to answer. See SHOW_PHONE_CONTACT in lib/contact.ts. */}
+                {SHOW_PHONE_CONTACT && (<>
                 <a
                   href={WHATSAPP_URL}
                   target="_blank"
@@ -182,6 +185,7 @@ export default function ContactPageClient({ dict, locale }: Props) {
                     0560 409 195
                   </a>
                 </div>
+                </>)}
               </div>
 
               {/* ── RIGHT: White form card ── */}
@@ -352,7 +356,7 @@ export default function ContactPageClient({ dict, locale }: Props) {
                             <h2 className="text-2xl font-black text-ink">{f.thankYouTitle}</h2>
                             <p className="text-gray-500 text-base mt-2 max-w-xs">{f.thankYouDesc}</p>
                           </div>
-                          <a
+                          {SHOW_PHONE_CONTACT && (<a
                             href={WHATSAPP_URL}
                             target="_blank"
                             rel="noopener noreferrer"
@@ -361,7 +365,7 @@ export default function ContactPageClient({ dict, locale }: Props) {
                           >
                             <WhatsAppIcon className="h-6 w-6" />
                             {f.thankYouWhatsapp}
-                          </a>
+                          </a>)}
                           <button
                             onClick={() => { setStep(1); setFormData({ name: "", phone: "", country: "", startDate: "" }); }}
                             className="text-sm text-gray-400 hover:text-gray-600 transition-colors"

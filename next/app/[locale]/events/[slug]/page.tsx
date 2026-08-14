@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { SHOW_PHONE_CONTACT } from "@/lib/contact";
 import { format } from "date-fns";
 import { getDictionary } from "@/dictionaries";
 import type { Locale } from "@/i18n.config";
@@ -184,7 +185,7 @@ export default async function EventPage({ params }: Props) {
               )}
 
               {/* Quick contact options */}
-              {(isPast || !event.isActive) && (
+              {SHOW_PHONE_CONTACT && (isPast || !event.isActive) && (
                 <div className="rounded-3xl bg-gradient-to-br from-whatsapp to-whatsapp-dark p-8 shadow-xl text-white text-center">
                   <p className="text-xs font-bold uppercase tracking-wider mb-3 opacity-90">Registration Closed?</p>
                   <h3 className="text-2xl font-black mb-4">Contact Us</h3>
@@ -204,7 +205,7 @@ export default async function EventPage({ params }: Props) {
               )}
 
               {/* Show these even when registration is closed */}
-              {(!isPast && event.isActive) && (
+              {SHOW_PHONE_CONTACT && (!isPast && event.isActive) && (
                 <>
                   {/* WhatsApp CTA - PROMINENT */}
                   <div className="rounded-3xl bg-gradient-to-br from-whatsapp to-whatsapp-dark p-8 shadow-xl text-white text-center">
