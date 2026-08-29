@@ -18,10 +18,10 @@
  */
 export const SHOW_PHONE_CONTACT = false;
 
-export const WHATSAPP_NUMBER = "447879003218";
+export const WHATSAPP_NUMBER = "213656781080";
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`;
 
-export const CONTACT_EMAIL = "contact@voxbridge.com";
+export const CONTACT_EMAIL = "voxbridgeschool@gmail.com";
 
 /** Where job applications sent by email land. */
 export const CAREERS_EMAIL = "voxbridgeschool@gmail.com";
@@ -31,10 +31,21 @@ export const PHONES = [
   { display: "0560 409 195", tel: "+213560409195", track: "0560409195" },
 ] as const;
 
+/**
+ * Line for the /connect social-media landing page. Kept separate from
+ * PHONES/SHOW_PHONE_CONTACT above — this page always shows a live number
+ * regardless of that master switch, since its whole purpose is quick calls
+ * from social traffic.
+ */
+export const CONNECT_PHONE = {
+  display: "0656 781 080",
+  tel: "+213656781080",
+} as const;
+
 /** M'Sila, Algeria. */
 export const MAP_COORDS = "35.7058,4.5419";
 export const MAP_EMBED_URL = `https://www.google.com/maps?q=${MAP_COORDS}&hl=en&z=15&output=embed`;
-export const MAPS_DIRECTIONS = `https://maps.google.com/?q=${MAP_COORDS}`;
+export const MAPS_DIRECTIONS = "https://maps.app.goo.gl/BUHQjufMk1oBnQ4Q9";
 
 /** Languages offered, used by the lead-form dropdown. */
 export const LANGUAGES = [

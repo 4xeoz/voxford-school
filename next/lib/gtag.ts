@@ -42,7 +42,7 @@ export const trackContactFormSubmit = (studyField: string, country: string) =>
     destination_country: country,
   });
 
-export const trackWhatsAppClick = (source: "navbar" | "footer" | "hero" | "widget" | "contact") =>
+export const trackWhatsAppClick = (source: "navbar" | "footer" | "hero" | "widget" | "contact" | "connect") =>
   event("whatsapp_click", { category: "cta", label: source });
 
 export const trackGetStartedClick = (source: "navbar" | "hero") =>

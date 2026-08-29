@@ -312,3 +312,38 @@ export async function getAllClockRecords() {
     orderBy: { clockIn: "desc" },
   });
 }
+
+// --------------- Traffic (social landing pages) ---------------
+
+export async function getTrafficStats(page: string = "connect") {
+  await requireAdminOrAbove();
+
+  const [counts, recent] = await Promise.all([
+    prisma.trafficEvent.groupBy({
+      by: ["type"],
+      where: { page },
+      _count: { _all: true },
+    }),
+    prisma.trafficEvent.findMany({
+      where: { page },
+      orderBy: { createdAt: "desc" },
+      take: 50,
+    }),
+  ]);
+
+  const byType = Object.fromEntries(
+    counts.map((c: { type: string; _count: { _all: number } }) => [c.type, c._count._all])
+  ) as Record<
+    "PAGE_VIEW" | "WHATSAPP_CLICK" | "CALL_CLICK" | "LOCATION_CLICK" | "EMAIL_CLICK",
+    number
+  >;
+
+  return {
+    views: byType.PAGE_VIEW ?? 0,
+    whatsappClicks: byType.WHATSAPP_CLICK ?? 0,
+    callClicks: byType.CALL_CLICK ?? 0,
+    locationClicks: byType.LOCATION_CLICK ?? 0,
+    emailClicks: byType.EMAIL_CLICK ?? 0,
+    recent,
+  };
+}

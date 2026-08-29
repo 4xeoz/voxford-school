@@ -105,6 +105,19 @@ export default function AdminShell({
           },
         ]
       : []),
+    ...(role === "SUPER_ADMIN" || role === "ADMIN"
+      ? [
+          {
+            label: "Traffic",
+            href: "/admin/traffic",
+            icon: (
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.5l3-3 3.75 3.75L15 8.25l6 6M3 19.5h18M3 4.5v15" />
+              </svg>
+            ),
+          },
+        ]
+      : []),
   ];
 
   function SidebarContent() {

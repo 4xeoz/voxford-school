@@ -67,5 +67,17 @@
     "title": "Take a look inside.",
     "subtitle": "The classrooms, the teachers, and the route abroad — a first look before we open our doors.",
     "cta": "Watch the film"
+  },
+  "connect": {
+    "title": "Let's talk.",
+    "subtitle": "Reach Voxbridge Language School in M'Sila — pick whatever's easiest for you.",
+    "whatsapp": "Chat on WhatsApp",
+    "whatsappHint": "Usually replies within minutes",
+    "call": "Call us",
+    "callHint": "Tap to dial",
+    "directions": "Get Directions",
+    "directionsHint": "M'Sila, Algeria",
+    "email": "Send an Email",
+    "emailHint": "For longer questions"
   }
 }

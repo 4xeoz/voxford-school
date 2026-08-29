@@ -67,5 +67,17 @@
     "title": "Jetez un œil à l'intérieur.",
     "subtitle": "Les salles, les professeurs et le départ à l'étranger — un premier aperçu avant l'ouverture.",
     "cta": "Voir la vidéo"
+  },
+  "connect": {
+    "title": "Parlons-en.",
+    "subtitle": "Contactez l'école de langues Voxbridge à M'Sila — choisissez ce qui vous convient.",
+    "whatsapp": "Discuter sur WhatsApp",
+    "whatsappHint": "Réponse généralement en quelques minutes",
+    "call": "Appelez-nous",
+    "callHint": "Appuyez pour composer",
+    "directions": "Itinéraire",
+    "directionsHint": "M'Sila, Algérie",
+    "email": "Envoyer un e-mail",
+    "emailHint": "Pour les questions plus détaillées"
   }
 }

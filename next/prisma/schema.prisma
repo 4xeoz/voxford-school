@@ -240,3 +240,29 @@ model JobApplicationNote {
 
   @@map("job_application_notes")
 }
+
+// ─── Traffic tracking ──────────────────────────────────────────────────────
+// First-party click/view tracking for the standalone social-media landing
+// pages (e.g. /connect), shown in the admin panel. Deliberately separate
+// from GA4 (lib/gtag.ts) so the numbers are visible without leaving the site.
+
+enum TrafficEventType {
+  PAGE_VIEW
+  WHATSAPP_CLICK
+  CALL_CLICK
+  LOCATION_CLICK
+  EMAIL_CLICK
+}
+
+model TrafficEvent {
+  id        String           @id @default(cuid())
+  page      String
+  type      TrafficEventType
+  locale    String?
+  referrer  String?
+  createdAt DateTime         @default(now()) @map("created_at")
+
+  @@index([page, type])
+  @@index([createdAt])
+  @@map("traffic_events")
+}
