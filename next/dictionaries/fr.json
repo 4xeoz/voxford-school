@@ -78,6 +78,48 @@
     "directions": "Itinéraire",
     "directionsHint": "M'Sila, Algérie",
     "email": "Envoyer un e-mail",
-    "emailHint": "Pour les questions plus détaillées"
+    "emailHint": "Pour les questions plus détaillées",
+
+    "skip": "Passer →",
+    "back": "Retour",
+
+    "gateEyebrow": "Voxbridge recrute",
+    "gateQuestion": "Vous voulez enseigner dans un institut international prestigieux ?",
+    "gateYes": "Oui, ça m'intéresse",
+    "gateNo": "Pas pour l'instant",
+
+    "roleTitle": "Quelle langue enseignez-vous ?",
+    "roleSubtitle": "Choisissez votre matière pour voir où vous vous situez.",
+    "roleEnglish": "Anglais",
+    "roleFrench": "Français",
+    "roleGerman": "Allemand",
+    "roleSpanish": "Espagnol",
+
+    "detailsTitle": "Presque terminé",
+    "detailsSubtitle": "Pour savoir à qui nous parlons.",
+    "namePlaceholder": "Nom complet",
+    "phonePlaceholder": "Numéro de téléphone",
+    "continueButton": "Continuer",
+
+    "timingTitle": "Quand devons-nous vous contacter ?",
+    "timingSubtitle": "Choisissez un moment qui vous convient.",
+    "timingToday": "Aujourd'hui",
+    "timingTomorrow": "Demain",
+    "timingWeek": "Cette semaine",
+    "sending": "Envoi…",
+
+    "successEyebrow": "Vous êtes sur la liste",
+    "successTitle": "Bien joué, {name} ! 🎉",
+    "successSubtitle": "Nous avons bien reçu votre candidature en {role} — contactez-nous à tout moment avant notre appel.",
+    "successWhatsapp": "Écrivez-nous sur WhatsApp",
+    "successWhatsappHint": "Le moyen le plus rapide de nous joindre",
+    "successCall": "Ou appelez-nous directement",
+    "successShare": "Partager avec un ami",
+    "successShareHint": "Vous connaissez un bon professeur ?",
+    "shareText": "Je viens de postuler pour enseigner à l'école Voxbridge — toi aussi, jette un œil !",
+    "linkCopied": "Lien copié — vous pouvez le partager !",
+
+    "seeAllContact": "Voir toutes les options de contact",
+    "restart": "Recommencer"
   }
 }

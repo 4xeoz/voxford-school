@@ -78,6 +78,48 @@
     "directions": "Get Directions",
     "directionsHint": "M'Sila, Algeria",
     "email": "Send an Email",
-    "emailHint": "For longer questions"
+    "emailHint": "For longer questions",
+
+    "skip": "Skip →",
+    "back": "Back",
+
+    "gateEyebrow": "Voxbridge is hiring",
+    "gateQuestion": "Want to teach at a prestigious international institute?",
+    "gateYes": "Yes, I'm interested",
+    "gateNo": "Not right now",
+
+    "roleTitle": "Which language do you teach?",
+    "roleSubtitle": "Pick your subject to see where you fit.",
+    "roleEnglish": "English",
+    "roleFrench": "French",
+    "roleGerman": "German",
+    "roleSpanish": "Spanish",
+
+    "detailsTitle": "Almost there",
+    "detailsSubtitle": "So we know who we're talking to.",
+    "namePlaceholder": "Full name",
+    "phonePlaceholder": "Phone number",
+    "continueButton": "Continue",
+
+    "timingTitle": "When should we contact you?",
+    "timingSubtitle": "Pick a time that works for you.",
+    "timingToday": "Today",
+    "timingTomorrow": "Tomorrow",
+    "timingWeek": "This week",
+    "sending": "Sending…",
+
+    "successEyebrow": "You're on the list",
+    "successTitle": "Nice one, {name}! 🎉",
+    "successSubtitle": "We've got your {role} application — reach out any time before we call.",
+    "successWhatsapp": "Message us on WhatsApp",
+    "successWhatsappHint": "Fastest way to reach us",
+    "successCall": "Or call us directly",
+    "successShare": "Share with a friend",
+    "successShareHint": "Know another great teacher?",
+    "shareText": "I just applied to teach at Voxbridge Language School — you should check it out too!",
+    "linkCopied": "Link copied — go ahead and share it!",
+
+    "seeAllContact": "See all contact options instead",
+    "restart": "Start over"
   }
 }

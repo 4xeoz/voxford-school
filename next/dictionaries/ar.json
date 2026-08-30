@@ -78,6 +78,48 @@
     "directions": "احصل على الاتجاهات",
     "directionsHint": "المسيلة، الجزائر",
     "email": "أرسل بريدًا إلكترونيًا",
-    "emailHint": "للأسئلة الأطول"
+    "emailHint": "للأسئلة الأطول",
+
+    "skip": "تخطّي ←",
+    "back": "رجوع",
+
+    "gateEyebrow": "فوكسبريدج توظّف",
+    "gateQuestion": "هل تريد التدريس في معهد دولي مرموق؟",
+    "gateYes": "نعم، أنا مهتم",
+    "gateNo": "ليس الآن",
+
+    "roleTitle": "ما اللغة التي تدرّسها؟",
+    "roleSubtitle": "اختر تخصصك لنعرف أين تناسبك.",
+    "roleEnglish": "الإنجليزية",
+    "roleFrench": "الفرنسية",
+    "roleGerman": "الألمانية",
+    "roleSpanish": "الإسبانية",
+
+    "detailsTitle": "أوشكنا على الانتهاء",
+    "detailsSubtitle": "لنعرف مع من نتحدث.",
+    "namePlaceholder": "الاسم الكامل",
+    "phonePlaceholder": "رقم الهاتف",
+    "continueButton": "متابعة",
+
+    "timingTitle": "متى نتواصل معك؟",
+    "timingSubtitle": "اختر الوقت الأنسب لك.",
+    "timingToday": "اليوم",
+    "timingTomorrow": "غدًا",
+    "timingWeek": "هذا الأسبوع",
+    "sending": "جارٍ الإرسال…",
+
+    "successEyebrow": "أنت الآن على القائمة",
+    "successTitle": "أحسنت يا {name}! 🎉",
+    "successSubtitle": "استلمنا طلبك لتدريس {role} — تواصل معنا في أي وقت قبل اتصالنا بك.",
+    "successWhatsapp": "راسلنا على واتساب",
+    "successWhatsappHint": "أسرع طريقة للتواصل معنا",
+    "successCall": "أو اتصل بنا مباشرة",
+    "successShare": "شارك مع صديق",
+    "successShareHint": "تعرف معلمًا رائعًا آخر؟",
+    "shareText": "تقدمت للتو للتدريس في مدرسة فوكسبريدج للغات — جرّب أنت أيضًا!",
+    "linkCopied": "تم نسخ الرابط — يمكنك مشاركته الآن!",
+
+    "seeAllContact": "عرض جميع خيارات التواصل بدلاً من ذلك",
+    "restart": "البدء من جديد"
   }
 }

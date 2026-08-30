@@ -59,3 +59,19 @@ export const trackLanguageSwitch = (to: string) =>
 
 export const trackBlogClick = () =>
   event("blog_click", { category: "navigation" });
+
+// ─── /connect careers-funnel events ───────────────────────────────────────────
+
+export const trackFunnelStep = (step: string) =>
+  event("careers_funnel_step", { category: "careers_funnel", label: step, step });
+
+export const trackFunnelSubmit = (role: string, timing: string) =>
+  event("careers_funnel_submit", {
+    category: "careers_funnel",
+    label: `${role} · ${timing}`,
+    role,
+    timing,
+  });
+
+export const trackShareClick = (method: "native" | "clipboard") =>
+  event("careers_funnel_share", { category: "careers_funnel", label: method });
