@@ -23,6 +23,7 @@ import {
 import Navbar from "@/components/layout/Navbar";
 import type { Dictionary } from "@/dictionaries";
 import footerLogo from "@/public/voxbridge/icon-detailed-red-on-whiteBackground-v2.png";
+import PrivacyLink from "@/components/layout/PrivacyLink";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -413,6 +414,7 @@ export default function ContactPageClient({ dict, locale }: Props) {
             <Link href={`/${locale}`} className="text-white/35 hover:text-white/70 transition-colors">
               {dict.nav.home}
             </Link>
+            <PrivacyLink locale={locale} className="text-white/35 hover:text-white/70 transition-colors" />
             <Link href="/admin/login" className="text-white/20 hover:text-white/40 transition-colors text-xs">
               {f.adminLogin}
             </Link>

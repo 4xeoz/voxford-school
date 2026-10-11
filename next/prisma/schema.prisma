@@ -242,9 +242,9 @@ model JobApplicationNote {
 }
 
 // ─── Traffic tracking ──────────────────────────────────────────────────────
-// First-party click/view tracking for the standalone social-media landing
-// pages (e.g. /connect), shown in the admin panel. Deliberately separate
-// from GA4 (lib/gtag.ts) so the numbers are visible without leaving the site.
+// First-party public-page analytics, shown only to administrators. Detailed
+// visit metadata is cleared after 30 days; page and event counts remain.
+// Kept separate from GA4 so the numbers are visible without leaving the site.
 
 enum TrafficEventType {
   PAGE_VIEW
@@ -255,12 +255,26 @@ enum TrafficEventType {
 }
 
 model TrafficEvent {
-  id        String           @id @default(cuid())
-  page      String
-  type      TrafficEventType
-  locale    String?
-  referrer  String?
-  createdAt DateTime         @default(now()) @map("created_at")
+  id             String           @id @default(cuid())
+  page           String
+  type           TrafficEventType
+  locale         String?
+  referrer       String?
+  ipAddress      String?          @map("ip_address")
+  countryCode    String?          @map("country_code")
+  regionCode     String?          @map("region_code")
+  city           String?
+  deviceType     String?          @map("device_type")
+  deviceModel    String?          @map("device_model")
+  osName         String?          @map("os_name")
+  osVersion      String?          @map("os_version")
+  browserName    String?          @map("browser_name")
+  browserVersion String?          @map("browser_version")
+  screenWidth    Int?             @map("screen_width")
+  screenHeight   Int?             @map("screen_height")
+  viewportWidth  Int?             @map("viewport_width")
+  viewportHeight Int?             @map("viewport_height")
+  createdAt      DateTime         @default(now()) @map("created_at")
 
   @@index([page, type])
   @@index([createdAt])

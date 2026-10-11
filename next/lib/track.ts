@@ -13,7 +13,20 @@ export type TrafficEventType =
 export function trackEvent(page: string, type: TrafficEventType, locale?: string) {
   if (typeof window === "undefined") return;
 
-  const payload = JSON.stringify({ page, type, locale });
+  const payload = JSON.stringify({
+    page,
+    type,
+    locale,
+    ...(type === "PAGE_VIEW" ? {
+      referrer: document.referrer,
+      screen: {
+        screenWidth: window.screen.width,
+        screenHeight: window.screen.height,
+        viewportWidth: window.innerWidth,
+        viewportHeight: window.innerHeight,
+      },
+    } : {}),
+  });
 
   if (navigator.sendBeacon) {
     const blob = new Blob([payload], { type: "application/json" });

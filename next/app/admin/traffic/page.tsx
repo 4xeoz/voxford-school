@@ -12,7 +12,7 @@ export default async function TrafficPage() {
   const role = (session.user as { role: string }).role;
   if (role !== "SUPER_ADMIN" && role !== "ADMIN") redirect("/admin/dashboard");
 
-  const stats = await getTrafficStats("connect");
+  const stats = await getTrafficStats();
 
   return <TrafficClient stats={JSON.parse(JSON.stringify(stats))} />;
 }
