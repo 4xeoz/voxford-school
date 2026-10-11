@@ -1,178 +1,168 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowUpRight,
-  Check,
-  CheckCircle2,
-  Globe2,
-  MessageCircle,
-  Ticket,
-} from "lucide-react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { ArrowLeft, ArrowRight, CheckCircle2, MapPin, Phone } from "lucide-react";
 import { submitContactForm } from "@/actions/contact";
-import { WHATSAPP_URL } from "@/lib/contact";
-import { trackContactFormSubmit, trackWhatsAppClick } from "@/lib/gtag";
+import { CONNECT_PHONE, MAPS_DIRECTIONS } from "@/lib/contact";
+import { trackContactFormSubmit, trackPhoneCall } from "@/lib/gtag";
 import type { Locale } from "@/i18n.config";
+
+type Step = "welcome" | "form" | "success";
 
 type Copy = {
   open: string;
-  eyebrow: string;
   headline: string;
-  headlineAccent: string;
-  lead: string;
-  pointOne: string;
-  pointTwo: string;
-  cardEyebrow: string;
-  cardTitle: string;
-  cardLead: string;
-  student: string;
-  parent: string;
-  yourName: string;
+  intro: string;
+  start: string;
+  simple: string;
+  formTitle: string;
+  formIntro: string;
+  name: string;
   namePlaceholder: string;
   phone: string;
   phonePlaceholder: string;
-  language: string;
-  notSure: string;
-  activate: string;
-  activating: string;
-  reassurance: string;
-  whatsapp: string;
-  whatsappMessage: string;
-  successTitle: string;
-  successLead: string;
+  send: string;
+  sending: string;
+  back: string;
+  privacy: string;
+  invalidName: string;
   invalidPhone: string;
   failure: string;
-  home: string;
+  successTitle: string;
+  successIntro: string;
+  otherWays: string;
+  call: string;
+  map: string;
   location: string;
 };
 
 const copy: Record<Locale, Copy> = {
   ar: {
     open: "التسجيل مفتوح الآن",
-    eyebrow: "مسحت رمز البروشور. وصلت إلى المكان الصحيح.",
     headline: "فعّل تذكرتك",
-    headlineAccent: "من هنا إلى بلد اللغة.",
-    lead: "ابدأ بتعلّم اللغة في مواقف حقيقية، واكتشف فرص ممارستها في بلدها خلال العطل. أخبرنا بما يهمك، وسنساعدك على اختيار البداية المناسبة.",
-    pointOne: "لغة تستخدمها، لا تحفظها فقط",
-    pointTwo: "فرص تجربة اللغة في بلدها",
-    cardEyebrow: "تذكرة البداية · فوكس بريدج",
-    cardTitle: "هذه التذكرة باسم من؟",
-    cardLead: "اترك بياناتك وسيتواصل معك فريقنا لشرح المسارات والخطوة التالية.",
-    student: "طالب/ـة",
-    parent: "وليّ أمر",
-    yourName: "الاسم",
-    namePlaceholder: "اسمك الكامل",
-    phone: "رقم الهاتف أو واتساب",
-    phonePlaceholder: "05 / 06 / 07 ...",
-    language: "اللغة التي تهمك",
-    notSure: "لم أقرر بعد",
-    activate: "فعّل تذكرتي",
-    activating: "جارٍ إرسال طلبك...",
-    reassurance: "سنستخدم رقمك للتواصل بشأن هذا الطلب. لا يلزمك اختيار برنامج الآن.",
-    whatsapp: "تفضّل بالتواصل عبر واتساب",
-    whatsappMessage: "مرحبًا، مسحت رمز البروشور وأود معرفة المزيد عن الدراسة في فوكس بريدج.",
-    successTitle: "وصلتنا تذكرتك!",
-    successLead: "تم استلام طلبك. سيتواصل معك فريق فوكس بريدج لشرح الخيارات والخطوة التالية.",
+    intro: "اترك اسمك ورقمك. سنتواصل معك لشرح الدراسة ورحلات العطل.",
+    start: "سجّل اهتمامك",
+    simple: "الاسم ورقم الهاتف فقط",
+    formTitle: "كيف نتواصل معك؟",
+    formIntro: "نحتاج اسمك ورقم هاتفك فقط.",
+    name: "اسمك",
+    namePlaceholder: "اكتب اسمك هنا",
+    phone: "رقم هاتفك",
+    phonePlaceholder: "مثال: 05 12 34 56 78",
+    send: "أرسل اهتمامي",
+    sending: "جارٍ الإرسال...",
+    back: "رجوع",
+    privacy: "سنستخدم رقمك للرد على طلبك.",
+    invalidName: "يرجى كتابة اسمك.",
     invalidPhone: "يرجى إدخال رقم هاتف صحيح.",
-    failure: "تعذّر إرسال طلبك الآن. حاول مرة أخرى أو تواصل معنا عبر واتساب.",
-    home: "الموقع الرئيسي",
+    failure: "تعذّر الإرسال الآن. حاول مرة أخرى أو اتصل بنا.",
+    successTitle: "وصلنا طلبك",
+    successIntro: "سيتواصل معك فريق فوكس بريدج لشرح الخطوة التالية.",
+    otherWays: "أو تواصل معنا مباشرة",
+    call: "اتصل بنا",
+    map: "افتح الموقع على خرائط Google",
     location: "المسيلة، الجزائر",
   },
   fr: {
-    open: "Les inscriptions sont ouvertes",
-    eyebrow: "Vous avez scanné la brochure. Vous êtes au bon endroit.",
+    open: "Inscriptions ouvertes",
     headline: "Activez votre billet",
-    headlineAccent: "d'ici au pays de la langue.",
-    lead: "Apprenez la langue dans des situations concrètes et découvrez les possibilités de la pratiquer dans son pays pendant les vacances. Dites-nous ce qui vous intéresse, nous vous aiderons à choisir votre départ.",
-    pointOne: "Une langue que vous utilisez vraiment",
-    pointTwo: "Des possibilités de séjour linguistique",
-    cardEyebrow: "Votre point de départ · Voxbridge",
-    cardTitle: "À quel nom est ce billet ?",
-    cardLead: "Laissez vos coordonnées : notre équipe vous expliquera les parcours et la prochaine étape.",
-    student: "Élève",
-    parent: "Parent",
-    yourName: "Nom",
-    namePlaceholder: "Votre nom complet",
-    phone: "Téléphone ou WhatsApp",
-    phonePlaceholder: "05 / 06 / 07 ...",
-    language: "Langue qui vous intéresse",
-    notSure: "Je ne sais pas encore",
-    activate: "Activer mon billet",
-    activating: "Envoi en cours...",
-    reassurance: "Nous utiliserons votre numéro pour répondre à cette demande. Vous n'avez pas à choisir un programme maintenant.",
-    whatsapp: "Parler avec nous sur WhatsApp",
-    whatsappMessage: "Bonjour, j'ai scanné la brochure et je voudrais en savoir plus sur Voxbridge.",
-    successTitle: "Votre billet est arrivé !",
-    successLead: "Nous avons reçu votre demande. L'équipe Voxbridge vous contactera pour expliquer les possibilités et la prochaine étape.",
-    invalidPhone: "Veuillez saisir un numéro de téléphone valide.",
-    failure: "Votre demande n'a pas pu être envoyée. Réessayez ou contactez-nous sur WhatsApp.",
-    home: "Site principal",
+    intro: "Laissez votre nom et votre numéro. Nous vous expliquerons les cours et les voyages linguistiques pendant les vacances.",
+    start: "Je suis intéressé(e)",
+    simple: "Nom et téléphone uniquement",
+    formTitle: "Comment vous joindre ?",
+    formIntro: "Il nous faut seulement votre nom et votre numéro.",
+    name: "Votre nom",
+    namePlaceholder: "Écrivez votre nom",
+    phone: "Votre téléphone",
+    phonePlaceholder: "Exemple : 05 12 34 56 78",
+    send: "Envoyer ma demande",
+    sending: "Envoi en cours...",
+    back: "Retour",
+    privacy: "Nous utiliserons votre numéro pour répondre à cette demande.",
+    invalidName: "Veuillez saisir votre nom.",
+    invalidPhone: "Veuillez saisir un numéro valide.",
+    failure: "Envoi impossible pour le moment. Réessayez ou appelez-nous.",
+    successTitle: "Demande reçue",
+    successIntro: "L'équipe Voxbridge vous contactera pour expliquer la prochaine étape.",
+    otherWays: "Ou contactez-nous directement",
+    call: "Appelez-nous",
+    map: "Ouvrir dans Google Maps",
     location: "M'Sila, Algérie",
   },
   en: {
-    open: "Enrollment is open now",
-    eyebrow: "You scanned the brochure. You're in the right place.",
+    open: "Enrollment is open",
     headline: "Activate your ticket",
-    headlineAccent: "from here to where the language lives.",
-    lead: "Learn through real situations, then explore opportunities to practise the language in its country during school breaks. Tell us what interests you, and we'll help you choose a starting point.",
-    pointOne: "Language you actually use",
-    pointTwo: "Opportunities to practise abroad",
-    cardEyebrow: "Your starting ticket · Voxbridge",
-    cardTitle: "Whose name is on this ticket?",
-    cardLead: "Leave your details and our team will explain the pathways and your next step.",
-    student: "Student",
-    parent: "Parent",
-    yourName: "Name",
-    namePlaceholder: "Your full name",
-    phone: "Phone or WhatsApp number",
-    phonePlaceholder: "05 / 06 / 07 ...",
-    language: "Language you're interested in",
-    notSure: "Not sure yet",
-    activate: "Activate my ticket",
-    activating: "Sending your request...",
-    reassurance: "We'll use your number to respond to this request. You don't need to choose a programme yet.",
-    whatsapp: "Talk to us on WhatsApp",
-    whatsappMessage: "Hello, I scanned the brochure and would like to know more about Voxbridge.",
-    successTitle: "Your ticket reached us!",
-    successLead: "We've received your request. The Voxbridge team will contact you to explain the options and next step.",
+    intro: "Leave your name and number. We'll explain the courses and holiday language trips.",
+    start: "Register interest",
+    simple: "Just your name and phone number",
+    formTitle: "How can we reach you?",
+    formIntro: "We only need your name and phone number.",
+    name: "Your name",
+    namePlaceholder: "Enter your name",
+    phone: "Your phone number",
+    phonePlaceholder: "For example: 05 12 34 56 78",
+    send: "Send my interest",
+    sending: "Sending...",
+    back: "Back",
+    privacy: "We'll use your number to respond to this request.",
+    invalidName: "Please enter your name.",
     invalidPhone: "Please enter a valid phone number.",
-    failure: "We couldn't send your request. Please try again or message us on WhatsApp.",
-    home: "Main website",
+    failure: "We couldn't send this now. Please retry or call us.",
+    successTitle: "Request received",
+    successIntro: "The Voxbridge team will contact you about the next step.",
+    otherWays: "Or contact us directly",
+    call: "Call us",
+    map: "Open in Google Maps",
     location: "M'Sila, Algeria",
   },
 };
 
-const languages = [
-  { value: "English", ar: "الإنجليزية", fr: "Anglais", en: "English" },
-  { value: "French", ar: "الفرنسية", fr: "Français", en: "French" },
-  { value: "German", ar: "الألمانية", fr: "Allemand", en: "German" },
-  { value: "Spanish", ar: "الإسبانية", fr: "Espagnol", en: "Spanish" },
-  { value: "Chinese", ar: "الصينية", fr: "Chinois", en: "Chinese" },
-] as const;
-
 const inputClass =
-  "mt-2 h-12 w-full rounded-xl border border-[#E6E0DC] bg-[#FCFBFA] px-4 text-base text-ink outline-none transition placeholder:text-[#A09B97] focus:border-brand focus:bg-white focus:ring-4 focus:ring-brand/10";
+  "mt-2 min-h-[58px] w-full rounded-2xl border-2 border-[#D8D2CE] bg-white px-4 text-[18px] text-[#1E1B1A] placeholder:text-[#77716D] outline-none transition focus:border-[#BC0000] focus:ring-4 focus:ring-[#BC0000]/15";
+
+const contactClass =
+  "flex min-h-[68px] w-full items-center gap-4 rounded-2xl border border-[#E5DEDA] bg-[#FCFAF8] px-4 py-3 text-start text-[#201C1A] shadow-[0_3px_12px_rgba(55,23,17,0.06)] transition-colors hover:border-[#BC0000]/40 hover:bg-white focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#BC0000]/30 active:bg-[#FFF3EF]";
 
 export default function TicketPageClient({ locale }: { locale: Locale }) {
   const t = copy[locale];
   const isArabic = locale === "ar";
-  const [visitor, setVisitor] = useState<"student" | "parent">("student");
+  const reduceMotion = useReducedMotion() === true;
+  const [step, setStep] = useState<Step>("welcome");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [language, setLanguage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
+  const phoneRef = useRef<HTMLInputElement>(null);
+  const firstRender = useRef(true);
 
-  const whatsappHref = `${WHATSAPP_URL}?text=${encodeURIComponent(t.whatsappMessage)}`;
+  useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
+    const timer = window.setTimeout(() => headingRef.current?.focus(), reduceMotion ? 0 : 260);
+    return () => window.clearTimeout(timer);
+  }, [step, reduceMotion]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (isSubmitting) return;
-    if (phone.replace(/\D/g, "").length < 8) {
+
+    if (!name.trim()) {
+      setError(t.invalidName);
+      nameRef.current?.focus();
+      return;
+    }
+
+    const digits = phone.replace(/\D/g, "");
+    if (digits.length < 8 || digits.length > 15) {
       setError(t.invalidPhone);
+      phoneRef.current?.focus();
       return;
     }
 
@@ -182,19 +172,14 @@ export default function TicketPageClient({ locale }: { locale: Locale }) {
       const result = await submitContactForm({
         name: name.trim(),
         phone: phone.trim(),
-        message: [
-          "Source: brochure QR ticket",
-          `Visitor: ${visitor}`,
-          `Language interest: ${language || "Not sure yet"}`,
-        ].join("\n"),
+        message: "Source: brochure QR ticket",
       });
-
       if (!result.success) {
         setError(t.failure);
         return;
       }
-      trackContactFormSubmit("Brochure ticket", language || "Not sure yet");
-      setSubmitted(true);
+      trackContactFormSubmit("Brochure ticket", "Not specified");
+      setStep("success");
     } catch {
       setError(t.failure);
     } finally {
@@ -203,214 +188,191 @@ export default function TicketPageClient({ locale }: { locale: Locale }) {
   }
 
   return (
-    <main
-      dir={isArabic ? "rtl" : "ltr"}
-      className="relative min-h-screen overflow-hidden bg-[#A90000] text-white"
-    >
-      <div aria-hidden className="pointer-events-none absolute -start-48 -top-48 h-[34rem] w-[34rem] rounded-full border-[4.5rem] border-white/[0.055]" />
-      <div aria-hidden className="pointer-events-none absolute -end-44 top-64 h-[38rem] w-[38rem] rounded-full border-[5rem] border-white/[0.055]" />
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#780000]/70 to-transparent" />
+    <main dir={isArabic ? "rtl" : "ltr"} className="relative min-h-[100svh] overflow-hidden bg-[#F7F3F0] text-[#201C1A]">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-[340px] bg-gradient-to-br from-[#C90000] to-[#970000]" />
+      <div aria-hidden="true" className="pointer-events-none absolute -top-24 end-[-8rem] h-80 w-80 rounded-full border-[3.5rem] border-white/[0.08]" />
 
-      <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col px-5 pb-6 pt-5 sm:px-8 lg:px-12">
-        <header className="flex items-center justify-between gap-4 border-b border-white/15 pb-4">
-          <Link href={`/${locale}`} className="flex items-center gap-3" aria-label="Voxbridge Language School">
-            <Image
-              src="/voxbridge/icon-detailed-white-transparent-v2.png"
-              alt=""
-              width={43}
-              height={43}
-              className="h-10 w-10 object-contain"
-              priority
-            />
-            <span className="text-start font-sans text-[1.05rem] font-black leading-[1.05] tracking-tight sm:text-lg">
+      <div className="relative mx-auto flex min-h-[100svh] w-full max-w-[540px] flex-col px-4 pb-6 pt-4 sm:px-6 sm:pt-6">
+        <header className="flex min-h-12 items-center justify-between">
+          <Link
+            href={"/" + locale}
+            aria-label="Voxbridge Language School"
+            className="inline-flex items-center gap-3 rounded-lg text-white focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/60"
+          >
+            <Image src="/voxbridge/icon-detailed-white-transparent-v2.png" alt="" width={43} height={43} className="h-10 w-10 object-contain" priority />
+            <span className="font-sans text-lg font-black leading-[1.05]">
               Voxbridge
-              <span className="block text-xs font-bold tracking-[0.08em] text-white/75 sm:text-sm">
-                Language School
-              </span>
+              <span className="block text-[11px] font-bold tracking-wide text-white/85">Language School</span>
             </span>
           </Link>
-          <a
-            href={whatsappHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => trackWhatsAppClick("contact")}
-            className="hidden items-center gap-2 rounded-full border border-white/30 px-4 py-2 text-xs font-bold transition hover:bg-white/10 sm:inline-flex"
-          >
-            <MessageCircle className="h-4 w-4" />
-            WhatsApp
-          </a>
         </header>
 
-        <div className="grid flex-1 items-center gap-6 py-6 lg:grid-cols-[1fr_0.92fr] lg:gap-16 lg:py-16">
-          <section className="relative max-w-xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-sm font-bold">
-              <span className="h-2 w-2 rounded-full bg-[#FBD77C]" />
-              {t.open}
-            </div>
-            <p className="mt-5 text-sm font-medium text-white/70 lg:mt-8">{t.eyebrow}</p>
-            <h1 className="mt-3 text-[clamp(2.5rem,7vw,5.8rem)] font-black leading-[1.05] tracking-tight">
-              {t.headline}
-              <span className="mt-2 block text-[#FFE6B3]">{t.headlineAccent}</span>
-            </h1>
-            <p className="mt-4 max-w-lg text-base leading-8 text-white/85 sm:text-lg lg:mt-6">
-              {t.lead}
-            </p>
+        <div className="mt-5 overflow-hidden rounded-[28px] border border-white bg-white shadow-[0_22px_65px_rgba(78,23,16,0.18)]">
+          <div className={"relative flex items-center justify-center overflow-hidden bg-[radial-gradient(circle_at_50%_30%,#FFFFFF_0%,#FFF5F0_72%,#FFE8E0_100%)] transition-[height] duration-300 motion-reduce:transition-none " + (step === "welcome" ? "h-[170px] sm:h-[190px]" : "h-0")}>
+            <div aria-hidden="true" className="absolute h-[220px] w-[220px] rounded-full border-[28px] border-[#C80000]/[0.055]" />
+            <Image
+              src="/voxbridge/ticket/globe-only.png"
+              alt=""
+              width={160}
+              height={160}
+              sizes="160px"
+              className="relative h-[152px] w-[152px] object-contain drop-shadow-[0_15px_15px_rgba(87,23,20,0.12)] sm:h-[170px] sm:w-[170px]"
+              priority
+            />
+            <Image
+              src="/voxbridge/ticket/algerian-passport-top-view.png"
+              alt=""
+              width={88}
+              height={125}
+              sizes="88px"
+              className="absolute bottom-[-29px] end-[11%] h-[125px] w-auto rotate-[13deg] object-contain drop-shadow-[0_12px_10px_rgba(20,22,20,0.25)]"
+              priority
+            />
+          </div>
 
-            <div className="mt-8 hidden max-w-md gap-3 border-t border-white/20 pt-6 text-sm font-semibold lg:grid lg:grid-cols-2">
-              <div className="flex items-center gap-2.5">
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/15">
-                  <Check className="h-4 w-4" />
-                </span>
-                {t.pointOne}
-              </div>
-              <div className="flex items-center gap-2.5">
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/15">
-                  <Globe2 className="h-4 w-4" />
-                </span>
-                {t.pointTwo}
-              </div>
-            </div>
-          </section>
-
-          <section className="relative w-full max-w-xl justify-self-center text-ink lg:justify-self-end" aria-label={t.cardTitle}>
-            <div className="overflow-hidden rounded-[2rem] bg-white shadow-[0_30px_80px_rgba(38,0,0,0.28)]">
-              <div className="bg-[#FFF8F1] px-6 pb-5 pt-6 sm:px-8 sm:pt-8">
-                <div className="flex items-center justify-between gap-4">
-                  <p className="text-[0.68rem] font-black uppercase tracking-[0.17em] text-brand sm:text-xs">
-                    {t.cardEyebrow}
-                  </p>
-                  <Ticket className="h-7 w-7 shrink-0 text-brand" strokeWidth={1.6} />
-                </div>
-                <h2 className="mt-5 text-2xl font-black leading-tight sm:text-3xl">
-                  {submitted ? t.successTitle : t.cardTitle}
-                </h2>
-                <p className="mt-2 text-sm leading-6 text-[#655F5B]">
-                  {submitted ? t.successLead : t.cardLead}
-                </p>
-              </div>
-
-              <div className="relative px-6 sm:px-8">
-                <div className="border-t-2 border-dashed border-[#E9DDD1]" />
-                <span aria-hidden className="absolute -start-4 -top-4 h-8 w-8 rounded-full bg-[#A90000]" />
-                <span aria-hidden className="absolute -end-4 -top-4 h-8 w-8 rounded-full bg-[#A90000]" />
-              </div>
-
-              {submitted ? (
-                <div className="flex flex-col items-center px-6 pb-8 pt-8 text-center sm:px-8">
-                  <span className="flex h-16 w-16 items-center justify-center rounded-full bg-[#EAF8EE] text-[#168342]">
-                    <CheckCircle2 className="h-9 w-9" />
-                  </span>
-                  <a
-                    href={whatsappHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => trackWhatsAppClick("contact")}
-                    className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-5 py-3.5 text-sm font-bold text-white transition hover:bg-brand-dark"
-                  >
-                    <MessageCircle className="h-4 w-4" />
-                    {t.whatsapp}
-                  </a>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-4 px-6 pb-7 pt-6 sm:px-8 sm:pb-8">
-                  <fieldset className="flex gap-2" aria-label={t.cardTitle}>
-                    {(["student", "parent"] as const).map((kind) => (
-                      <button
-                        key={kind}
-                        type="button"
-                        aria-pressed={visitor === kind}
-                        onClick={() => setVisitor(kind)}
-                        className={`rounded-full px-4 py-2 text-xs font-bold transition sm:text-sm ${
-                          visitor === kind
-                            ? "bg-brand text-white"
-                            : "border border-[#E6E0DC] bg-white text-[#706A66] hover:border-brand/50"
-                        }`}
-                      >
-                        {kind === "student" ? t.student : t.parent}
-                      </button>
-                    ))}
-                  </fieldset>
-
-                  <div>
-                    <label htmlFor="ticket-name" className="text-sm font-bold">{t.yourName}</label>
-                    <input
-                      id="ticket-name"
-                      name="name"
-                      type="text"
-                      autoComplete="name"
-                      value={name}
-                      onChange={(event) => setName(event.target.value)}
-                      placeholder={t.namePlaceholder}
-                      required
-                      maxLength={120}
-                      className={inputClass}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="ticket-phone" className="text-sm font-bold">{t.phone}</label>
-                    <input
-                      id="ticket-phone"
-                      name="phone"
-                      type="tel"
-                      inputMode="tel"
-                      autoComplete="tel"
-                      value={phone}
-                      onChange={(event) => setPhone(event.target.value)}
-                      placeholder={t.phonePlaceholder}
-                      required
-                      maxLength={30}
-                      className={inputClass}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="ticket-language" className="text-sm font-bold">{t.language}</label>
-                    <select
-                      id="ticket-language"
-                      name="language"
-                      value={language}
-                      onChange={(event) => setLanguage(event.target.value)}
-                      className={inputClass}
+          <div className="px-6 pb-6 pt-6 sm:px-8 sm:pb-8">
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.section
+                key={step}
+                initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={reduceMotion ? undefined : { opacity: 0, y: -10 }}
+                transition={{ duration: reduceMotion ? 0 : 0.22, ease: "easeOut" }}
+                aria-live="polite"
+              >
+                {step === "welcome" && (
+                  <>
+                    <span className="inline-flex min-h-9 items-center rounded-full bg-[#FFF0E9] px-4 text-sm font-bold text-[#9B0000]">
+                      <span aria-hidden="true" className="me-2 h-2 w-2 rounded-full bg-[#BC0000]" />
+                      {t.open}
+                    </span>
+                    <h1 ref={headingRef} tabIndex={-1} className="mt-4 text-[clamp(2rem,9vw,2.7rem)] font-black leading-tight tracking-tight focus:outline-none">
+                      {t.headline}
+                    </h1>
+                    <p className="mt-3 text-[17px] leading-7 text-[#4D4642]">{t.intro}</p>
+                    <button
+                      type="button"
+                      onClick={() => { setError(""); setStep("form"); }}
+                      className="mt-6 flex min-h-[60px] w-full items-center justify-center rounded-2xl bg-[#BC0000] px-5 text-[18px] font-black text-white shadow-[0_12px_24px_rgba(188,0,0,0.22)] transition-colors hover:bg-[#A50000] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#BC0000]/30 active:bg-[#8F0000]"
                     >
-                      <option value="">{t.notSure}</option>
-                      {languages.map((item) => (
-                        <option key={item.value} value={item.value}>{item[locale]}</option>
-                      ))}
-                    </select>
+                      {t.start}
+                    </button>
+                    <p className="mt-3 text-center text-sm font-semibold text-[#665D58]">{t.simple}</p>
+                  </>
+                )}
+
+                {step === "form" && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => { setError(""); setStep("welcome"); }}
+                      className="inline-flex min-h-11 items-center gap-2 rounded-lg text-base font-bold text-[#8B0000] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#BC0000]/25"
+                    >
+                      {isArabic ? <ArrowRight aria-hidden="true" className="h-5 w-5" /> : <ArrowLeft aria-hidden="true" className="h-5 w-5" />}
+                      {t.back}
+                    </button>
+                    <h1 ref={headingRef} tabIndex={-1} className="mt-1 text-[clamp(1.9rem,8vw,2.5rem)] font-black leading-tight focus:outline-none">
+                      {t.formTitle}
+                    </h1>
+                    <p className="mt-2 text-[17px] leading-7 text-[#4D4642]">{t.formIntro}</p>
+                    <form onSubmit={handleSubmit} noValidate className="mt-5 space-y-5">
+                      <div>
+                        <label htmlFor="ticket-name" className="text-[17px] font-bold">{t.name}</label>
+                        <input
+                          ref={nameRef}
+                          id="ticket-name"
+                          name="name"
+                          type="text"
+                          autoComplete="name"
+                          value={name}
+                          onChange={(event) => { setName(event.target.value); setError(""); }}
+                          placeholder={t.namePlaceholder}
+                          required
+                          maxLength={120}
+                          className={inputClass}
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="ticket-phone" className="text-[17px] font-bold">{t.phone}</label>
+                        <input
+                          ref={phoneRef}
+                          id="ticket-phone"
+                          name="phone"
+                          type="tel"
+                          inputMode="tel"
+                          autoComplete="tel"
+                          dir="ltr"
+                          value={phone}
+                          onChange={(event) => { setPhone(event.target.value); setError(""); }}
+                          placeholder={t.phonePlaceholder}
+                          required
+                          maxLength={30}
+                          className={inputClass}
+                        />
+                      </div>
+                      {error && <p role="alert" className="rounded-xl bg-[#FFF0ED] px-4 py-3 text-base font-semibold text-[#920000]">{error}</p>}
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="flex min-h-[60px] w-full items-center justify-center rounded-2xl bg-[#BC0000] px-5 text-[18px] font-black text-white shadow-[0_12px_24px_rgba(188,0,0,0.22)] transition-colors hover:bg-[#A50000] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#BC0000]/30 disabled:cursor-wait disabled:opacity-60"
+                      >
+                        {isSubmitting ? t.sending : t.send}
+                      </button>
+                      <p className="text-center text-sm leading-6 text-[#625A55]">{t.privacy}</p>
+                    </form>
+                  </>
+                )}
+
+                {step === "success" && (
+                  <div className="py-3 text-center">
+                    <span className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#E9F7EE] text-[#176A3B]">
+                      <CheckCircle2 aria-hidden="true" className="h-11 w-11" />
+                    </span>
+                    <h1 ref={headingRef} tabIndex={-1} className="mt-5 text-[clamp(2rem,9vw,2.7rem)] font-black leading-tight focus:outline-none">
+                      {t.successTitle}
+                    </h1>
+                    <p className="mt-3 text-[17px] leading-7 text-[#4D4642]">{t.successIntro}</p>
                   </div>
+                )}
+              </motion.section>
+            </AnimatePresence>
 
-                  {error && <p role="alert" className="text-sm font-semibold text-brand">{error}</p>}
-
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-5 py-4 text-base font-black text-white shadow-lg shadow-brand/20 transition hover:-translate-y-0.5 hover:bg-brand-dark disabled:cursor-wait disabled:opacity-60"
-                  >
-                    {isSubmitting ? t.activating : t.activate}
-                    {!isSubmitting && <ArrowUpRight className="h-5 w-5" />}
-                  </button>
-                  <p className="text-center text-xs leading-5 text-[#77716D]">{t.reassurance}</p>
-                  <a
-                    href={whatsappHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => trackWhatsAppClick("contact")}
-                    className="flex items-center justify-center gap-2 text-center text-sm font-bold text-brand underline-offset-4 hover:underline"
-                  >
-                    <MessageCircle className="h-4 w-4" />
-                    {t.whatsapp}
-                  </a>
-                </form>
-              )}
+            <div className="mt-6 border-t border-[#E8E1DD] pt-5">
+              <p className="mb-3 text-center text-sm font-semibold text-[#5C534E]">{t.otherWays}</p>
+              <div className="grid gap-3">
+                <a
+                  href={"tel:" + CONNECT_PHONE.tel}
+                  onClick={() => trackPhoneCall(CONNECT_PHONE.tel)}
+                  className={contactClass}
+                >
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#FFF0EB] text-[#A50000]">
+                    <Phone aria-hidden="true" className="h-6 w-6" />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block text-base font-bold">{t.call}</span>
+                    <span dir="ltr" className="block text-base font-semibold tabular-nums text-[#554B46]">{CONNECT_PHONE.display}</span>
+                  </span>
+                </a>
+                <a
+                  href={MAPS_DIRECTIONS}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={contactClass}
+                >
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#FFF0EB] text-[#A50000]">
+                    <MapPin aria-hidden="true" className="h-6 w-6" />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block text-base font-bold">{t.map}</span>
+                    <span className="block text-sm font-medium text-[#554B46]">{t.location}</span>
+                  </span>
+                </a>
+              </div>
             </div>
-          </section>
+          </div>
         </div>
 
-        <footer className="flex flex-wrap items-center justify-between gap-3 border-t border-white/15 pt-4 text-xs text-white/65">
-          <span>© Voxbridge Language School · {t.location}</span>
-          <Link href={`/${locale}`} className="inline-flex items-center gap-1.5 hover:text-white">
-            {t.home} <ArrowUpRight className="h-3.5 w-3.5" />
-          </Link>
-        </footer>
+        <p className="mt-5 text-center text-sm font-medium text-[#6A605B]">Voxbridge Language School</p>
       </div>
     </main>
   );
