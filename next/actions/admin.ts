@@ -313,22 +313,28 @@ export async function getAllClockRecords() {
   });
 }
 
-// --------------- Traffic (social landing pages) ---------------
+// --------------- First-party public-site traffic ---------------
 
-export async function getTrafficStats(page: string = "connect") {
+export async function getTrafficStats() {
   await requireAdminOrAbove();
 
-  const [counts, recent] = await Promise.all([
+  const since = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+  const recentViews = { type: "PAGE_VIEW" as const, createdAt: { gte: since } };
+  const [counts, recent, periodViews, pages, devices, systems, browsers, countries] = await Promise.all([
     prisma.trafficEvent.groupBy({
       by: ["type"],
-      where: { page },
       _count: { _all: true },
     }),
     prisma.trafficEvent.findMany({
-      where: { page },
       orderBy: { createdAt: "desc" },
-      take: 50,
+      take: 75,
     }),
+    prisma.trafficEvent.count({ where: recentViews }),
+    prisma.trafficEvent.groupBy({ by: ["page"], where: recentViews, _count: { _all: true }, orderBy: { _count: { page: "desc" } }, take: 6 }),
+    prisma.trafficEvent.groupBy({ by: ["deviceType"], where: recentViews, _count: { _all: true }, orderBy: { _count: { deviceType: "desc" } }, take: 6 }),
+    prisma.trafficEvent.groupBy({ by: ["osName"], where: recentViews, _count: { _all: true }, orderBy: { _count: { osName: "desc" } }, take: 6 }),
+    prisma.trafficEvent.groupBy({ by: ["browserName"], where: recentViews, _count: { _all: true }, orderBy: { _count: { browserName: "desc" } }, take: 6 }),
+    prisma.trafficEvent.groupBy({ by: ["countryCode"], where: recentViews, _count: { _all: true }, orderBy: { _count: { countryCode: "desc" } }, take: 6 }),
   ]);
 
   const byType = Object.fromEntries(
@@ -344,6 +350,14 @@ export async function getTrafficStats(page: string = "connect") {
     callClicks: byType.CALL_CLICK ?? 0,
     locationClicks: byType.LOCATION_CLICK ?? 0,
     emailClicks: byType.EMAIL_CLICK ?? 0,
+    periodViews,
+    breakdowns: {
+      pages: pages.map((item) => ({ label: item.page === "home" ? "/" : `/${item.page}`, count: item._count._all })),
+      devices: devices.map((item) => ({ label: item.deviceType ?? "Unknown", count: item._count._all })),
+      systems: systems.map((item) => ({ label: item.osName ?? "Unknown", count: item._count._all })),
+      browsers: browsers.map((item) => ({ label: item.browserName ?? "Unknown", count: item._count._all })),
+      countries: countries.map((item) => ({ label: item.countryCode ?? "Unknown", count: item._count._all })),
+    },
     recent,
   };
 }

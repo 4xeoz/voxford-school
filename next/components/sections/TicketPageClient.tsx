@@ -3,11 +3,13 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import PrivacyLink from "@/components/layout/PrivacyLink";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ArrowLeft, ArrowRight, CheckCircle2, MapPin, Phone } from "lucide-react";
 import { submitContactForm } from "@/actions/contact";
 import { CONNECT_PHONE, MAPS_DIRECTIONS } from "@/lib/contact";
 import { trackContactFormSubmit, trackPhoneCall } from "@/lib/gtag";
+import { trackEvent } from "@/lib/track";
 import type { Locale } from "@/i18n.config";
 
 type Step = "welcome" | "form" | "success";
@@ -342,7 +344,7 @@ export default function TicketPageClient({ locale }: { locale: Locale }) {
               <div className="grid gap-3">
                 <a
                   href={"tel:" + CONNECT_PHONE.tel}
-                  onClick={() => trackPhoneCall(CONNECT_PHONE.tel)}
+                  onClick={() => { trackPhoneCall(CONNECT_PHONE.tel); trackEvent("ticket", "CALL_CLICK", locale); }}
                   className={contactClass}
                 >
                   <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#FFF0EB] text-[#A50000]">
@@ -357,6 +359,7 @@ export default function TicketPageClient({ locale }: { locale: Locale }) {
                   href={MAPS_DIRECTIONS}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackEvent("ticket", "LOCATION_CLICK", locale)}
                   className={contactClass}
                 >
                   <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#FFF0EB] text-[#A50000]">
@@ -373,6 +376,9 @@ export default function TicketPageClient({ locale }: { locale: Locale }) {
         </div>
 
         <p className="mt-5 text-center text-sm font-medium text-[#6A605B]">Voxbridge Language School</p>
+        <div className="mt-2 text-center text-sm">
+          <PrivacyLink locale={locale} className="text-[#675D58] underline underline-offset-4 hover:text-[#BC0000]" />
+        </div>
       </div>
     </main>
   );

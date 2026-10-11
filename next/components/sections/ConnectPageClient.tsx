@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import type { FormEvent } from "react";
 import Image from "next/image";
+import PrivacyLink from "@/components/layout/PrivacyLink";
 import { motion, AnimatePresence } from "motion/react";
 import { toast } from "sonner";
 import { MapPin, Mail, ArrowLeft, ArrowRight, Share2, CheckCircle2, Sparkles } from "lucide-react";
@@ -71,10 +72,6 @@ export default function ConnectPageClient({
   const [phone, setPhone] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showMore, setShowMore] = useState(false);
-
-  useEffect(() => {
-    trackEvent(PAGE, "PAGE_VIEW", locale);
-  }, [locale]);
 
   useEffect(() => {
     trackFunnelStep(step);
@@ -665,6 +662,9 @@ export default function ConnectPageClient({
             </AnimatePresence>
           </div>
         </motion.div>
+      </div>
+      <div className="pb-6 text-center text-sm">
+        <PrivacyLink locale={locale} className="text-subtle underline underline-offset-4 hover:text-brand" />
       </div>
     </main>
   );

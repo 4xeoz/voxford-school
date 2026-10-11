@@ -2,18 +2,28 @@
 
 import Script from "next/script";
 import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect, Suspense } from "react";
+import { useEffect, useRef, Suspense } from "react";
 import { GA_MEASUREMENT_ID, pageview } from "@/lib/gtag";
+import { trackEvent } from "@/lib/track";
 
 /** Tracks page views on every SPA navigation */
 function PageviewTracker() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const lastFirstPartyPath = useRef<string | null>(null);
 
   useEffect(() => {
     const url = pathname + (searchParams.toString() ? `?${searchParams}` : "");
     pageview(url);
   }, [pathname, searchParams]);
+
+  useEffect(() => {
+    if (!pathname || lastFirstPartyPath.current === pathname) return;
+    lastFirstPartyPath.current = pathname;
+    const [, locale, ...rest] = pathname.split("/");
+    if (locale !== "en" && locale !== "fr" && locale !== "ar") return;
+    trackEvent(rest.join("/") || "home", "PAGE_VIEW", locale);
+  }, [pathname]);
 
   return null;
 }

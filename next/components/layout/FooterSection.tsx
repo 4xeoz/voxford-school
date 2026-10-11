@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
+import PrivacyLink from "./PrivacyLink";
 import { Phone, CheckCircle, Lock, Clock } from "lucide-react";
 import { toast } from "sonner";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
@@ -440,6 +441,7 @@ export default function FooterSection({ dict, locale = "en", claimed = 0 }: Foot
           <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm">
             <Link href={`/${locale}`} className="text-white/40 hover:text-white/70 transition-colors">{dict.nav.home}</Link>
             <Link href={`/${locale}/blog`} className="text-white/40 hover:text-white/70 transition-colors">{dict.nav.blog}</Link>
+            <PrivacyLink locale={locale} className="text-white/40 hover:text-white/70 transition-colors" />
             <Link href="/admin/login" className="text-white/20 hover:text-white/40 transition-colors text-xs">{f.adminLogin}</Link>
           </div>
         </div>
