@@ -42,6 +42,12 @@ export const CONNECT_PHONE = {
   tel: "+213656781080",
 } as const;
 
+/** Direct-call number for the brochure ticket page. */
+export const TICKET_PHONE = {
+  display: "0550370874",
+  tel: "+213550370874",
+} as const;
+
 /** M'Sila, Algeria. */
 export const MAP_COORDS = "35.7058,4.5419";
 export const MAP_EMBED_URL = `https://www.google.com/maps?q=${MAP_COORDS}&hl=en&z=15&output=embed`;

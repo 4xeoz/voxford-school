@@ -7,7 +7,7 @@ import PrivacyLink from "@/components/layout/PrivacyLink";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ArrowLeft, ArrowRight, CheckCircle2, MapPin, Phone } from "lucide-react";
 import { submitContactForm } from "@/actions/contact";
-import { CONNECT_PHONE, MAPS_DIRECTIONS } from "@/lib/contact";
+import { TICKET_PHONE, MAPS_DIRECTIONS } from "@/lib/contact";
 import { trackContactFormSubmit, trackPhoneCall } from "@/lib/gtag";
 import { trackEvent } from "@/lib/track";
 import type { Locale } from "@/i18n.config";
@@ -343,8 +343,8 @@ export default function TicketPageClient({ locale }: { locale: Locale }) {
               <p className="mb-3 text-center text-sm font-semibold text-[#5C534E]">{t.otherWays}</p>
               <div className="grid gap-3">
                 <a
-                  href={"tel:" + CONNECT_PHONE.tel}
-                  onClick={() => { trackPhoneCall(CONNECT_PHONE.tel); trackEvent("ticket", "CALL_CLICK", locale); }}
+                  href={"tel:" + TICKET_PHONE.tel}
+                  onClick={() => { trackPhoneCall(TICKET_PHONE.tel); trackEvent("ticket", "CALL_CLICK", locale); }}
                   className={contactClass}
                 >
                   <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#FFF0EB] text-[#A50000]">
@@ -352,7 +352,7 @@ export default function TicketPageClient({ locale }: { locale: Locale }) {
                   </span>
                   <span className="min-w-0">
                     <span className="block text-base font-bold">{t.call}</span>
-                    <span dir="ltr" className="block text-base font-semibold tabular-nums text-[#554B46]">{CONNECT_PHONE.display}</span>
+                    <span dir="ltr" className="block text-base font-semibold tabular-nums text-[#554B46]">{TICKET_PHONE.display}</span>
                   </span>
                 </a>
                 <a
