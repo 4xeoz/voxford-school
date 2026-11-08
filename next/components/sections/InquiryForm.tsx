@@ -4,12 +4,14 @@ import { useState, type FormEvent } from "react";
 import { submitContactForm } from "@/actions/contact";
 import { trackContactFormSubmit } from "@/lib/gtag";
 import { contentFor } from "@/lib/open-site-content";
+import { isProgrammeInterest, type ProgrammeInterest } from "@/lib/programme-interests";
 
-export default function InquiryForm({ locale, source = "website", initialLanguage = "" }: { locale: string; source?: string; initialLanguage?: string }) {
+export default function InquiryForm({ locale, source = "website", initialLanguage = "", initialProgrammeInterest }: { locale: string; source?: string; initialLanguage?: string; initialProgrammeInterest?: ProgrammeInterest }) {
   const c = contentFor(locale);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [language, setLanguage] = useState(initialLanguage === "English" || initialLanguage === "French" ? initialLanguage : "");
+  const [programmeInterest, setProgrammeInterest] = useState<ProgrammeInterest | "">(initialProgrammeInterest ?? "");
   const [website, setWebsite] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
@@ -18,7 +20,7 @@ export default function InquiryForm({ locale, source = "website", initialLanguag
     if (status === "sending") return;
     setStatus("sending");
     try {
-      const result = await submitContactForm({ name, phone, studyField: language, message: `Source: ${source}`, website });
+      const result = await submitContactForm({ name, phone, studyField: language, programmeInterest: programmeInterest || undefined, message: `Source: ${source}`, website });
       if (!result.success) throw new Error(result.message);
       trackContactFormSubmit(source, language);
       setStatus("success");
@@ -56,6 +58,17 @@ export default function InquiryForm({ locale, source = "website", initialLanguag
           <option value="English">{c.formEnglish}</option>
           <option value="French">{c.formFrench}</option>
           <option value="Other enquiry">{c.formOther}</option>
+        </select>
+      </label>
+      <label className="mt-4 block text-sm font-bold">
+        <span>{c.formProgramme}</span>
+        <select className="mt-2 w-full rounded-xl border border-[#d9d3d0] bg-[#faf8f6] px-4 py-3 text-base outline-none transition focus:border-[#c50e02] focus:ring-2 focus:ring-[#c50e02]/20" name="programmeInterest" required value={programmeInterest} onChange={e => { if (isProgrammeInterest(e.target.value)) setProgrammeInterest(e.target.value); }}>
+          <option value="" disabled>{c.formProgramme}</option>
+          <option value="language-classes">{c.formProgrammeClasses}</option>
+          <option value="holiday-study-trip">{c.formProgrammeTrip}</option>
+          <option value="study-abroad-enquiry">{c.formProgrammeStudyAbroad}</option>
+          <option value="classes-and-trip">{c.formProgrammeBoth}</option>
+          <option value="help-me-choose">{c.formProgrammeUnsure}</option>
         </select>
       </label>
       <div className="absolute -left-[10000px]" aria-hidden="true"><label>Website<input tabIndex={-1} autoComplete="off" value={website} onChange={e => setWebsite(e.target.value)} /></label></div>

@@ -1,11 +1,13 @@
 "use server";
 
 import prisma from "@/lib/prisma";
+import { isProgrammeInterest, PROGRAMME_INTEREST_LABELS, type ProgrammeInterest } from "@/lib/programme-interests";
 
 export interface ContactFormData {
   name: string;
   phone: string;
   studyField?: string;
+  programmeInterest?: ProgrammeInterest;
   country?: string;
   startDate?: string;
   email?: string;
@@ -47,8 +49,17 @@ export async function submitContactForm(
       }
     }
 
+    if (data.programmeInterest !== undefined && !isProgrammeInterest(data.programmeInterest)) {
+      return {
+        success: false,
+        message: "Please choose a valid programme interest.",
+        error: "VALIDATION_ERROR",
+      };
+    }
+
     const parts: string[] = [];
     if (data.studyField) parts.push(`📚 Language/interest: ${data.studyField.slice(0, 100)}`);
+    if (data.programmeInterest) parts.push(`🎯 Programme interest: ${PROGRAMME_INTEREST_LABELS[data.programmeInterest]}`);
     if (data.country) parts.push(`🌍 Destination: ${data.country}`);
     if (data.startDate) parts.push(`📅 Start: ${data.startDate}`);
     if (data.message?.trim()) parts.push(`\n💬 Message:\n${data.message.trim().slice(0, 2000)}`);
