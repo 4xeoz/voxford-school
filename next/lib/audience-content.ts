@@ -17,10 +17,10 @@ const catalog: Array<{
   image: string;
   age?: { ar: string; en: string; fr: string };
 }> = [
-  { id: "toddlers", category: "young-learners", image: "/voxbridge/audiences/toddlers.jpg", age: { ar: "٤–٧ سنوات", en: "Ages 4–7", fr: "4–7 ans" } },
-  { id: "juniors", category: "young-learners", image: "/voxbridge/audiences/juniors.jpg", age: { ar: "٧–١٠ سنوات", en: "Ages 7–10", fr: "7–10 ans" } },
-  { id: "school-students", category: "young-learners", image: "/voxbridge/audiences/school-students.jpg", age: { ar: "١٠–١٤ سنة", en: "Ages 10–14", fr: "10–14 ans" } },
-  { id: "teens", category: "young-learners", image: "/voxbridge/audiences/teens.jpg", age: { ar: "١٥–١٧ سنة", en: "Ages 15–17", fr: "15–17 ans" } },
+  { id: "toddlers", category: "young-learners", image: "/voxbridge/audiences/toddlers.jpg", age: { ar: "4–7 سنوات", en: "Ages 4–7", fr: "4–7 ans" } },
+  { id: "juniors", category: "young-learners", image: "/voxbridge/audiences/juniors.jpg", age: { ar: "7–10 سنوات", en: "Ages 7–10", fr: "7–10 ans" } },
+  { id: "school-students", category: "young-learners", image: "/voxbridge/audiences/school-students.jpg", age: { ar: "10–14 سنة", en: "Ages 10–14", fr: "10–14 ans" } },
+  { id: "teens", category: "young-learners", image: "/voxbridge/audiences/teens.jpg", age: { ar: "15–17 سنة", en: "Ages 15–17", fr: "15–17 ans" } },
   { id: "adult-academic", category: "study-and-career", image: "/voxbridge/audiences/adult-academic.jpg" },
   { id: "career", category: "study-and-career", image: "/voxbridge/audiences/career.jpg" },
   { id: "university", category: "study-and-career", image: "/voxbridge/audiences/university.jpg" },
