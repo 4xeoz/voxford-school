@@ -13,19 +13,16 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Voxbridge Language School | Opening Soon in M'Sila, Algeria",
+    default: "Voxbridge Language School | Open in M'Sila, Algeria",
     template: '%s | Voxbridge',
   },
   description:
-    "Voxbridge Language School is opening in M'Sila, Algeria. English, French, Spanish, German and more — with a route to study abroad. Pre-register for the founding intake.",
+    "Voxbridge Language School is open in M'Sila. Explore English and French, real communication, and learning experiences beyond the classroom.",
   keywords: [
     "language school M'Sila",
     'English courses Algeria',
     "French courses M'Sila",
     'learn English Algeria',
-    'IELTS preparation Algeria',
-    'Spanish courses Algeria',
-    'German courses Algeria',
     "école de langues M'Sila",
     "cours d'anglais Algérie",
     'Voxbridge',
@@ -47,9 +44,9 @@ export const metadata: Metadata = {
     locale: 'en_DZ',
     alternateLocale: ['fr_DZ', 'ar_DZ'],
     url: SITE_URL,
-    title: 'Voxbridge Language School — Opening Soon',
+    title: 'Voxbridge Language School — Now Open in M\'Sila',
     description:
-      "A new language school opening in M'Sila, Algeria. Pre-register for the founding intake and be first to enrol.",
+      "Visit Voxbridge in M'Sila. Learn English or French through communication and ask about study trips during school breaks.",
     images: [
       {
         url: '/og-image.png',
@@ -63,7 +60,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Voxbridge Language School',
     description:
-      "Opening soon in M'Sila, Algeria. Pre-register for the founding intake.",
+      "Voxbridge Language School is open in M'Sila. Visit us or send an enquiry.",
     images: ['/og-image.png'],
   },
   robots: {
@@ -114,11 +111,9 @@ export default async function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/og-image.png" />
         <link rel="manifest" href="/manifest.json" />
-        {/* Snaga Arabic (Adobe Fonts). The kit id is a public identifier — it
-            ships in the markup of every site that uses it. Only fetched for the
-            Arabic locale, which is the only place the family is applied. */}
+        {/* Cairo matches the current approved Arabic campaign typography. */}
         {isArabic && (
-          <link rel="stylesheet" href="https://use.typekit.net/aen1cxm.css" />
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" />
         )}
       </head>
       <body className={isArabic ? 'font-arabic' : undefined}>

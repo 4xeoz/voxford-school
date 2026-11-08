@@ -46,12 +46,9 @@ const config: Config = {
     extend: {
       colors: palette,
       fontFamily: {
-        // Snaga Arabic, from the Adobe Fonts kit, loaded only on /ar.
-        // NB the kit publishes the family as "snaga-arabic-text" (weights 400
-        // and 700) — "snaga-arabic" matches nothing and silently falls back.
-        // The rest are system Arabic faces for when the kit can't load.
+        // Cairo follows the approved Arabic campaign direction.
         arabic: [
-          'snaga-arabic-text',
+          'Cairo',
           'Geeza Pro',
           'Segoe UI',
           'Tahoma',

@@ -1,7 +1,7 @@
 import { getDictionary } from "@/dictionaries";
 import type { Locale } from "@/i18n.config";
 import type { Metadata } from "next";
-import ContactPageClient from "@/components/sections/ContactPageClient";
+import OpenContactPage from "@/components/sections/OpenContactPage";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
@@ -13,15 +13,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
 
   const titles: Record<string, string> = {
-    en: "Pre-register | Voxbridge Language School",
-    fr: "Pré-inscription | Voxbridge, école de langues",
-    ar: "التسجيل المسبق | مدرسة فوكسبريدج للغات",
+    en: "Contact & visit | Voxbridge Language School",
+    fr: "Contact et visite | Voxbridge, école de langues",
+    ar: "تواصل وزيارة | مدرسة فوكسبريدج للغات",
   };
 
   const descriptions: Record<string, string> = {
-    en: "Pre-register for Voxbridge Language School in M'Sila, Algeria. English, French, Spanish, German and more — be first to enrol when we open.",
-    fr: "Pré-inscrivez-vous à l'école de langues Voxbridge à M'Sila, Algérie. Anglais, espagnol, allemand et plus — soyez prioritaire à l'ouverture.",
-    ar: "سجّل مسبقاً في مدرسة فوكسبريدج للغات بالمسيلة، الجزائر. الإنجليزية والفرنسية والإسبانية والألمانية وغيرها — كن أول المسجّلين عند الافتتاح.",
+    en: "Visit Voxbridge Language School in M'Sila or ask us about English, French and study trips.",
+    fr: "Visitez l'école de langues Voxbridge à M'Sila ou renseignez-vous sur l'anglais, le français et les séjours.",
+    ar: "زر مدرسة فوكسبريدج للغات في المسيلة أو استفسر عن الإنجليزية والفرنسية ورحلات التعلّم.",
   };
 
   return {
@@ -43,8 +43,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function ContactPage({ params }: Props) {
+export default async function ContactPage({ params, searchParams }: Props & { searchParams: Promise<{ interest?: string }> }) {
   const { locale } = await params;
+  const { interest } = await searchParams;
   const dict = await getDictionary(locale as Locale);
-  return <ContactPageClient dict={dict} locale={locale} />;
+  return <OpenContactPage dict={dict} locale={locale} interest={interest} />;
 }

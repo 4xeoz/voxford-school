@@ -1,26 +1,26 @@
 {
   "seo": {
-    "title": "Voxbridge Language School | Opening Soon in M'Sila, Algeria",
-    "description": "Voxbridge Language School is opening in M'Sila. English, French, Spanish, German and more — with a route to study abroad. Pre-register for the founding intake.",
-    "keywords": "language school M'Sila, English courses Algeria, French courses M'Sila, learn English Algeria, IELTS preparation Algeria, Spanish courses Algeria, German courses Algeria, language classes M'Sila, Voxbridge, مدرسة لغات المسيلة",
-    "ogTitle": "Voxbridge Language School — Opening Soon",
-    "ogDescription": "A new language school opening in M'Sila, Algeria. Pre-register for the founding intake and be first to enrol."
+    "title": "Voxbridge Language School | Open in M'Sila, Algeria",
+    "description": "Voxbridge is open in M'Sila. Explore English and French, communication-led learning, and study trips during school breaks.",
+    "keywords": "language school M'Sila, English classes M'Sila, French classes M'Sila, learn languages Algeria, Voxbridge, مدرسة لغات المسيلة",
+    "ogTitle": "Voxbridge Language School — Open in M'Sila",
+    "ogDescription": "Visit Voxbridge in M'Sila or ask about English, French and learning beyond the classroom."
   },
   "nav": {
     "home": "Home",
     "blog": "Blog",
     "careers": "Careers",
     "contact": "Contact",
-    "applyNow": "Pre-register"
+    "applyNow": "Enquire now"
   },
   "hero": {
     "eyebrow": "Learn it here. Live it there.",
     "headlineTop": "We don't just teach the language.",
     "headlineBottom": "We send you to where it's spoken.",
-    "lead": "English, French, Spanish and more — opening soon in M'Sila, with a route to study abroad.",
-    "leadSecondary": "Pre-register for the founding intake.",
+    "lead": "Voxbridge is open in M'Sila.",
+    "leadSecondary": "Visit the school or send an enquiry.",
     "ctaWhatsapp": "Chat on WhatsApp",
-    "ctaPreRegister": "Pre-register"
+    "ctaPreRegister": "Enquire now"
   },
   "footer": {
     "yourName": "Full Name",
@@ -63,9 +63,9 @@
     "fr": "FR"
   },
   "teaser": {
-    "badge": "Opening soon",
-    "title": "Take a look inside.",
-    "subtitle": "The classrooms, the teachers, and the route abroad — a first look before we open our doors.",
+    "badge": "Now open",
+    "title": "Come and see us.",
+    "subtitle": "Visit our school in M'Sila.",
     "cta": "Watch the film"
   },
   "connect": {
@@ -79,35 +79,29 @@
     "directionsHint": "M'Sila, Algeria",
     "email": "Send an Email",
     "emailHint": "For longer questions",
-
     "skip": "Skip →",
     "back": "Back",
-
     "gateEyebrow": "Voxbridge is hiring",
     "gateQuestion": "Want to teach at a prestigious international institute?",
     "gateYes": "Yes, I'm interested",
     "gateNo": "Not right now",
-
     "roleTitle": "Which language do you teach?",
     "roleSubtitle": "Pick your subject to see where you fit.",
     "roleEnglish": "English",
     "roleFrench": "French",
     "roleGerman": "German",
     "roleSpanish": "Spanish",
-
     "detailsTitle": "Almost there",
     "detailsSubtitle": "So we know who we're talking to.",
     "namePlaceholder": "Full name",
     "phonePlaceholder": "Phone number",
     "continueButton": "Continue",
-
     "timingTitle": "When should we contact you?",
     "timingSubtitle": "Pick a time that works for you.",
     "timingToday": "Today",
     "timingTomorrow": "Tomorrow",
     "timingWeek": "This week",
     "sending": "Sending…",
-
     "successEyebrow": "You're on the list",
     "successTitle": "Nice one, {name}! 🎉",
     "successSubtitle": "We've got your {role} application — reach out any time before we call.",
@@ -118,7 +112,6 @@
     "successShareHint": "Know another great teacher?",
     "shareText": "I just applied to teach at Voxbridge Language School — you should check it out too!",
     "linkCopied": "Link copied — go ahead and share it!",
-
     "seeAllContact": "See all contact options instead",
     "restart": "Start over"
   }

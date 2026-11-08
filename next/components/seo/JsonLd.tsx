@@ -1,5 +1,5 @@
 import type { Dictionary } from "@/dictionaries";
-import { SHOW_PHONE_CONTACT } from "@/lib/contact";
+import { CONTACT_EMAIL, SHOW_PHONE_CONTACT } from "@/lib/contact";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
@@ -33,7 +33,7 @@ export default function JsonLd({ locale, dict }: JsonLdProps) {
     description: dict.seo.description,
     address: {
       "@type": "PostalAddress",
-      streetAddress: "M'Sila",
+      streetAddress: "Hay Ennobalaa, behind El Mokri Secondary School",
       addressLocality: "M'Sila",
       addressRegion: "M'Sila Province",
       addressCountry: "DZ",
@@ -66,10 +66,9 @@ export default function JsonLd({ locale, dict }: JsonLdProps) {
           ],
         }
       : {}),
-    email: "contact@voxbridge.com",
+    email: CONTACT_EMAIL,
     sameAs: [
-      "https://instagram.com/voxbridge",
-      "https://linkedin.com/company/voxbridge",
+      "https://www.instagram.com/voxbridge.school/",
     ],
     areaServed: [
       {
@@ -81,9 +80,7 @@ export default function JsonLd({ locale, dict }: JsonLdProps) {
       "Language Courses",
       "English Language Teaching",
       "French Language Teaching",
-      "IELTS Preparation",
     ],
-    priceRange: "Pre-registration open",
   };
 
   const website = {

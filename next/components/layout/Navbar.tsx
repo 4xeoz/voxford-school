@@ -3,9 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useRef, useCallback, useEffect } from "react";
-import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
-import logoMark from "@/public/voxbridge/icon-detailed-red-transparent-v2.png";
+import BrandLockup from "@/components/BrandLockup";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 import { WHATSAPP_URL, PHONES, SHOW_PHONE_CONTACT } from "@/lib/contact";
 import type { Dictionary } from "@/dictionaries";
@@ -152,11 +151,11 @@ export default function Navbar({ locale, dict }: NavbarProps) {
           <div className="flex shrink-0 items-center">
             {isHomePage ? (
               <a href="#home" onClick={(e) => handleSmoothScroll(e, "#home")} className="flex items-center">
-                <Image src={logoMark} alt="Voxbridge logo" width={140} height={140} className="h-8 w-auto object-contain md:h-11" priority />
+                <BrandLockup compact />
               </a>
             ) : (
               <Link href={`/${locale}`} className="flex items-center">
-                <Image src={logoMark} alt="Voxbridge logo" width={140} height={140} className="h-8 w-auto object-contain md:h-11" priority />
+                <BrandLockup compact />
               </Link>
             )}
           </div>

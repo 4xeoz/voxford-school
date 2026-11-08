@@ -10,6 +10,7 @@ export interface ContactFormData {
   startDate?: string;
   email?: string;
   message?: string;
+  website?: string;
 }
 
 export interface ContactFormResponse {
@@ -22,10 +23,15 @@ export async function submitContactForm(
   data: ContactFormData
 ): Promise<ContactFormResponse> {
   try {
-    if (!data.name || !data.phone) {
+    if (data.website?.trim()) {
+      return { success: true, message: "Thank you for your enquiry." };
+    }
+    const name = data.name?.trim();
+    const phone = data.phone?.trim();
+    if (!name || name.length < 2 || name.length > 100 || !phone || !/^[+0-9 ()-]{6,24}$/.test(phone)) {
       return {
         success: false,
-        message: "Please fill in your name and phone number.",
+        message: "Please enter a valid name and phone number.",
         error: "VALIDATION_ERROR",
       };
     }
@@ -42,19 +48,19 @@ export async function submitContactForm(
     }
 
     const parts: string[] = [];
-    if (data.studyField) parts.push(`📚 Field: ${data.studyField}`);
+    if (data.studyField) parts.push(`📚 Language/interest: ${data.studyField.slice(0, 100)}`);
     if (data.country) parts.push(`🌍 Destination: ${data.country}`);
     if (data.startDate) parts.push(`📅 Start: ${data.startDate}`);
-    if (data.message?.trim()) parts.push(`\n💬 Message:\n${data.message.trim()}`);
+    if (data.message?.trim()) parts.push(`\n💬 Message:\n${data.message.trim().slice(0, 2000)}`);
     const composedMessage = parts.length ? parts.join("\n") : null;
 
     // Create contact in database
     await prisma.contact.create({
       data: {
-        name: data.name.trim(),
+        name,
         email: data.email?.trim().toLowerCase() ?? null,
-        phone: data.phone.trim() || null,
-        message: composedMessage,
+        phone,
+        message: composedMessage ?? "",
       },
     });
 

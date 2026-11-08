@@ -34,15 +34,15 @@ export function event(
 
 // ─── Pre-typed event helpers ──────────────────────────────────────────────────
 
-export const trackContactFormSubmit = (studyField: string, country: string) =>
+export const trackContactFormSubmit = (source: string, language: string) =>
   event("contact_form_submit", {
     category: "engagement",
-    label: `${studyField} · ${country}`,
-    study_field: studyField,
-    destination_country: country,
+    label: `${source} · ${language}`,
+    source,
+    language_interest: language,
   });
 
-export const trackWhatsAppClick = (source: "navbar" | "footer" | "hero" | "widget" | "contact" | "connect") =>
+export const trackWhatsAppClick = (source: "navbar" | "footer" | "hero" | "widget" | "contact" | "connect" | "footer-success" | "contact-success") =>
   event("whatsapp_click", { category: "cta", label: source });
 
 export const trackGetStartedClick = (source: "navbar" | "hero") =>

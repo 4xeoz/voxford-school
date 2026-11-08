@@ -8,3 +8,24 @@
 body {
   @apply antialiased bg-surface;
 }
+
+html { scroll-behavior: smooth; }
+
+.open-hero-glow {
+  background: radial-gradient(circle at 72% 45%, rgba(255, 149, 110, .24), transparent 38%),
+    radial-gradient(circle at 15% 85%, rgba(113, 3, 0, .32), transparent 40%),
+    linear-gradient(135deg, #de210f, #b80f07 70%);
+}
+.open-mark-pattern {
+  background-image: repeating-linear-gradient(0deg, transparent 0 38px, rgba(255,255,255,.26) 39px 43px, transparent 44px 94px);
+  mask-image: radial-gradient(circle at 92% 20%, black, transparent 60%);
+}
+.open-eyebrow { color: #b5190e; font-size: .75rem; font-weight: 900; letter-spacing: .19em; text-transform: uppercase; }
+.open-heading { font-size: clamp(2.9rem, 5.3vw, 5.5rem); font-weight: 900; line-height: 1.03; letter-spacing: -.04em; text-wrap: balance; }
+.open-place-ring { animation: open-ring 13s ease-in-out infinite alternate; }
+.open-card-ring { transform-origin: center; }
+@keyframes open-ring { from { transform: rotate(-12deg) scale(.96); } to { transform: rotate(10deg) scale(1.04); } }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .open-place-ring { animation: none; }
+}
