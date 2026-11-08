@@ -171,6 +171,11 @@ export default function Navbar({ locale, dict }: NavbarProps) {
                 {dict.nav.home}
               </Link>
             )}
+            {isHomePage ? (
+              <a href="#courses" onClick={(e) => handleSmoothScroll(e, "#courses")} className="rounded-full px-4 py-2 transition-colors text-ink-soft hover:bg-brand/5 hover:text-brand">{dict.nav.courses}</a>
+            ) : (
+              <Link href={`/${locale}#courses`} className={`rounded-full px-4 py-2 transition-colors ${pathname.includes("/courses/") ? "bg-brand/10 text-brand" : "text-ink-soft hover:bg-brand/5 hover:text-brand"}`}>{dict.nav.courses}</Link>
+            )}
             <Link
               href={`/${locale}/blog`}
               onClick={() => trackBlogClick()}
@@ -256,6 +261,11 @@ export default function Navbar({ locale, dict }: NavbarProps) {
                       <Link href={`/${locale}`} onClick={handleClose} className="rounded-xl px-3 py-2.5 text-ink-soft hover:bg-brand/5 hover:text-brand">
                         {dict.nav.home}
                       </Link>
+                    )}
+                    {isHomePage ? (
+                      <a href="#courses" onClick={(e) => handleSmoothScroll(e, "#courses")} className="rounded-xl px-3 py-2.5 text-ink-soft hover:bg-brand/5 hover:text-brand">{dict.nav.courses}</a>
+                    ) : (
+                      <Link href={`/${locale}#courses`} onClick={handleClose} className={`rounded-xl px-3 py-2.5 transition ${pathname.includes("/courses/") ? "bg-brand/10 text-brand" : "text-ink-soft hover:bg-brand/5 hover:text-brand"}`}>{dict.nav.courses}</Link>
                     )}
                     <Link href={`/${locale}/blog`} onClick={() => { handleClose(); trackBlogClick(); }} className={`rounded-xl px-3 py-2.5 transition ${pathname.includes('/blog') ? 'bg-brand/10 text-brand' : 'text-ink-soft hover:bg-brand/5 hover:text-brand'}`}>
                       {dict.nav.blog}

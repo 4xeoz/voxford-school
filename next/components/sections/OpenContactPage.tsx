@@ -10,6 +10,7 @@ import BrandLockup from "@/components/BrandLockup";
 
 export default function OpenContactPage({ locale, dict, interest }: { locale: string; dict: Dictionary; interest?: string }) {
   const c = contentFor(locale);
+  const courseLanguage = interest === "English" || interest === "French" ? interest : undefined;
   return <div className="min-h-screen bg-[#fffdfa] text-[#242020]">
     <Navbar locale={locale} dict={dict} />
     <main className="relative isolate overflow-hidden bg-[#c91408] px-5 pb-20 pt-32 text-white sm:px-8 lg:pb-28 lg:pt-40" dir={locale === "ar" ? "rtl" : "ltr"}>
@@ -26,7 +27,7 @@ export default function OpenContactPage({ locale, dict, interest }: { locale: st
             <a href={MAPS_DIRECTIONS} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex rounded-full bg-white px-6 py-3 font-bold text-[#b71208] transition hover:-translate-y-1">{c.directions} ↗</a>
           </div>
         </div>
-        <InquiryForm locale={locale} source={interest === "trips" ? "trip-enquiry" : "contact-page"} />
+        <InquiryForm locale={locale} initialLanguage={courseLanguage} source={courseLanguage ? `course-${courseLanguage.toLowerCase()}` : interest === "trips" ? "trip-enquiry" : "contact-page"} />
       </div>
     </main>
     <footer className="flex flex-wrap items-center justify-between gap-4 px-5 py-8 sm:px-8"><BrandLockup compact /><p className="text-sm text-[#6b625f]">© {new Date().getFullYear()} {dict.footer.copyright}</p></footer>

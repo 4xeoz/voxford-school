@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next';
 import { i18n } from '@/i18n.config';
 import { getAllPublishedSlugs } from '@/actions/blog';
 import { getOpenJobSlugs } from '@/actions/careers';
+import { courseSlugs } from '@/lib/course-content';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
@@ -33,6 +34,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           allLocales.map((l) => [l, `${SITE_URL}/${l}/contact`])
         ),
       },
+    });
+  });
+
+  // Confirmed live courses, with a localized detail page for each language.
+  courseSlugs.forEach((slug) => {
+    allLocales.forEach((locale) => {
+      routes.push({
+        url: `${SITE_URL}/${locale}/courses/${slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly' as const,
+        priority: 0.8,
+        alternates: {
+          languages: Object.fromEntries(allLocales.map((l) => [l, `${SITE_URL}/${l}/courses/${slug}`])),
+        },
+      });
     });
   });
 

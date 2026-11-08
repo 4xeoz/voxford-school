@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { MAPS_DIRECTIONS } from "@/lib/contact";
 import { contentFor } from "@/lib/open-site-content";
+import { courseFor, courseSectionFor, courseSlugs } from "@/lib/course-content";
 const desktopHero = "/voxbridge/hero-studio-desktop-v2.png";
 const mobileHero = "/voxbridge/hero-studio-mobile-v2.png";
 const speech = "/voxbridge/home-speech-sculpture.png";
@@ -16,6 +17,7 @@ function Reveal({ children, className = "", delay = 0 }: { children: React.React
 
 export default function OpenHomeExperience({ locale }: { locale: string }) {
   const c = contentFor(locale);
+  const courseCopy = courseSectionFor(locale);
   const reduce = useReducedMotion();
   const isAr = locale === "ar";
 
@@ -40,6 +42,33 @@ export default function OpenHomeExperience({ locale }: { locale: string }) {
         <motion.a href={MAPS_DIRECTIONS} target="_blank" rel="noopener noreferrer" initial={reduce ? false : { opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .55, duration: .7 }} className="absolute -bottom-11 right-3 z-20 flex min-h-[112px] w-[calc(100%-1.5rem)] max-w-[440px] items-center justify-between gap-5 rounded-[1.6rem] bg-[#fff7e9] px-7 py-5 text-[#9f160d] shadow-[0_22px_55px_rgba(80,20,8,.17)] transition hover:-translate-y-1 hover:shadow-[0_26px_60px_rgba(80,20,8,.24)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#aa160c] sm:-bottom-14 sm:right-8 sm:min-h-[130px] sm:px-9" dir={isAr ? "rtl" : "ltr"}>
           <span><span className="block text-[2rem] font-black leading-none sm:text-[2.45rem]">{c.city}</span><span className="mt-2 block text-xs font-bold leading-snug text-[#5c4f49] sm:text-sm">{c.address}</span></span><span className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-[#d8aaa0] text-xl" aria-hidden>↗</span>
         </motion.a>
+      </div>
+    </section>
+
+    <section id="courses" className="scroll-mt-24 bg-[#fffdfa] px-5 pb-24 pt-8 sm:px-8 lg:pb-32 lg:pt-12" dir={isAr ? "rtl" : "ltr"}>
+      <div className="mx-auto max-w-[1240px]">
+        <Reveal className="mb-10 grid gap-5 lg:mb-14 lg:grid-cols-[1.3fr_.7fr] lg:items-end">
+          <div><p className="open-eyebrow">{courseCopy.eyebrow}</p><h2 className="open-heading mt-4 max-w-[15ch]">{courseCopy.title}</h2></div>
+          <p className="max-w-[30rem] text-lg font-medium leading-relaxed text-[#625855] sm:text-xl">{courseCopy.lead}</p>
+        </Reveal>
+        <div className="grid gap-5 lg:grid-cols-2 lg:gap-7">
+          {courseSlugs.map((slug, index) => {
+            const course = courseFor(slug, locale);
+            const red = slug === "french";
+            return <Reveal key={slug} delay={index * .1}>
+              <Link href={`/${locale}/courses/${slug}`} className="group block overflow-hidden rounded-[2rem] border border-[#e7d9d2] bg-[#fff4e7] shadow-[0_18px_50px_rgba(57,15,8,.09)] transition duration-300 hover:-translate-y-2 hover:shadow-[0_28px_65px_rgba(57,15,8,.17)] focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-[#b9180d]">
+                <div className={`relative flex min-h-[235px] flex-col px-7 pb-7 pt-7 sm:px-9 sm:pt-9 ${red ? "bg-[#b51b10] text-[#fff8ee]" : "bg-[#f5eee5] text-[#a8170c]"}`}>
+                  <div className="flex items-start justify-between gap-4"><span dir="ltr" className={`rounded-full border px-3 py-1 text-xs font-black ${red ? "border-white/45" : "border-[#d8aca4]"}`}>{String(index + 1).padStart(2, "0")} / 02</span><Image src={red ? "/voxbridge/icon-detailed-white-transparent-v2.png" : "/voxbridge/icon-detailed-red-transparent-v2.png"} width={40} height={40} alt="" aria-hidden className="h-9 w-auto" /></div>
+                  <div className="mt-auto"><h3 className="text-[clamp(2.6rem,4.2vw,4.4rem)] font-black leading-[1.05]">{course.title}</h3><p className={`mt-3 max-w-[27rem] text-base font-medium leading-relaxed sm:text-lg ${red ? "text-white/85" : "text-[#695854]"}`}>{course.teaser}</p></div>
+                </div>
+                <div className="relative h-[330px] overflow-hidden bg-[#a71109] sm:h-[380px]">
+                  <Image src={course.image} alt="Illustrative Voxbridge studio portrait" fill sizes="(max-width: 1024px) 100vw, 50vw" className={`object-cover transition duration-500 group-hover:scale-[1.055] ${red ? "object-[center_20%]" : "object-[center_35%]"}`} />
+                  <span className="absolute bottom-5 start-5 inline-flex min-h-12 items-center gap-4 rounded-full bg-[#fff7e9] px-5 py-2 text-sm font-black text-[#9e190e] shadow-[0_10px_28px_rgba(46,0,0,.22)] sm:bottom-7 sm:start-7">{courseCopy.action}<span aria-hidden className="grid h-8 w-8 place-items-center rounded-full bg-[#b8170d] text-lg text-white transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5">↗</span></span>
+                </div>
+              </Link>
+            </Reveal>;
+          })}
+        </div>
       </div>
     </section>
 

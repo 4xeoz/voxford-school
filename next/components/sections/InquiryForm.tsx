@@ -5,11 +5,11 @@ import { submitContactForm } from "@/actions/contact";
 import { trackContactFormSubmit } from "@/lib/gtag";
 import { contentFor } from "@/lib/open-site-content";
 
-export default function InquiryForm({ locale, source = "website" }: { locale: string; source?: string }) {
+export default function InquiryForm({ locale, source = "website", initialLanguage = "" }: { locale: string; source?: string; initialLanguage?: string }) {
   const c = contentFor(locale);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [language, setLanguage] = useState("");
+  const [language, setLanguage] = useState(initialLanguage === "English" || initialLanguage === "French" ? initialLanguage : "");
   const [website, setWebsite] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
