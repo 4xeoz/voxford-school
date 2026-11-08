@@ -6,30 +6,54 @@ type Locale = "ar" | "en" | "fr";
 export const courseSectionCopy = {
   ar: {
     eyebrow: "مسارات حسب الفئة",
-    title: "اختر مرحلتك، ثم لغتك.",
-    lead: "لكل عمر وهدف نقطة بداية. اختر الفئة الأقرب إليك؛ الإنجليزية والفرنسية متاحتان، والألمانية والإسبانية قريباً.",
-    action: "اكتشف الدورة",
+    title: "مسار يناسب مرحلتك وهدفك.",
+    lead: "اختر الفئة الأقرب إلى عمرك أو طموحك، ثم تعرّف على المسار المناسب لخطوتك التالية.",
+    readMore: "تعرّف أكثر",
     previous: "الفئات السابقة",
     next: "الفئات التالية",
     carousel: "مسارات اللغات حسب الفئة",
   },
   en: {
     eyebrow: "Courses by learner group",
-    title: "Choose your path, then your language.",
-    lead: "Start with the group that fits your age or goal. English and French are open; German and Spanish are coming soon.",
-    action: "Explore the course",
+    title: "A pathway for your stage and goals.",
+    lead: "Choose the group that fits your age or ambitions, then explore the pathway built around it.",
+    readMore: "Read more",
     previous: "Previous groups",
     next: "Next groups",
     carousel: "Language pathways by learner group",
   },
   fr: {
     eyebrow: "Cours par public",
-    title: "Choisissez votre parcours, puis votre langue.",
-    lead: "Commencez par le groupe qui correspond à votre âge ou à votre objectif. Anglais et français sont ouverts ; allemand et espagnol bientôt.",
-    action: "Découvrir le cours",
+    title: "Un parcours adapté à votre étape et vos objectifs.",
+    lead: "Choisissez le groupe qui correspond à votre âge ou à vos ambitions, puis découvrez le parcours adapté.",
+    readMore: "En savoir plus",
     previous: "Groupes précédents",
     next: "Groupes suivants",
     carousel: "Parcours linguistiques par public",
+  },
+} as const;
+
+export const audienceDetailCopy = {
+  ar: {
+    back: "العودة إلى المسارات",
+    languageTitle: "اختر اللغة التي تهمّك",
+    languageLead: "تعرّف على تفاصيل المسار المتاح، واسألنا عن الخطوة التالية.",
+    available: "متاح",
+    comingSoon: "قريباً",
+  },
+  en: {
+    back: "Back to pathways",
+    languageTitle: "Choose the language you are interested in",
+    languageLead: "Explore the available pathway details and ask us about your next step.",
+    available: "Available",
+    comingSoon: "Coming soon",
+  },
+  fr: {
+    back: "Retour aux parcours",
+    languageTitle: "Choisissez la langue qui vous intéresse",
+    languageLead: "Découvrez les parcours disponibles et renseignez-vous sur la prochaine étape.",
+    available: "Disponible",
+    comingSoon: "Bientôt",
   },
 } as const;
 

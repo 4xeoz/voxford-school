@@ -3,6 +3,7 @@ import { i18n } from '@/i18n.config';
 import { getAllPublishedSlugs } from '@/actions/blog';
 import { getOpenJobSlugs } from '@/actions/careers';
 import { courseSlugs } from '@/lib/course-content';
+import { audienceIds } from '@/lib/audience-content';
 import { SITE_URL } from '@/lib/site-url';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -46,6 +47,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.8,
         alternates: {
           languages: Object.fromEntries(allLocales.map((l) => [l, `${SITE_URL}/${l}/courses/${slug}`])),
+        },
+      });
+    });
+  });
+
+  // Audience-first pathway detail pages linked from the homepage carousel.
+  audienceIds.forEach((slug) => {
+    allLocales.forEach((locale) => {
+      routes.push({
+        url: `${SITE_URL}/${locale}/courses/audience/${slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly' as const,
+        priority: 0.75,
+        alternates: {
+          languages: Object.fromEntries(allLocales.map((l) => [l, `${SITE_URL}/${l}/courses/audience/${slug}`])),
         },
       });
     });
