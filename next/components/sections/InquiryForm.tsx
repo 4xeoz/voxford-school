@@ -6,7 +6,7 @@ import { trackContactFormSubmit } from "@/lib/gtag";
 import { contentFor } from "@/lib/open-site-content";
 import { isProgrammeInterest, type ProgrammeInterest } from "@/lib/programme-interests";
 
-export default function InquiryForm({ locale, source = "website", initialLanguage = "", initialProgrammeInterest }: { locale: string; source?: string; initialLanguage?: string; initialProgrammeInterest?: ProgrammeInterest }) {
+export default function InquiryForm({ locale, source = "website", initialLanguage = "", initialProgrammeInterest, audienceContext }: { locale: string; source?: string; initialLanguage?: string; initialProgrammeInterest?: ProgrammeInterest; audienceContext?: string }) {
   const c = contentFor(locale);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -20,7 +20,8 @@ export default function InquiryForm({ locale, source = "website", initialLanguag
     if (status === "sending") return;
     setStatus("sending");
     try {
-      const result = await submitContactForm({ name, phone, studyField: language, programmeInterest: programmeInterest || undefined, message: `Source: ${source}`, website });
+      const message = [`Source: ${source}`, audienceContext ? `Audience: ${audienceContext}` : ""].filter(Boolean).join("\n");
+      const result = await submitContactForm({ name, phone, studyField: language, programmeInterest: programmeInterest || undefined, message, website });
       if (!result.success) throw new Error(result.message);
       trackContactFormSubmit(source, language);
       setStatus("success");

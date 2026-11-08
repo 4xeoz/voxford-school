@@ -5,7 +5,8 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { MAPS_DIRECTIONS } from "@/lib/contact";
 import { contentFor } from "@/lib/open-site-content";
-import { courseFor, courseSectionFor, courseSlugs } from "@/lib/course-content";
+import { audienceLanguageCopy, courseSectionFor } from "@/lib/course-content";
+import { audienceGroupsFor, languagesForAudience } from "@/lib/audience-content";
 const desktopHero = "/voxbridge/hero-studio-desktop-v2.png";
 const mobileHero = "/voxbridge/hero-studio-mobile-v2.png";
 const speech = "/voxbridge/home-speech-sculpture.png";
@@ -18,6 +19,9 @@ function Reveal({ children, className = "", delay = 0 }: { children: React.React
 export default function OpenHomeExperience({ locale }: { locale: string }) {
   const c = contentFor(locale);
   const courseCopy = courseSectionFor(locale);
+  const audienceGroups = audienceGroupsFor(locale);
+  const audienceLanguages = languagesForAudience(locale);
+  const languageCopy = audienceLanguageCopy[locale === "ar" || locale === "fr" ? locale : "en"];
   const reduce = useReducedMotion();
   const isAr = locale === "ar";
 
@@ -51,23 +55,43 @@ export default function OpenHomeExperience({ locale }: { locale: string }) {
           <div><p className="open-eyebrow">{courseCopy.eyebrow}</p><h2 className="open-heading mt-4 max-w-[15ch]">{courseCopy.title}</h2></div>
           <p className="max-w-[30rem] text-lg font-medium leading-relaxed text-[#625855] sm:text-xl">{courseCopy.lead}</p>
         </Reveal>
-        <div className="grid gap-5 lg:grid-cols-2 lg:gap-7">
-          {courseSlugs.map((slug, index) => {
-            const course = courseFor(slug, locale);
-            const red = slug === "french";
-            return <Reveal key={slug} delay={index * .1}>
-              <Link href={`/${locale}/courses/${slug}`} className="group block overflow-hidden rounded-[2rem] border border-[#e7d9d2] bg-[#fff4e7] shadow-[0_18px_50px_rgba(57,15,8,.09)] transition duration-300 hover:-translate-y-2 hover:shadow-[0_28px_65px_rgba(57,15,8,.17)] focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-[#b9180d]">
-                <div className={`relative flex min-h-[235px] flex-col px-7 pb-7 pt-7 sm:px-9 sm:pt-9 ${red ? "bg-[#b51b10] text-[#fff8ee]" : "bg-[#f5eee5] text-[#a8170c]"}`}>
-                  <div className="flex items-start justify-between gap-4"><span dir="ltr" className={`rounded-full border px-3 py-1 text-xs font-black ${red ? "border-white/45" : "border-[#d8aca4]"}`}>{String(index + 1).padStart(2, "0")} / 02</span><Image src={red ? "/voxbridge/icon-detailed-white-transparent-v2.png" : "/voxbridge/icon-detailed-red-transparent-v2.png"} width={40} height={40} alt="" aria-hidden className="h-9 w-auto" /></div>
-                  <div className="mt-auto"><h3 className="text-[clamp(2.6rem,4.2vw,4.4rem)] font-black leading-[1.05]">{course.title}</h3><p className={`mt-3 max-w-[27rem] text-base font-medium leading-relaxed sm:text-lg ${red ? "text-white/85" : "text-[#695854]"}`}>{course.teaser}</p></div>
-                </div>
-                <div className="relative h-[330px] overflow-hidden bg-[#a71109] sm:h-[380px]">
-                  <Image src={course.image} alt="Illustrative Voxbridge studio portrait" fill sizes="(max-width: 1024px) 100vw, 50vw" className={`object-cover transition duration-500 group-hover:scale-[1.055] ${red ? "object-[center_20%]" : "object-[center_35%]"}`} />
-                  <span className="absolute bottom-5 start-5 inline-flex min-h-12 items-center gap-4 rounded-full bg-[#fff7e9] px-5 py-2 text-sm font-black text-[#9e190e] shadow-[0_10px_28px_rgba(46,0,0,.22)] sm:bottom-7 sm:start-7">{courseCopy.action}<span aria-hidden className="grid h-8 w-8 place-items-center rounded-full bg-[#b8170d] text-lg text-white transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5">↗</span></span>
-                </div>
-              </Link>
-            </Reveal>;
-          })}
+        <div className="space-y-14 lg:space-y-20">
+          {audienceGroups.map((group, groupIndex) => <section key={group.id} aria-labelledby={`audience-${group.id}`}>
+            <div className="mb-6 flex items-center gap-4">
+              <h3 id={`audience-${group.id}`} className="text-xl font-black text-[#a8170c] sm:text-2xl">{group.title}</h3>
+              <span aria-hidden className="h-px flex-1 bg-[#e8d9d2]" />
+            </div>
+            <div className={`grid gap-4 sm:grid-cols-2 ${group.id === "study-and-career" ? "xl:grid-cols-3" : "xl:grid-cols-4"}`}>
+              {group.audiences.map((audience, index) => {
+                const cardNumber = String((groupIndex === 0 ? 0 : 4) + index + 1).padStart(2, "0");
+                return <Reveal key={audience.id} delay={index * .06} className="h-full">
+                  <article className="h-full overflow-hidden rounded-[1.75rem] border border-[#eadbd4] bg-white shadow-[0_15px_40px_rgba(57,15,8,.07)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_22px_50px_rgba(57,15,8,.13)]">
+                    <div className="relative h-[190px] overflow-hidden bg-[#b7190d] sm:h-[170px] xl:h-[155px]">
+                      <Image src={audience.image} alt="" fill sizes="(max-width: 639px) 100vw, (max-width: 1279px) 50vw, 25vw" className="object-cover object-[center_34%] transition duration-500 hover:scale-[1.035]" />
+                      <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-[#4f0804]/60 via-transparent to-[#4f0804]/10" />
+                      <span dir="ltr" className="absolute start-4 top-4 rounded-full border border-white/60 bg-[#7e1009]/55 px-3 py-1 text-xs font-black tracking-wide text-white backdrop-blur-sm">{cardNumber} / 07</span>
+                    </div>
+                    <div className="p-5 sm:p-6">
+                      <h4 className="min-h-[2.5rem] text-xl font-black leading-snug text-[#282321]">{audience.title}</h4>
+                      {audience.ageRange && <span className="mt-2 inline-flex rounded-full bg-[#fff1e9] px-3 py-1 text-xs font-bold text-[#a8170c]">{audience.ageRange}</span>}
+                      <p className="mt-5 text-xs font-black uppercase tracking-[.12em] text-[#81746f]">{languageCopy.chooseLanguage}</p>
+                      <div className="mt-2 grid grid-cols-2 gap-2">
+                        {audienceLanguages.map(language => language.available ? (
+                          <Link key={language.slug} href={`/${locale}/courses/${language.slug}?audience=${audience.id}`} aria-label={`${language.label} — ${audience.title}`} className="inline-flex min-h-10 items-center justify-center gap-2 rounded-xl bg-[#fff4e8] px-3 py-2 text-sm font-black text-[#a8170c] transition hover:bg-[#f8e1d7] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b7190d]">
+                            {language.label}<span aria-hidden className="text-base">↗</span>
+                          </Link>
+                        ) : (
+                          <span key={language.slug} aria-label={`${language.label} — ${language.comingSoon}`} className="inline-flex min-h-10 flex-col items-center justify-center rounded-xl border border-dashed border-[#e1d2cc] px-2 py-1 text-xs font-bold leading-tight text-[#77706c]">
+                            <span>{language.label}</span><span className="text-[10px]">{language.comingSoon}</span>
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </article>
+                </Reveal>;
+              })}
+            </div>
+          </section>)}
         </div>
       </div>
     </section>

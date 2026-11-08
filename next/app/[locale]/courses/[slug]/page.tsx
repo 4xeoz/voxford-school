@@ -7,10 +7,11 @@ import { getDictionary } from "@/dictionaries";
 import { i18n, type Locale } from "@/i18n.config";
 import { MAPS_DIRECTIONS } from "@/lib/contact";
 import { courseFor, coursePageFor, courseSlugs, isCourseSlug } from "@/lib/course-content";
+import { audienceFor } from "@/lib/audience-content";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://voxbridge-school.vercel.app";
 
-type Props = { params: Promise<{ locale: string; slug: string }> };
+type Props = { params: Promise<{ locale: string; slug: string }>; searchParams?: Promise<{ audience?: string }> };
 
 export function generateStaticParams() {
   return i18n.locales.flatMap((locale) => courseSlugs.map((slug) => ({ locale, slug })));
@@ -36,13 +37,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function CourseDetailPage({ params }: Props) {
+export default async function CourseDetailPage({ params, searchParams }: Props) {
   const { locale, slug } = await params;
+  const { audience: audienceId } = await searchParams ?? {};
   if (!isCourseSlug(slug)) notFound();
   const dict = await getDictionary(locale as Locale);
   const course = courseFor(slug, locale);
+  const audience = audienceFor(audienceId, locale);
   const page = coursePageFor(locale);
   const isAr = locale === "ar";
+  const contactHref = `/${locale}/contact?interest=${course.language}${audience ? `&audience=${audience.id}` : ""}`;
 
   return <HomePageWrapper locale={locale} dict={dict}>
     <main className="bg-[#fffdfa] text-[#242020]" dir={isAr ? "rtl" : "ltr"}>
@@ -50,10 +54,13 @@ export default async function CourseDetailPage({ params }: Props) {
         <div className="mx-auto grid max-w-[1500px] overflow-hidden rounded-[2rem] bg-[#b7190d] text-white shadow-[0_24px_70px_rgba(82,17,8,.14)] sm:rounded-[2.5rem] lg:min-h-[650px] lg:grid-cols-2">
           <div className="flex flex-col items-start justify-center px-7 pb-14 pt-12 sm:px-12 lg:px-[clamp(3rem,6vw,6.5rem)] lg:py-20">
             <Link href={`/${locale}#courses`} className="text-sm font-bold text-white/80 transition hover:text-white">{isAr ? "→" : "←"} {page.back}</Link>
-            <p className="mt-12 rounded-full border border-white/35 px-4 py-2 text-sm font-black sm:mt-16">{course.title}</p>
+            <div className="mt-12 flex flex-wrap gap-2 sm:mt-16">
+              <p className="rounded-full border border-white/35 px-4 py-2 text-sm font-black">{course.title}</p>
+              {audience && <p className="rounded-full border border-white/35 bg-white/10 px-4 py-2 text-sm font-bold">{audience.title}{audience.ageRange ? ` · ${audience.ageRange}` : ""}</p>}
+            </div>
             <h1 className="mt-6 max-w-[11ch] text-[clamp(3rem,5vw,6rem)] font-black leading-[1.07] [text-wrap:balance]">{course.heroTitle}</h1>
             <p className="mt-7 max-w-[35rem] text-lg font-medium leading-relaxed text-white/90">{course.heroLead}</p>
-            <Link href={`/${locale}/contact?interest=${course.language}`} className="mt-9 inline-flex min-h-14 items-center gap-4 rounded-full bg-[#fff7e9] px-7 py-3 font-black text-[#a6170d] transition hover:-translate-y-1 hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">{course.ask}<span aria-hidden>↗</span></Link>
+            <Link href={contactHref} className="mt-9 inline-flex min-h-14 items-center gap-4 rounded-full bg-[#fff7e9] px-7 py-3 font-black text-[#a6170d] transition hover:-translate-y-1 hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">{course.ask}<span aria-hidden>↗</span></Link>
           </div>
           <div className="relative min-h-[400px] overflow-hidden bg-[#a91008] sm:min-h-[560px] lg:min-h-full">
             <Image src={course.image} alt="Illustrative Voxbridge studio portrait with a sculpted ivory ribbon" fill priority sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover object-[center_46%]" />
@@ -78,7 +85,7 @@ export default async function CourseDetailPage({ params }: Props) {
       <section className="bg-[#f4eee9] px-5 py-20 sm:px-8 lg:py-24">
         <div className="mx-auto flex max-w-[1240px] flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div><h2 className="open-heading max-w-[13ch]">{page.finalTitle}</h2><p className="mt-5 max-w-[37rem] text-lg text-[#5d5554]">{page.finalLead}</p></div>
-          <div className="flex flex-wrap gap-3"><Link href={`/${locale}/contact?interest=${course.language}`} className="inline-flex min-h-13 items-center gap-3 rounded-full bg-[#b7190d] px-6 py-3 font-black text-white transition hover:bg-[#911207]">{course.ask}<span aria-hidden>↗</span></Link><a href={MAPS_DIRECTIONS} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-13 items-center gap-3 rounded-full border border-[#b7190d] px-6 py-3 font-black text-[#a8170c] transition hover:bg-white">{page.visit}<span aria-hidden>↗</span></a></div>
+          <div className="flex flex-wrap gap-3"><Link href={contactHref} className="inline-flex min-h-13 items-center gap-3 rounded-full bg-[#b7190d] px-6 py-3 font-black text-white transition hover:bg-[#911207]">{course.ask}<span aria-hidden>↗</span></Link><a href={MAPS_DIRECTIONS} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-13 items-center gap-3 rounded-full border border-[#b7190d] px-6 py-3 font-black text-[#a8170c] transition hover:bg-white">{page.visit}<span aria-hidden>↗</span></a></div>
         </div>
       </section>
     </main>

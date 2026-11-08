@@ -3,7 +3,7 @@ import type { Locale } from "@/i18n.config";
 import type { Metadata } from "next";
 import OpenContactPage from "@/components/sections/OpenContactPage";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://voxbridge-school.vercel.app";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -43,9 +43,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function ContactPage({ params, searchParams }: Props & { searchParams: Promise<{ interest?: string }> }) {
+export default async function ContactPage({ params, searchParams }: Props & { searchParams: Promise<{ interest?: string; audience?: string }> }) {
   const { locale } = await params;
-  const { interest } = await searchParams;
+  const { interest, audience } = await searchParams;
   const dict = await getDictionary(locale as Locale);
-  return <OpenContactPage dict={dict} locale={locale} interest={interest} />;
+  return <OpenContactPage dict={dict} locale={locale} interest={interest} audience={audience} />;
 }

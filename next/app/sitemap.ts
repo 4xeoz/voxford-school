@@ -4,7 +4,7 @@ import { getAllPublishedSlugs } from '@/actions/blog';
 import { getOpenJobSlugs } from '@/actions/careers';
 import { courseSlugs } from '@/lib/course-content';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://voxbridge-school.vercel.app';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const allLocales = i18n.locales;

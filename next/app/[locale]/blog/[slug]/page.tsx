@@ -10,7 +10,7 @@ import HomePageWrapper from "@/components/layout/HomePageWrapper";
 
 export const dynamic = "force-dynamic";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://voxbridge-school.vercel.app";
 
 export async function generateMetadata({
   params,

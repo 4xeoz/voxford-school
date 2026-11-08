@@ -8,7 +8,7 @@ import './globals.css';
 
 // Set NEXT_PUBLIC_SITE_URL to the production domain — canonical URLs, OG tags
 // and the sitemap all derive from it.
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://voxbridge-school.vercel.app';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -109,7 +109,7 @@ export default async function RootLayout({
     <html lang={locale} dir="ltr" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" href="/og-image.png" />
+        <link rel="apple-touch-icon" href="/voxbridge/icon-detailed-red-on-whiteBackground-v2.png" />
         <link rel="manifest" href="/manifest.json" />
         {/* Cairo matches the current approved Arabic campaign typography. */}
         {isArabic && (

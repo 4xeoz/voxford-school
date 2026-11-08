@@ -5,23 +5,29 @@ type Locale = "ar" | "en" | "fr";
 
 export const courseSectionCopy = {
   ar: {
-    eyebrow: "مسارات اللغة",
-    title: "اختر لغتك. وابدأ من هنا.",
-    lead: "الإنجليزية أو الفرنسية؟ افتح المسار الذي يهمّك، وتعرّف على الخطوة التالية.",
+    eyebrow: "مسارات حسب الفئة",
+    title: "اختر مرحلتك، ثم لغتك.",
+    lead: "لكل عمر وهدف نقطة بداية. اختر الفئة الأقرب إليك؛ الإنجليزية والفرنسية متاحتان، والألمانية والإسبانية قريباً.",
     action: "اكتشف الدورة",
   },
   en: {
-    eyebrow: "Language courses",
-    title: "Choose your language. Start here.",
-    lead: "English or French? Open the course that interests you and see your next step.",
+    eyebrow: "Courses by learner group",
+    title: "Choose your path, then your language.",
+    lead: "Start with the group that fits your age or goal. English and French are open; German and Spanish are coming soon.",
     action: "Explore the course",
   },
   fr: {
-    eyebrow: "Cours de langues",
-    title: "Choisissez votre langue. Commencez ici.",
-    lead: "Anglais ou français ? Découvrez le cours qui vous intéresse et votre prochaine étape.",
+    eyebrow: "Cours par public",
+    title: "Choisissez votre parcours, puis votre langue.",
+    lead: "Commencez par le groupe qui correspond à votre âge ou à votre objectif. Anglais et français sont ouverts ; allemand et espagnol bientôt.",
     action: "Découvrir le cours",
   },
+} as const;
+
+export const audienceLanguageCopy = {
+  ar: { available: "متاح", comingSoon: "قريباً", chooseLanguage: "اختر اللغة" },
+  en: { available: "Available", comingSoon: "Coming soon", chooseLanguage: "Choose a language" },
+  fr: { available: "Disponible", comingSoon: "Bientôt", chooseLanguage: "Choisir une langue" },
 } as const;
 
 export const coursePageCopy = {

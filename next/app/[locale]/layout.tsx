@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { i18n, type Locale } from '@/i18n.config';
 import { getDictionary } from '@/dictionaries';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://voxbridge-school.vercel.app';
 
 export function generateStaticParams() {
   return i18n.locales.map((locale) => ({ locale }));
@@ -15,6 +15,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const dict = await getDictionary(locale as Locale);
+  const socialImage = `/og-image-${locale}.png`;
 
   return {
     // absolute: seo.title already carries the brand, so skip the root
@@ -27,7 +28,14 @@ export async function generateMetadata({
       description: dict.seo.ogDescription,
       url: `${SITE_URL}/${locale}`,
       locale: locale === 'ar' ? 'ar_DZ' : locale === 'fr' ? 'fr_DZ' : 'en_DZ',
+      images: [{
+        url: socialImage,
+        width: 1200,
+        height: 630,
+        alt: locale === 'ar' ? 'فوكس بريدج مدرسة لغات في المسيلة' : locale === 'fr' ? 'Voxbridge Language School à M’Sila' : 'Voxbridge Language School in M’Sila',
+      }],
     },
+    twitter: { images: [socialImage] },
     alternates: {
       canonical: `${SITE_URL}/${locale}`,
       languages: {
