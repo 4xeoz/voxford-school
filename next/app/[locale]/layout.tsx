@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
 import { i18n, type Locale } from '@/i18n.config';
 import { getDictionary } from '@/dictionaries';
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://voxbridge-school.vercel.app';
+import { SITE_URL } from '@/lib/site-url';
 
 export function generateStaticParams() {
   return i18n.locales.map((locale) => ({ locale }));

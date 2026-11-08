@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { i18n, type Locale } from "@/i18n.config";
 import TicketPageClient from "@/components/sections/TicketPageClient";
-
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://voxbridge-school.vercel.app";
+import { SITE_URL } from "@/lib/site-url";
 
 const titles: Record<Locale, string> = {
   ar: "فعّل تذكرتك | فوكس بريدج",

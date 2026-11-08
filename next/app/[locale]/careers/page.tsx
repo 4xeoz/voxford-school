@@ -3,12 +3,11 @@ import Link from "next/link";
 import { getOpenJobs } from "@/actions/careers";
 import { getDictionary } from "@/dictionaries";
 import type { Locale } from "@/i18n.config";
+import { SITE_URL } from "@/lib/site-url";
 import HomePageWrapper from "@/components/layout/HomePageWrapper";
 import { getCareersLabels, employmentLabel } from "@/lib/careers-i18n";
 
 export const dynamic = "force-dynamic";
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://voxbridge-school.vercel.app";
 
 export async function generateMetadata({
   params,

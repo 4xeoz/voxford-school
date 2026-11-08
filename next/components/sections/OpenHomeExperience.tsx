@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRef } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { MAPS_DIRECTIONS } from "@/lib/contact";
 import { contentFor } from "@/lib/open-site-content";
@@ -20,8 +21,10 @@ export default function OpenHomeExperience({ locale }: { locale: string }) {
   const c = contentFor(locale);
   const courseCopy = courseSectionFor(locale);
   const audienceGroups = audienceGroupsFor(locale);
+  const audienceCards = audienceGroups.flatMap(group => group.audiences.map(audience => ({ ...audience, categoryTitle: group.title })));
   const audienceLanguages = languagesForAudience(locale);
   const languageCopy = audienceLanguageCopy[locale === "ar" || locale === "fr" ? locale : "en"];
+  const audienceCarousel = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
   const isAr = locale === "ar";
 
@@ -55,43 +58,43 @@ export default function OpenHomeExperience({ locale }: { locale: string }) {
           <div><p className="open-eyebrow">{courseCopy.eyebrow}</p><h2 className="open-heading mt-4 max-w-[15ch]">{courseCopy.title}</h2></div>
           <p className="max-w-[30rem] text-lg font-medium leading-relaxed text-[#625855] sm:text-xl">{courseCopy.lead}</p>
         </Reveal>
-        <div className="space-y-14 lg:space-y-20">
-          {audienceGroups.map((group, groupIndex) => <section key={group.id} aria-labelledby={`audience-${group.id}`}>
-            <div className="mb-6 flex items-center gap-4">
-              <h3 id={`audience-${group.id}`} className="text-xl font-black text-[#a8170c] sm:text-2xl">{group.title}</h3>
-              <span aria-hidden className="h-px flex-1 bg-[#e8d9d2]" />
-            </div>
-            <div className={`grid gap-4 sm:grid-cols-2 ${group.id === "study-and-career" ? "xl:grid-cols-3" : "xl:grid-cols-4"}`}>
-              {group.audiences.map((audience, index) => {
-                const cardNumber = String((groupIndex === 0 ? 0 : 4) + index + 1).padStart(2, "0");
-                return <Reveal key={audience.id} delay={index * .06} className="h-full">
-                  <article className="h-full overflow-hidden rounded-[1.75rem] border border-[#eadbd4] bg-white shadow-[0_15px_40px_rgba(57,15,8,.07)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_22px_50px_rgba(57,15,8,.13)]">
-                    <div className="relative h-[190px] overflow-hidden bg-[#b7190d] sm:h-[170px] xl:h-[155px]">
-                      <Image src={audience.image} alt="" fill sizes="(max-width: 639px) 100vw, (max-width: 1279px) 50vw, 25vw" className="object-cover object-[center_34%] transition duration-500 hover:scale-[1.035]" />
-                      <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-[#4f0804]/60 via-transparent to-[#4f0804]/10" />
-                      <span dir="ltr" className="absolute start-4 top-4 rounded-full border border-white/60 bg-[#7e1009]/55 px-3 py-1 text-xs font-black tracking-wide text-white backdrop-blur-sm">{cardNumber} / 07</span>
-                    </div>
-                    <div className="p-5 sm:p-6">
-                      <h4 className="min-h-[2.5rem] text-xl font-black leading-snug text-[#282321]">{audience.title}</h4>
-                      {audience.ageRange && <span className="mt-2 inline-flex rounded-full bg-[#fff1e9] px-3 py-1 text-xs font-bold text-[#a8170c]">{audience.ageRange}</span>}
-                      <p className="mt-5 text-xs font-black uppercase tracking-[.12em] text-[#81746f]">{languageCopy.chooseLanguage}</p>
-                      <div className="mt-2 grid grid-cols-2 gap-2">
-                        {audienceLanguages.map(language => language.available ? (
-                          <Link key={language.slug} href={`/${locale}/courses/${language.slug}?audience=${audience.id}`} aria-label={`${language.label} — ${audience.title}`} className="inline-flex min-h-10 items-center justify-center gap-2 rounded-xl bg-[#fff4e8] px-3 py-2 text-sm font-black text-[#a8170c] transition hover:bg-[#f8e1d7] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b7190d]">
-                            {language.label}<span aria-hidden className="text-base">↗</span>
-                          </Link>
-                        ) : (
-                          <span key={language.slug} aria-label={`${language.label} — ${language.comingSoon}`} className="inline-flex min-h-10 flex-col items-center justify-center rounded-xl border border-dashed border-[#e1d2cc] px-2 py-1 text-xs font-bold leading-tight text-[#77706c]">
-                            <span>{language.label}</span><span className="text-[10px]">{language.comingSoon}</span>
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </article>
-                </Reveal>;
-              })}
-            </div>
-          </section>)}
+        <div className="mb-5 flex justify-end gap-2">
+          <button type="button" aria-label={courseCopy.previous} onClick={() => audienceCarousel.current?.scrollBy({ left: (isAr ? 1 : -1) * 320, behavior: "smooth" })} className="grid h-11 w-11 place-items-center rounded-full bg-[#262321] text-xl font-bold text-white transition hover:bg-[#a8170c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#b7190d]" dir="ltr">{isAr ? "→" : "←"}</button>
+          <button type="button" aria-label={courseCopy.next} onClick={() => audienceCarousel.current?.scrollBy({ left: (isAr ? -1 : 1) * 320, behavior: "smooth" })} className="grid h-11 w-11 place-items-center rounded-full bg-[#262321] text-xl font-bold text-white transition hover:bg-[#a8170c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#b7190d]" dir="ltr">{isAr ? "←" : "→"}</button>
+        </div>
+        <div ref={audienceCarousel} role="region" aria-label={courseCopy.carousel} tabIndex={0} className="flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain pb-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:gap-5 lg:gap-6">
+          {audienceCards.map((audience, index) => {
+            const cardNumber = String(index + 1).padStart(2, "0");
+            return <Reveal key={audience.id} delay={index * .04} className="h-full w-[82vw] max-w-[310px] shrink-0 snap-start sm:w-[300px] xl:w-[290px]">
+              <article className="flex h-[520px] flex-col overflow-hidden rounded-[1.75rem] border border-[#eadbd4] bg-white shadow-[0_15px_40px_rgba(57,15,8,.07)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_22px_50px_rgba(57,15,8,.13)]">
+                <div className="px-5 pb-4 pt-5 sm:px-6">
+                  <div className="flex items-center justify-between">
+                    <span dir="ltr" className="rounded-full border border-[#e4d7d0] px-3 py-1 text-xs font-black tracking-wide text-[#81746f]">{cardNumber} / 07</span>
+                    <span aria-hidden className="h-8 w-8 rounded-full border-[5px] border-[#f1e9e4]" />
+                  </div>
+                  <p className="mt-4 text-[10px] font-black uppercase tracking-[.12em] text-[#a8170c]">{audience.categoryTitle}</p>
+                  <h3 className="mt-1 min-h-[3.4rem] text-[1.55rem] font-black leading-tight text-[#282321]">{audience.title}</h3>
+                  {audience.ageRange && <span className="mt-1 inline-flex rounded-full bg-[#fff1e9] px-3 py-1 text-xs font-bold text-[#a8170c]">{audience.ageRange}</span>}
+                  <p className="mt-4 text-[11px] font-black uppercase tracking-[.1em] text-[#81746f]">{languageCopy.chooseLanguage}</p>
+                  <div className="mt-2 grid grid-cols-2 gap-2">
+                    {audienceLanguages.map(language => language.available ? (
+                      <Link key={language.slug} href={`/${locale}/courses/${language.slug}?audience=${audience.id}`} aria-label={`${language.label} — ${audience.title}`} className="inline-flex min-h-10 items-center justify-center gap-1 rounded-xl bg-[#fff4e8] px-2 py-2 text-[13px] font-black text-[#a8170c] transition hover:bg-[#f8e1d7] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b7190d]">
+                        {language.label}<span aria-hidden className="text-base">↗</span>
+                      </Link>
+                    ) : (
+                      <span key={language.slug} aria-label={`${language.label} — ${language.comingSoon}`} className="inline-flex min-h-10 flex-col items-center justify-center rounded-xl border border-dashed border-[#e1d2cc] px-2 py-1 text-xs font-bold leading-tight text-[#77706c]">
+                        <span>{language.label}</span><span className="text-[10px]">{language.comingSoon}</span>
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div className="relative mt-auto min-h-[220px] flex-1 overflow-hidden bg-[#b7190d]">
+                  <Image src={audience.image} alt="" fill sizes="(max-width: 639px) 82vw, 310px" className="object-cover object-[center_34%] transition duration-500 hover:scale-[1.035]" />
+                  <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-[#4f0804]/35 via-transparent to-[#4f0804]/10" />
+                </div>
+              </article>
+            </Reveal>;
+          })}
         </div>
       </div>
     </section>

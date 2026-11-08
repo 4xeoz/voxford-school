@@ -2,8 +2,7 @@ import { getDictionary } from "@/dictionaries";
 import type { Locale } from "@/i18n.config";
 import type { Metadata } from "next";
 import ConnectPageClient from "@/components/sections/ConnectPageClient";
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://voxbridge-school.vercel.app";
+import { SITE_URL } from "@/lib/site-url";
 
 type Props = {
   params: Promise<{ locale: string }>;

@@ -1,14 +1,11 @@
 import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import { i18n } from '@/i18n.config';
+import { SITE_URL } from '@/lib/site-url';
 import { Toaster } from '@/components/ui/sonner';
 import SmoothScrollProvider from '@/components/providers/SmoothScrollProvider';
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
 import './globals.css';
-
-// Set NEXT_PUBLIC_SITE_URL to the production domain — canonical URLs, OG tags
-// and the sitemap all derive from it.
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://voxbridge-school.vercel.app';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

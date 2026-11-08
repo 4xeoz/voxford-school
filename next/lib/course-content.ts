@@ -9,18 +9,27 @@ export const courseSectionCopy = {
     title: "اختر مرحلتك، ثم لغتك.",
     lead: "لكل عمر وهدف نقطة بداية. اختر الفئة الأقرب إليك؛ الإنجليزية والفرنسية متاحتان، والألمانية والإسبانية قريباً.",
     action: "اكتشف الدورة",
+    previous: "الفئات السابقة",
+    next: "الفئات التالية",
+    carousel: "مسارات اللغات حسب الفئة",
   },
   en: {
     eyebrow: "Courses by learner group",
     title: "Choose your path, then your language.",
     lead: "Start with the group that fits your age or goal. English and French are open; German and Spanish are coming soon.",
     action: "Explore the course",
+    previous: "Previous groups",
+    next: "Next groups",
+    carousel: "Language pathways by learner group",
   },
   fr: {
     eyebrow: "Cours par public",
     title: "Choisissez votre parcours, puis votre langue.",
     lead: "Commencez par le groupe qui correspond à votre âge ou à votre objectif. Anglais et français sont ouverts ; allemand et espagnol bientôt.",
     action: "Découvrir le cours",
+    previous: "Groupes précédents",
+    next: "Groupes suivants",
+    carousel: "Parcours linguistiques par public",
   },
 } as const;
 

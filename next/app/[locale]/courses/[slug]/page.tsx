@@ -8,8 +8,7 @@ import { i18n, type Locale } from "@/i18n.config";
 import { MAPS_DIRECTIONS } from "@/lib/contact";
 import { courseFor, coursePageFor, courseSlugs, isCourseSlug } from "@/lib/course-content";
 import { audienceFor } from "@/lib/audience-content";
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://voxbridge-school.vercel.app";
+import { SITE_URL } from "@/lib/site-url";
 
 type Props = { params: Promise<{ locale: string; slug: string }>; searchParams?: Promise<{ audience?: string }> };
 

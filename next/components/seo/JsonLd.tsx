@@ -1,7 +1,6 @@
 import type { Dictionary } from "@/dictionaries";
 import { CONTACT_EMAIL, SHOW_PHONE_CONTACT } from "@/lib/contact";
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://voxbridge-school.vercel.app";
+import { SITE_URL } from "@/lib/site-url";
 
 interface JsonLdProps {
   locale: string;
