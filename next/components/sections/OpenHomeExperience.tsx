@@ -74,7 +74,7 @@ export default function OpenHomeExperience({ locale }: { locale: string }) {
                   </div>
                   <p className="mt-4 text-[10px] font-black uppercase tracking-[.12em] text-[#a8170c]">{audience.categoryTitle}</p>
                   <h3 className="mt-1 min-h-[3.4rem] text-[1.55rem] font-black leading-tight text-[#282321]">{audience.title}</h3>
-                  {audience.ageRange && <span className="mt-1 inline-flex rounded-full bg-[#fff1e9] px-3 py-1 text-xs font-bold text-[#a8170c]">{audience.ageRange}</span>}
+                  {audience.ageRange && <span dir="ltr" className="mt-1 inline-flex rounded-full bg-[#fff1e9] px-3 py-1 text-xs font-bold text-[#a8170c]">{audience.ageRange}</span>}
                   <p className="mt-4 text-[11px] font-black uppercase tracking-[.1em] text-[#81746f]">{languageCopy.chooseLanguage}</p>
                   <div className="mt-2 grid grid-cols-2 gap-2">
                     {audienceLanguages.map(language => language.available ? (
