@@ -2,6 +2,9 @@ export const openSiteContent = {
   ar: {
     open: "أبوابنا مفتوحة في المسيلة",
     headline: "تعلّم اللغة. ثم عِشها.",
+    heroLineOne: "تعلّم اللغة.",
+    heroLineTwo: "ثم عِشها.",
+    city: "المسيلة",
     heroLead: "من القسم إلى مواقف الحياة، ومن المسيلة إلى بلد تُسمع فيه لغتك الجديدة كل يوم.",
     visit: "زورونا في المدرسة",
     explore: "اكتشف التجربة",
@@ -45,6 +48,9 @@ export const openSiteContent = {
   en: {
     open: "Now open in M'Sila",
     headline: "Learn the language. Then live it.",
+    heroLineOne: "Learn the language.",
+    heroLineTwo: "Then live it.",
+    city: "M'Sila",
     heroLead: "From classroom conversations to real moments, and from M'Sila to a place where your new language is spoken every day.",
     visit: "Visit the school",
     explore: "Explore the experience",
@@ -88,6 +94,9 @@ export const openSiteContent = {
   fr: {
     open: "Ouvert à M'Sila",
     headline: "Apprenez la langue. Puis vivez-la.",
+    heroLineOne: "Apprenez la langue.",
+    heroLineTwo: "Puis vivez-la.",
+    city: "M'Sila",
     heroLead: "Des échanges en classe aux situations réelles, de M'Sila à un pays où votre nouvelle langue se parle chaque jour.",
     visit: "Visiter l'école",
     explore: "Découvrir l'expérience",

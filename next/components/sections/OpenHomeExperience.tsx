@@ -2,13 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
-import { useRef } from "react";
+import { motion, useReducedMotion } from "motion/react";
 import { MAPS_DIRECTIONS } from "@/lib/contact";
 import { contentFor } from "@/lib/open-site-content";
-import BrandLockup from "@/components/BrandLockup";
-
-const book = "/voxbridge/home-ribbon-book.png";
+const desktopHero = "/voxbridge/hero-studio-desktop-v2.png";
+const mobileHero = "/voxbridge/hero-studio-mobile-v2.png";
 const speech = "/voxbridge/home-speech-sculpture.png";
 
 function Reveal({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
@@ -19,35 +17,30 @@ function Reveal({ children, className = "", delay = 0 }: { children: React.React
 export default function OpenHomeExperience({ locale }: { locale: string }) {
   const c = contentFor(locale);
   const reduce = useReducedMotion();
-  const heroRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
-  const imageY = useTransform(scrollYProgress, [0, 1], [0, 75]);
   const isAr = locale === "ar";
 
   return <main className="open-site overflow-hidden bg-[#fffdfa] text-[#242020]">
-    <section id="home" ref={heroRef} className="open-hero relative isolate min-h-[760px] overflow-hidden bg-[#c91408] text-white lg:min-h-[790px]">
-      <div aria-hidden className="open-hero-glow absolute inset-0" />
-      <div aria-hidden className="open-mark-pattern absolute inset-0 opacity-[.075]" />
-      <div className="relative mx-auto grid min-h-[760px] max-w-[1440px] grid-cols-1 items-center px-5 pb-12 pt-28 sm:px-8 lg:min-h-[790px] lg:grid-cols-[1.06fr_.94fr] lg:gap-8 lg:px-12 lg:pb-10 lg:pt-28">
-        <div className={`relative z-20 max-w-[760px] ${isAr ? "lg:order-2" : ""}`} dir={isAr ? "rtl" : "ltr"}>
-          <motion.div initial={reduce ? false : { opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7 }}>
-            <BrandLockup light />
-          </motion.div>
-          <motion.p initial={reduce ? false : { opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .16, duration: .65 }} className="mt-11 inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-2 text-xs font-extrabold uppercase tracking-[.14em] sm:text-sm"><span className="h-2 w-2 rounded-full bg-white shadow-[0_0_12px_white]" />{c.open}</motion.p>
-          <motion.h1 initial={reduce ? false : { opacity: 0, y: 26 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .26, duration: .78 }} className="mt-6 max-w-[11ch] text-[clamp(3.3rem,7vw,7.2rem)] font-black leading-[.98] tracking-[-.045em] [text-wrap:balance]">{c.headline}</motion.h1>
-          <motion.p initial={reduce ? false : { opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .38, duration: .72 }} className="mt-7 max-w-[570px] text-lg font-medium leading-relaxed text-white/85 sm:text-xl">{c.heroLead}</motion.p>
-          <motion.div initial={reduce ? false : { opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .48, duration: .65 }} className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <a className="inline-flex min-h-14 items-center justify-center gap-3 rounded-full bg-white px-7 py-3 text-base font-black text-[#b6190e] shadow-[0_12px_35px_rgba(61,0,0,.22)] transition hover:-translate-y-1 hover:shadow-[0_18px_42px_rgba(61,0,0,.32)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white" href="#location">{c.visit}<span aria-hidden>↗</span></a>
-            <a className="inline-flex min-h-14 items-center justify-center rounded-full border border-white/50 bg-white/5 px-7 py-3 text-base font-bold text-white transition hover:bg-white/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white" href="#experience">{c.explore}</a>
-          </motion.div>
-          <p className="mt-12 text-xs font-bold uppercase tracking-[.18em] text-white/65">{c.location} <span aria-hidden className="mx-2">·</span> {c.scroll} ↓</p>
+    <section id="home" className="relative bg-[#fffdfa] px-3 pb-24 pt-[104px] text-white sm:px-5 sm:pt-[112px] lg:px-7 lg:pb-28">
+      <div className="relative mx-auto max-w-[1500px]">
+        <div className="relative min-h-[780px] overflow-hidden rounded-[2rem] bg-[#c51408] shadow-[0_24px_70px_rgba(82,17,8,.18)] sm:rounded-[2.5rem] lg:min-h-[700px] xl:min-h-[750px]">
+          <Image src={desktopHero} alt="Illustrative Voxbridge studio scene with a student, a red notebook and a sculpted ivory ribbon" fill priority sizes="(min-width: 1024px) 94vw, 1px" className="hidden object-cover object-center lg:block" />
+          <div className="absolute inset-x-0 bottom-0 top-[265px] lg:hidden">
+            <Image src={mobileHero} alt="Illustrative Voxbridge student in a red studio" fill priority sizes="(max-width: 1023px) 100vw, 1px" className="object-cover object-center" />
+          </div>
+          <div aria-hidden className="absolute inset-0 bg-[linear-gradient(90deg,rgba(92,4,0,.18)_0%,rgba(116,6,1,.07)_48%,transparent_72%)] max-lg:bg-[linear-gradient(180deg,#c51408_0%,#c51408_22%,rgba(197,20,8,.96)_35%,rgba(197,20,8,.28)_56%,transparent_76%)]" />
+          <div className="relative z-10 flex min-h-[780px] items-start px-7 pb-28 pt-11 sm:px-12 sm:pt-16 lg:min-h-[700px] lg:items-center lg:px-[clamp(3rem,6vw,7rem)] lg:pb-24 lg:pt-16 xl:min-h-[750px]">
+            <div className="max-w-[590px]" dir={isAr ? "rtl" : "ltr"}>
+              <motion.p initial={reduce ? false : { opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .55 }} className="inline-flex items-center gap-2 rounded-full border border-white/45 bg-white/10 px-4 py-2 text-xs font-black backdrop-blur-sm sm:text-sm"><span className="h-2 w-2 rounded-full bg-[#fff2df]" />{c.open}</motion.p>
+              <motion.h1 initial={reduce ? false : { opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .12, duration: .72 }} className="mt-6 text-[clamp(2.8rem,5.7vw,6rem)] font-black leading-[1.08] tracking-[-.035em] [text-wrap:balance] sm:mt-8"><span className="block">{c.heroLineOne}</span><span className="mt-2 block text-[#fff0db]">{c.heroLineTwo}</span></motion.h1>
+              <motion.p initial={reduce ? false : { opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .23, duration: .7 }} className="mt-5 max-w-[480px] text-base font-medium leading-relaxed text-white/95 sm:mt-7 sm:text-lg">{c.heroLead}</motion.p>
+              <motion.div initial={reduce ? false : { opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .32, duration: .65 }} className="mt-7 sm:mt-9"><a className="inline-flex min-h-14 items-center justify-center gap-5 rounded-full bg-[#fff7e9] px-7 py-3 text-base font-black text-[#aa160c] shadow-[0_13px_35px_rgba(64,0,0,.22)] transition hover:-translate-y-1 hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white" href="#location">{c.visit}<span aria-hidden>↗</span></a></motion.div>
+            </div>
+          </div>
         </div>
-        <motion.div style={reduce ? undefined : { y: imageY }} className={`relative mt-9 h-[440px] w-full overflow-hidden rounded-[2.4rem] border border-white/20 bg-[#bd0f07] shadow-[0_35px_80px_rgba(74,0,0,.45)] sm:h-[600px] lg:mt-0 lg:h-[650px] ${isAr ? "lg:order-1" : ""}`}>
-          <Image src={book} alt="Illustrative Voxbridge studio artwork: a cream ribbon rising from an open book" fill priority sizes="(max-width: 1024px) 100vw, 45vw" className="object-cover object-[center_62%]" />
-          <div aria-hidden className="absolute inset-0 rounded-[2.4rem] ring-1 ring-inset ring-white/25" />
-        </motion.div>
+        <motion.a href={MAPS_DIRECTIONS} target="_blank" rel="noopener noreferrer" initial={reduce ? false : { opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .55, duration: .7 }} className="absolute -bottom-11 right-3 z-20 flex min-h-[112px] w-[calc(100%-1.5rem)] max-w-[440px] items-center justify-between gap-5 rounded-[1.6rem] bg-[#fff7e9] px-7 py-5 text-[#9f160d] shadow-[0_22px_55px_rgba(80,20,8,.17)] transition hover:-translate-y-1 hover:shadow-[0_26px_60px_rgba(80,20,8,.24)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#aa160c] sm:-bottom-14 sm:right-8 sm:min-h-[130px] sm:px-9" dir={isAr ? "rtl" : "ltr"}>
+          <span><span className="block text-[2rem] font-black leading-none sm:text-[2.45rem]">{c.city}</span><span className="mt-2 block text-xs font-bold leading-snug text-[#5c4f49] sm:text-sm">{c.address}</span></span><span className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-[#d8aaa0] text-xl" aria-hidden>↗</span>
+        </motion.a>
       </div>
-      <div aria-hidden className="open-hero-bottom absolute inset-x-0 bottom-0 h-4 bg-[#fffdfa]" />
     </section>
 
     <section id="experience" className="relative px-5 py-24 sm:px-8 lg:py-32" dir={isAr ? "rtl" : "ltr"}>
