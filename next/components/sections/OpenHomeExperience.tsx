@@ -70,7 +70,8 @@ export default function OpenHomeExperience({ locale }: { locale: string }) {
           <button type="button" aria-label={courseCopy.previous} onClick={() => scrollAudienceCarousel("previous")} className="grid h-11 w-11 place-items-center rounded-full bg-[#262321] text-xl font-bold text-white transition hover:bg-[#a8170c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#b7190d]" dir="ltr">{isAr ? "→" : "←"}</button>
           <button type="button" aria-label={courseCopy.next} onClick={() => scrollAudienceCarousel("next")} className="grid h-11 w-11 place-items-center rounded-full bg-[#262321] text-xl font-bold text-white transition hover:bg-[#a8170c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#b7190d]" dir="ltr">{isAr ? "←" : "→"}</button>
         </div>
-        <div ref={audienceCarousel} role="region" aria-label={courseCopy.carousel} tabIndex={0} style={{ paddingInline: "max(1.25rem, calc((100vw - 1240px) / 2))" }} className="relative left-1/2 flex w-screen -translate-x-1/2 snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain pb-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:gap-5 lg:gap-6">
+      </div>
+      <div ref={audienceCarousel} role="region" aria-label={courseCopy.carousel} tabIndex={0} style={{ paddingInline: "clamp(1.25rem, 2.5vw, 2rem)" }} className="-mx-5 flex w-[calc(100%_+_2.5rem)] snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain pb-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:-mx-8 sm:w-[calc(100%_+_4rem)] sm:gap-5 lg:gap-6">
           {audienceCards.map((audience, index) => {
             return <Reveal key={audience.id} delay={index * .04} className="h-full w-[82vw] max-w-[340px] shrink-0 snap-start sm:w-[330px] xl:w-[310px]">
               <Link href={`/${locale}/courses/audience/${audience.id}`} aria-label={`${courseCopy.readMore}: ${audience.heading}`} className="group block h-full rounded-[2rem] focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-[#b7190d]">
@@ -100,7 +101,6 @@ export default function OpenHomeExperience({ locale }: { locale: string }) {
             </Reveal>;
           })}
         </div>
-      </div>
     </section>
 
     <section id="experience" className="relative px-5 py-24 sm:px-8 lg:py-32" dir={isAr ? "rtl" : "ltr"}>
